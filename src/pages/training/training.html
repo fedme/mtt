@@ -1,0 +1,28 @@
+<ion-content>
+
+  <ion-grid>
+
+    <!-- 1st row of cards -->
+    <ion-row>
+      <ion-col *ngFor="let monster of monsters | slice:0:9">
+        <card [monster]="monster"></card>
+      </ion-col>
+    </ion-row>
+
+    <!-- 2nd row of cards -->
+    <ion-row>
+        <ion-col *ngFor="let monster of monsters | slice:9:18">
+          <card [monster]="monster"></card>
+        </ion-col>
+      </ion-row>
+
+      <!-- 3rd row of cards -->
+      <ion-row>
+          <ion-col *ngFor="let monster of monsters | slice:18:27">
+            <card [monster]="monster"></card>
+          </ion-col>
+        </ion-row>
+        
+  </ion-grid>
+
+</ion-content>

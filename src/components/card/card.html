@@ -1,0 +1,23 @@
+<svg viewBox="0 0 185 268" (click)="cardTapped($event)">
+
+  <svg:g [attr.opacity]="getFrontOpacity()">
+
+      <svg:image href="assets/img/card/front.png" width="185" height="268" x="0" y="0" />
+      <svg:image [attr.href]="monster.img" width="120" x="32" y="19" />
+
+      <svg:text x="19" y="150" font-family="Arial" font-size="17">FREUNDLICH</svg:text>
+      <svg:text x="142" y="154" font-family="Verdana" font-size="30">{{monster.friendly}}</svg:text>
+
+      <svg:text x="19" y="196" font-family="Arial" font-size="17">PÜNKTLICH</svg:text>
+      <svg:text x="142" y="201" font-family="Verdana" font-size="30">{{monster.punctual}}</svg:text>
+      
+      <svg:text x="19" y="239" font-family="Arial" font-size="17">WITZIG</svg:text>
+      <svg:text x="142" y="244" font-family="Verdana" font-size="30">{{monster.funny}}</svg:text>
+
+  </svg:g>
+
+  <svg:g [attr.opacity]="getBackOpacity()">
+      <svg:image href="assets/img/card/back.png" width="185" height="268" x="0" y="0" />
+      <svg:text x="73" y="175" font-family="Verdana" font-size="34">{{monster.criterion}}</svg:text>
+  </svg:g>
+</svg>

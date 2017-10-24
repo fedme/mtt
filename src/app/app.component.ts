@@ -3,6 +3,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
+import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { FirstRunPage } from '../pages/pages';
 import { Settings } from '../providers/providers';
@@ -45,14 +46,19 @@ export class MyApp {
     { title: 'Search', component: 'SearchPage' }
   ]
 
-  constructor(private translate: TranslateService, platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-    this.initTranslate();
+  constructor(private translate: TranslateService, platform: Platform, settings: Settings, 
+    private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen,
+    private androidFullScreen: AndroidFullScreen) {
+      platform.ready().then(() => {
+        // Okay, so the platform is ready and our plugins are available.
+        // Here you can do any higher level native things you might need.
+        this.androidFullScreen.isImmersiveModeSupported()
+        .then(() => this.androidFullScreen.immersiveMode())
+        .catch((error: any) => console.log(error))
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+      });
+      this.initTranslate();
   }
 
   initTranslate() {
