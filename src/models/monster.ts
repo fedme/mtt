@@ -16,13 +16,13 @@ export class Monster {
   funny: number;
   criterion: number;
 
-  constructor(id: string = "default", friendly: number = 0, punctual: number = 0, funny: number = 0) {
+  constructor(id: string = "default", friendly: number = 0, punctual: number = 0, funny: number = 0, criterion: number = 0) {
     this.id = id;
     this.img = "assets/img/monsters/" + id + ".png";
     this.friendly = friendly;
     this.punctual = punctual;
     this.funny = funny;
-    this.criterion = (6 * friendly) + (3 * punctual) + funny - 10;
+    this.criterion = criterion;
   }
 
 }
