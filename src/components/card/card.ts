@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Monster } from '../../models/monster';
+import { Stimuli } from '../../providers/providers';
 
 /**
  * Generated class for the CardComponent component.
@@ -14,27 +15,35 @@ import { Monster } from '../../models/monster';
 export class CardComponent {
 
   @Input() monster: Monster;
-  shown: boolean = false;
+  @Output() cardFlipped = new EventEmitter();
+  flipped: boolean = false;
 
-  constructor() {
+  constructor(private stimuli: Stimuli) {
     //console.log('Hello CardComponent Component');
   }
 
   cardTapped(event) {
-    this.shown = this.shown ? false : true;
+    if (this.stimuli.isPassive()) return;
+    if (this.flipped) return;
+    this.flipCard();
+  }
+
+  flipCard() {
+    this.flipped = true;
+    this.cardFlipped.emit(this.monster);
   }
 
   getCardBg() {
-    if (!this.shown) return "assets/img/card/back.png";
+    if (!this.flipped) return "assets/img/card/back.png";
     return "assets/img/card/front.png";
   }
 
   getFrontOpacity() {
-    return this.shown ? 1 : 0;
+    return this.flipped ? 0 : 1;
   }
 
   getBackOpacity() {
-    return this.shown ? 0 : 1;
+    return this.flipped ? 1 : 0;
   }
 
 }

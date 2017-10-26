@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 export class Utils {
 
   constructor() {
+    console.log('Hello Utils Provider');
   }
 
   getRandomInt(min, max) {
@@ -64,5 +65,24 @@ export class Utils {
     return result;
   }
 
+
+
+  /* Counters */
+  getCounterValue(counterIndex: number = 1) {
+    let counterName = "isrc-counter-" + counterIndex;
+    if (localStorage.getItem(counterName) === null) {
+      return 0;
+    }
+    return parseInt(localStorage.getItem(counterName));
+  }
+
+  incrementCounter(counterIndex: number = 1) {
+    let counterName = "isrc-counter-" + counterIndex;
+    let count: number = 1;
+    if (localStorage.getItem(counterName) != null) {
+      count = parseInt(localStorage.getItem(counterName)) + 1;
+    }
+    localStorage.setItem(counterName, count.toString());  
+  }
 
 }

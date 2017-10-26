@@ -11,7 +11,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { Settings, User, Api} from '../providers/providers';
-import { Utils, Stimuli, TrainingMonsters} from '../providers/providers';
+import { Utils, Data, Stimuli, TrainingMonsters} from '../providers/providers';
 import { Items } from '../mocks/providers/items';
 import { MyApp } from './app.component';
 
@@ -70,7 +70,8 @@ export function provideSettings(storage: Storage) {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Utils,
     Stimuli,
-    TrainingMonsters
+    TrainingMonsters,
+    Data
   ]
 })
 export class AppModule { }

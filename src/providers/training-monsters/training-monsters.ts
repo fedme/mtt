@@ -9,6 +9,7 @@ export class TrainingMonsters {
   monsters: Monster[] = [];
 
   constructor(private utils: Utils, private stimuli: Stimuli) {
+    console.log('Hello TrainingMonsters Provider');
     this.generateMonsters();
   }
 
