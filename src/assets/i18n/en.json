@@ -1,10 +1,25 @@
 {
-  "MONSTER_FEATURE_A_LABEL": "FREUNDLICH",
-  "MONSTER_FEATURE_B_LABEL": "PÜNKTLICH",
-  "MONSTER_FEATURE_C_LABEL": "WITZIG",
-  "TRAINING_ACTIVE_NEXT_PICK_BUTTON": "Let me pick a card",
-  "TRAINING_PASSIVE_NEXT_PICK_BUTTON": "Pick a card for me",
-  "TRAINING_ACTIVE_PICK_CARD_LABEL": "Tap a card to reveal it",
-  "TRAINING_PASSIVE_PICK_CARD_LABEL": "Tap the highlighted card to reveal it",
-  "TRAINING_END_TRAINING_BUTTON": "End training"
+
+  "MONSTER": {
+    "FEATURE_A_LABEL": "FREUNDLICH",
+    "FEATURE_B_LABEL": "PÜNKTLICH",
+    "FEATURE_C_LABEL": "WITZIG"
+  },
+
+  "TRAINING_INSTRUCTIONS": {
+    "TITLE": "Training instructions title",
+    "BODY": "Training instructions body<br><br>aaaaa<strong>bbbb</strong>",
+    "NEXT": "Let's play!"
+  },
+
+  "TRAINING": {
+    "NEXT_PICK_BUTTON_ACTIVE": "Let me pick a card",
+    "NEXT_PICK_BUTTON_PASSIVE": "Pick a card for me",
+    "PICK_CARD_INSTRUCTION_ACTIVE": "Tap a card to reveal it",
+    "PICK_CARD_INSTRUCTION_PASSIVE": "Tap the highlighted card to reveal it",
+    "END_BUTTON": "End training"
+  }
+  
+
+  
 }

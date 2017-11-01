@@ -24,22 +24,22 @@ export class TrainingMonsters {
 
       let monsterId = "monster" + (ids[i]);
 
-      let cues = {
-        "friendly": parseInt(gene.charAt(0)),
-        "punctual": parseInt(gene.charAt(1)),
-        "funny": parseInt(gene.charAt(2))
+      let features = {
+        "feature_a": parseInt(gene.charAt(0)),
+        "feature_b": parseInt(gene.charAt(1)),
+        "feature_c": parseInt(gene.charAt(2))
       };
 
-      let x = cues[this.stimuli.cueOrder[0]];
-      let y = cues[this.stimuli.cueOrder[1]];
-      let z = cues[this.stimuli.cueOrder[2]];
+      let x = features[this.stimuli.featuresOrder[0]];
+      let y = features[this.stimuli.featuresOrder[1]];
+      let z = features[this.stimuli.featuresOrder[2]];
       let criterion = (6 * x) + (3 * y) + z - 10;
 
       let monster = new Monster(
         monsterId, 
-        cues.friendly, 
-        cues.punctual, 
-        cues.funny,
+        features.feature_a, 
+        features.feature_b, 
+        features.feature_c,
         criterion
       );
       this.monsters.push(monster);

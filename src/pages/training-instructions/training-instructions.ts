@@ -22,4 +22,8 @@ export class TrainingInstructionsPage {
     console.log('ionViewDidLoad TrainingInstructionsPage');
   }
 
+  next() {
+    this.navCtrl.push("TrainingPage");
+  }
+
 }

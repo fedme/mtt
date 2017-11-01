@@ -12,7 +12,7 @@ import { allConditions } from './constants';
 @Injectable()
 export class Stimuli {
 
-  cueOrder: string[];
+  featuresOrder: string[];
   trainingType: string;
   firstTestType: string;
   secondTestType: string;
@@ -20,15 +20,17 @@ export class Stimuli {
   constructor(private utils: Utils) {
     console.log('Hello Stimuli Provider');
     this.pickCondition();
-    this.pickCueOrder();
+    this.pickFeaturesOrder();
+
+    console.log("[featuresOrder]", this.featuresOrder);
+    console.log("[trainingType]", this.trainingType);
+    console.log("[firstTestType]", this.firstTestType);
+    console.log("[secondTestType]", this.secondTestType);
   }
 
   pickCondition() {
-    console.log("[debug] pickCondition");
     let counter = this.utils.getCounterValue();
-    console.log(counter);
     let condition = allConditions[counter % allConditions.length];
-    console.log(condition);
     this.trainingType = condition.training;
     this.firstTestType = condition.testing[0];
     this.secondTestType = condition.testing[1];
@@ -37,9 +39,9 @@ export class Stimuli {
     this.utils.incrementCounter();
   }
 
-  pickCueOrder() {
-    let perms = this.utils.permute(["friendly", "punctual", "funny"]);
-    this.cueOrder = this.utils.pickRandomFromArray(perms);
+  pickFeaturesOrder() {
+    let perms = this.utils.permute(["feature_a", "feature_b", "feature_c"]);
+    this.featuresOrder = this.utils.pickRandomFromArray(perms);
   }
 
   isPassive() {

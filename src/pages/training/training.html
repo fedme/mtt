@@ -25,16 +25,16 @@
 
     <ion-row *ngIf="!ended">
       <ion-col text-center>
-        <button ion-button *ngIf="!waitingForReveal && stimuli.isActive()" (click)="nextPick()">{{ 'TRAINING_ACTIVE_NEXT_PICK_BUTTON' | translate }}</button>
-        <button ion-button *ngIf="!waitingForReveal && stimuli.isPassive()" (click)="nextPick()">{{ 'TRAINING_PASSIVE_NEXT_PICK_BUTTON' | translate }}</button>
-        <p *ngIf="waitingForReveal && stimuli.isActive()">{{ 'TRAINING_ACTIVE_PICK_CARD_LABEL' | translate }}</p>
-        <p *ngIf="waitingForReveal && stimuli.isPassive()">{{ 'TRAINING_PASSIVE_PICK_CARD_LABEL' | translate }}</p>
+        <button ion-button *ngIf="!waitingForReveal && stimuli.isActive()" (click)="nextPick()">{{ 'TRAINING.NEXT_PICK_BUTTON_ACTIVE' | translate }}</button>
+        <button ion-button *ngIf="!waitingForReveal && stimuli.isPassive()" (click)="nextPick()">{{ 'TRAINING.NEXT_PICK_BUTTON_PASSIVE' | translate }}</button>
+        <p *ngIf="waitingForReveal && stimuli.isActive()">{{ 'TRAINING.PICK_CARD_INSTRUCTION_ACTIVE' | translate }}</p>
+        <p *ngIf="waitingForReveal && stimuli.isPassive()">{{ 'TRAINING.PICK_CARD_INSTRUCTION_PASSIVE' | translate }}</p>
       </ion-col>
     </ion-row>
 
     <ion-row *ngIf="ended">
       <ion-col text-center>
-        <button ion-button (click)="endTraining()">{{ 'TRAINING_END_TRAINING_BUTTON' | translate }}</button>
+        <button ion-button (click)="endTraining()">{{ 'TRAINING.END_BUTTON' | translate }}</button>
       </ion-col>
     </ion-row>
 
