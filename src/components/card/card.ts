@@ -15,35 +15,49 @@ import { Stimuli } from '../../providers/providers';
 export class CardComponent {
 
   @Input() monster: Monster;
-  @Output() cardFlipped = new EventEmitter();
-  flipped: boolean = false;
+  @Input() active: boolean;
+  @Output() cardRevealed = new EventEmitter();
+  revealed: boolean = false;
+  highlighted: boolean = false;
 
   constructor(private stimuli: Stimuli) {
     //console.log('Hello CardComponent Component');
   }
 
   cardTapped(event) {
-    if (this.stimuli.isPassive()) return;
-    if (this.flipped) return;
-    this.flipCard();
+    //if (this.stimuli.isPassive()) return;
+    if (!this.active) return;
+    if (this.revealed) return;
+    this.revealCard();
   }
 
-  flipCard() {
-    this.flipped = true;
-    this.cardFlipped.emit(this.monster);
+  highlightCard() {
+    this.highlighted = true;
+  }
+
+  revealCard() {
+    this.revealed = true;
+    if (this.highlighted) {
+      this.highlighted = false;
+    }
+    this.cardRevealed.emit(this.monster);
   }
 
   getCardBg() {
-    if (!this.flipped) return "assets/img/card/back.png";
+    if (!this.revealed) return "assets/img/card/back.png";
     return "assets/img/card/front.png";
   }
 
-  getFrontOpacity() {
-    return this.flipped ? 0 : 1;
+  notRevealedOpacity() {
+    return this.revealed ? 0 : 1;
   }
 
-  getBackOpacity() {
-    return this.flipped ? 1 : 0;
+  highlightOpacity() {
+    return this.highlighted ? 1 : 0;
+  }
+
+  revealedOpacity() {
+    return this.revealed ? 1 : 0;
   }
 
 }

@@ -21,6 +21,9 @@ export class TrainingPage {
 
   monsters: Monster[];
   showedMonsters: Monster[];
+  waitingForReveal: boolean = false;
+  ended:boolean = false;
+  cardsDeactivated: boolean = true;
 
   @ViewChildren(CardComponent) cardComponents: QueryList<CardComponent>;
   cards: CardComponent[];
@@ -41,21 +44,50 @@ export class TrainingPage {
 
   }
 
-  handleCardFlipped(monster: Monster) {
+  handleCardRevealed(monster: Monster) {
+    this.deactivateCards();
     this.showedMonsters.push(monster);
+    this.waitingForReveal = false;
     if (this.showedMonsters.length == 22) {
-      this.endTraining();
+      this.ended = true;
     }
   }
 
   pickRandomCards() {
     this.cards = this.cardComponents.toArray();
+    for (let card of this.cards) {
+      card.active = false;
+    }
     this.utils.shuffleArray(this.cards);
   }
 
-  flipRandomCard() {
+  nextPick() {
+    if (this.waitingForReveal) return;
+    this.waitingForReveal = true;
+    if (this.stimuli.isPassive()) {
+      this.highlightRandomCard();
+    }
+    else {
+      this.activateCards();
+    }
+  }
+
+  highlightRandomCard() {
     let card = this.cards.pop();
-    card.flipCard();
+    card.highlightCard();
+    card.active = true;
+  }
+
+  deactivateCards() {
+    this.cardsDeactivated = true;
+  }
+
+  activateCards() {
+    this.cardsDeactivated = false;
+  }
+
+  areCardsActive() {
+    return !this.cardsDeactivated;
   }
 
   endTraining() {

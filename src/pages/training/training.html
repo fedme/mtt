@@ -5,27 +5,36 @@
     <!-- 1st row of cards -->
     <ion-row>
       <ion-col *ngFor="let monster of monsters | slice:0:9">
-        <card [monster]="monster" (cardFlipped)="handleCardFlipped($event)"></card>
+        <card [monster]="monster" [active]="areCardsActive()" (cardRevealed)="handleCardRevealed($event)"></card>
       </ion-col>
     </ion-row>
 
     <!-- 2nd row of cards -->
     <ion-row>
       <ion-col *ngFor="let monster of monsters | slice:9:18">
-        <card [monster]="monster" (cardFlipped)="handleCardFlipped($event)"></card>
+        <card [monster]="monster" [active]="areCardsActive()" (cardRevealed)="handleCardRevealed($event)"></card>
       </ion-col>
     </ion-row>
 
     <!-- 3rd row of cards -->
     <ion-row>
       <ion-col *ngFor="let monster of monsters | slice:18:27">
-        <card [monster]="monster" (cardFlipped)="handleCardFlipped($event)"></card>
+        <card [monster]="monster" [active]="areCardsActive()" (cardRevealed)="handleCardRevealed($event)"></card>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="stimuli.isPassive()">
+    <ion-row *ngIf="!ended">
       <ion-col text-center>
-        <button ion-button (click)="flipRandomCard()">Flip random card</button>
+        <button ion-button *ngIf="!waitingForReveal && stimuli.isActive()" (click)="nextPick()">{{ 'TRAINING_ACTIVE_NEXT_PICK_BUTTON' | translate }}</button>
+        <button ion-button *ngIf="!waitingForReveal && stimuli.isPassive()" (click)="nextPick()">{{ 'TRAINING_PASSIVE_NEXT_PICK_BUTTON' | translate }}</button>
+        <p *ngIf="waitingForReveal && stimuli.isActive()">{{ 'TRAINING_ACTIVE_PICK_CARD_LABEL' | translate }}</p>
+        <p *ngIf="waitingForReveal && stimuli.isPassive()">{{ 'TRAINING_PASSIVE_PICK_CARD_LABEL' | translate }}</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="ended">
+      <ion-col text-center>
+        <button ion-button (click)="endTraining()">{{ 'TRAINING_END_TRAINING_BUTTON' | translate }}</button>
       </ion-col>
     </ion-row>
 
