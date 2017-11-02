@@ -4,9 +4,10 @@ import { Utils } from '../utils/utils';
 import { Stimuli } from '../stimuli/stimuli';
 
 @Injectable()
-export class TrainingMonsters {
+export class TrainingProvider {
 
   monsters: Monster[] = [];
+  revealedMonsters: Monster[] = [];
 
   constructor(private utils: Utils, private stimuli: Stimuli) {
     console.log('Hello TrainingMonsters Provider');
@@ -47,7 +48,11 @@ export class TrainingMonsters {
     }
   }
 
-  query(params?: any) {
+  getAllMonsters() {
+    return this.monsters;
+  }
+
+  queryMonsters(params?: any) {
     if (!params) {
       return this.monsters;
     }
@@ -73,6 +78,16 @@ export class TrainingMonsters {
     this.monsters.splice(this.monsters.indexOf(monster), 1);
   }
 
+  addRevealedMonster(monster: Monster) {
+    this.revealedMonsters.push(monster);
+  }
 
+  getRevealedMonsters() {
+    return this.revealedMonsters;
+  }
+
+  getRevealedMonstersCount() {
+    return this.revealedMonsters.length;
+  }
 
 }

@@ -14,26 +14,25 @@ export class Stimuli {
 
   featuresOrder: string[];
   trainingType: string;
-  firstTestType: string;
-  secondTestType: string;
+  testTypes: string[];
+  currentTestIndex: number;
 
   constructor(private utils: Utils) {
     console.log('Hello Stimuli Provider');
     this.pickCondition();
     this.pickFeaturesOrder();
+    this.currentTestIndex = 0;
 
     console.log("[featuresOrder]", this.featuresOrder);
     console.log("[trainingType]", this.trainingType);
-    console.log("[firstTestType]", this.firstTestType);
-    console.log("[secondTestType]", this.secondTestType);
+    console.log("[testTypes]", this.testTypes);
   }
 
   pickCondition() {
     let counter = this.utils.getCounterValue();
     let condition = allConditions[counter % allConditions.length];
     this.trainingType = condition.training;
-    this.firstTestType = condition.testing[0];
-    this.secondTestType = condition.testing[1];
+    this.testTypes = condition.testing;
 
     //TODO: move to the data saving 
     this.utils.incrementCounter();
@@ -50,6 +49,14 @@ export class Stimuli {
 
   isActive() {
     return this.trainingType == "active";
+  }
+
+  getCurrentTestType() {
+    return this.testTypes[this.currentTestIndex];
+  }
+
+  isCurrentTest(testType: string) {
+    return this.getCurrentTestType() === testType;
   }
 
 }

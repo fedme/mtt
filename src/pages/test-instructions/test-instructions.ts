@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Stimuli } from '../../providers/providers'
 
 /**
  * Generated class for the TestInstructionsPage page.
@@ -15,7 +16,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TestInstructionsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private stimuli: Stimuli) {
   }
 
   ionViewDidLoad() {
@@ -23,7 +25,20 @@ export class TestInstructionsPage {
   }
 
   next() {
-    this.navCtrl.push("");
+    if (this.isComparison()) {
+      this.navCtrl.push("PairComparisonPage");
+    }
+    else if (this.isEstimation()) {
+      this.navCtrl.push("OutputEstimationPage");
+    }
+  }
+
+  isComparison() {
+    return this.stimuli.isCurrentTest("comparison");
+  }
+
+  isEstimation() {
+    return this.stimuli.isCurrentTest("estimation");
   }
 
 }

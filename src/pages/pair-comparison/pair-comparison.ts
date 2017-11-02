@@ -22,4 +22,8 @@ export class PairComparisonPage {
     console.log('ionViewDidLoad TestPairComparisonPage');
   }
 
+  next() {
+    
+  }
+
 }

@@ -2,7 +2,7 @@ import { Component, ViewChildren, QueryList } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Monster } from '../../models/monster';
-import { Utils, Stimuli, TrainingMonsters} from '../../providers/providers';
+import { Utils, Stimuli, TrainingProvider} from '../../providers/providers';
 import { CardComponent } from '../../components/card/card';
 
 /**
@@ -20,7 +20,7 @@ import { CardComponent } from '../../components/card/card';
 export class TrainingPage {
 
   monsters: Monster[];
-  showedMonsters: Monster[];
+  //revealedMonsters: Monster[];
   waitingForReveal: boolean = false;
   ended:boolean = false;
   cardsDeactivated: boolean = true;
@@ -29,10 +29,10 @@ export class TrainingPage {
   cards: CardComponent[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
-    private utils: Utils, private stimuli: Stimuli, private trainingMonsters: TrainingMonsters) {
+    private utils: Utils, private stimuli: Stimuli, private training: TrainingProvider) {
 
-    this.monsters = this.trainingMonsters.query();
-    this.showedMonsters = []; 
+    this.monsters = this.training.getAllMonsters();
+    //this.revealedMonsters = []; 
   }
 
   ionViewDidLoad() {
@@ -46,9 +46,10 @@ export class TrainingPage {
 
   handleCardRevealed(monster: Monster) {
     this.deactivateCards();
-    this.showedMonsters.push(monster);
+    //this.revealedMonsters.push(monster);
+    this.training.addRevealedMonster(monster);
     this.waitingForReveal = false;
-    if (this.showedMonsters.length == 22) {
+    if (this.training.getRevealedMonstersCount() == 22) {
       this.ended = true;
     }
   }

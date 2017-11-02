@@ -4,7 +4,7 @@ import { User } from './user/user';
 import { Utils } from './utils/utils';
 import { Data } from './data/data';
 import { Stimuli } from './stimuli/stimuli';
-import { TrainingMonsters } from './training-monsters/training-monsters';
+import { TrainingProvider } from './training/training';
 
 
 export {
@@ -14,5 +14,5 @@ export {
     Utils,
     Data,
     Stimuli,
-    TrainingMonsters    
+    TrainingProvider   
 };

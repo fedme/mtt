@@ -11,8 +11,9 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { Settings, User, Api} from '../providers/providers';
-import { Utils, Data, Stimuli, TrainingMonsters} from '../providers/providers';
+import { Utils, Data, Stimuli, TrainingProvider} from '../providers/providers';
 import { MyApp } from './app.component';
+import { PairComparisonProvider } from '../providers/pair-comparison/pair-comparison';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -67,9 +68,10 @@ export function provideSettings(storage: Storage) {
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Utils,
+    Data,
     Stimuli,
-    TrainingMonsters,
-    Data
+    TrainingProvider,
+    PairComparisonProvider
   ]
 })
 export class AppModule { }
