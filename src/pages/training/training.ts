@@ -91,6 +91,6 @@ export class TrainingPage {
   }
 
   endTraining() {
-    this.navCtrl.push("TestInstructions1Page");
+    this.navCtrl.push("TestInstructionsPage");
   }
 }

@@ -18,8 +18,19 @@
     "PICK_CARD_INSTRUCTION_ACTIVE": "Tap a card to reveal it",
     "PICK_CARD_INSTRUCTION_PASSIVE": "Tap the highlighted card to reveal it",
     "END_BUTTON": "End training"
-  }
+  },
   
+  "TEST_INSTRUCTIONS": {
+    "NEXT": "Let's go",
+    "PAIR_COMPARISON": {
+      "TITLE": "Pair comparison instructions title",
+      "BODY": "Pair comparison instructions body<br><br>aaaaa<strong>bbbb</strong>"
+    },
+    "OUTPUT_ESTIMATION": {
+      "TITLE": "Pair comparison instructions title",
+      "BODY": "Pair comparison instructions body<br><br>aaaaa<strong>bbbb</strong>"
+    }
+  }
 
   
 }

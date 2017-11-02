@@ -12,7 +12,6 @@ import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { Settings, User, Api} from '../providers/providers';
 import { Utils, Data, Stimuli, TrainingMonsters} from '../providers/providers';
-import { Items } from '../mocks/providers/items';
 import { MyApp } from './app.component';
 
 // The translate loader needs to know where to load i18n files
@@ -59,7 +58,6 @@ export function provideSettings(storage: Storage) {
   ],
   providers: [
     Api,
-    Items,
     User,
     Camera,
     SplashScreen,
