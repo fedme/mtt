@@ -16,6 +16,7 @@ export class CardComponent {
 
   @Input() monster: Monster;
   @Input() active: boolean;
+  @Output() cardTapped = new EventEmitter();
   @Output() cardRevealed = new EventEmitter();
   revealed: boolean = false;
   highlighted: boolean = false;
@@ -24,8 +25,8 @@ export class CardComponent {
     //console.log('Hello CardComponent Component');
   }
 
-  cardTapped(event) {
-    //if (this.stimuli.isPassive()) return;
+  handleCardTapped(event) {
+    this.cardTapped.emit(this);
     if (!this.active) return;
     if (this.revealed) return;
     this.revealCard();
@@ -35,12 +36,20 @@ export class CardComponent {
     this.highlighted = true;
   }
 
+  removeHighlight() {
+    this.highlighted = false;
+  }
+
   revealCard() {
     this.revealed = true;
     if (this.highlighted) {
       this.highlighted = false;
     }
     this.cardRevealed.emit(this.monster);
+  }
+
+  getMonster() {
+    return this.monster;
   }
 
   getCardBg() {

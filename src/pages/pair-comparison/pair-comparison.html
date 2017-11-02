@@ -1,26 +1,34 @@
 <ion-content padding>
-  
-    <ion-grid>
-      <ion-row>
-        <ion-col></ion-col>
-        <ion-col text-center>
-            <div class="content-wrapper">
-              <h1 translate [translateParams]="">TEST.PAIR_COMPARISON.TITLE</h1>
-              <p [innerHTML]="'TEST.PAIR_COMPARISON.BODY' | translate"></p>
-            </div>
-        </ion-col>
-        <ion-col></ion-col>
-      </ion-row>
-  
-      <ion-row>
-          <ion-col></ion-col>
-          <ion-col text-center>
-              <button ion-button large (click)="next()">{{'TEST.NEXT' | translate}}</button>
-          </ion-col>
-          <ion-col></ion-col>
-        </ion-row>
-    </ion-grid>
-  
-    
-  </ion-content>
-  
+
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col text-center>
+        <h1 translate [translateParams]="">TEST.PAIR_COMPARISON.TITLE</h1>
+        <p [innerHTML]="'TEST.PAIR_COMPARISON.BODY' | translate"></p>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col text-center>
+        <card [monster]="currentPair.left" [active]="false" (cardTapped)="handleCardTapped($event)"></card>
+      </ion-col>
+      <ion-col text-center>
+        <card [monster]="currentPair.right" [active]="false" (cardTapped)="handleCardTapped($event)"></card>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col text-center>
+        <button ion-button large (click)="next()">{{'TEST.PAIR_COMPARISON.NEXT_QUESTION' | translate}}</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

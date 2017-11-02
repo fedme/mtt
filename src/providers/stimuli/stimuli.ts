@@ -59,4 +59,18 @@ export class Stimuli {
     return this.getCurrentTestType() === testType;
   }
 
+  calculateCriterion(feature_a: number, feature_b: number, feature_c: number) {
+    let features = {
+      "feature_a": feature_a,
+      "feature_b": feature_b,
+      "feature_c": feature_c
+    };
+
+    let x = features[this.featuresOrder[0]];
+    let y = features[this.featuresOrder[1]];
+    let z = features[this.featuresOrder[2]];
+    
+    return (6 * x) + (3 * y) + z - 10;
+  }
+
 }

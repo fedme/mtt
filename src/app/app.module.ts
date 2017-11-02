@@ -11,9 +11,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { Settings, User, Api} from '../providers/providers';
-import { Utils, Data, Stimuli, TrainingProvider} from '../providers/providers';
+import { Utils, Data, Stimuli, TrainingProvider, PairComparisonProvider} from '../providers/providers';
 import { MyApp } from './app.component';
-import { PairComparisonProvider } from '../providers/pair-comparison/pair-comparison';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.

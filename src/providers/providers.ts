@@ -5,6 +5,7 @@ import { Utils } from './utils/utils';
 import { Data } from './data/data';
 import { Stimuli } from './stimuli/stimuli';
 import { TrainingProvider } from './training/training';
+import { PairComparisonProvider } from './pair-comparison/pair-comparison';
 
 
 export {
@@ -14,5 +15,6 @@ export {
     Utils,
     Data,
     Stimuli,
-    TrainingProvider   
+    TrainingProvider,
+    PairComparisonProvider   
 };

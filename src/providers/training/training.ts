@@ -25,22 +25,21 @@ export class TrainingProvider {
 
       let monsterId = "monster" + (ids[i]);
 
-      let features = {
-        "feature_a": parseInt(gene.charAt(0)),
-        "feature_b": parseInt(gene.charAt(1)),
-        "feature_c": parseInt(gene.charAt(2))
-      };
+      let feature_a = parseInt(gene.charAt(0));
+      let feature_b = parseInt(gene.charAt(1));
+      let feature_c = parseInt(gene.charAt(2));
 
-      let x = features[this.stimuli.featuresOrder[0]];
-      let y = features[this.stimuli.featuresOrder[1]];
-      let z = features[this.stimuli.featuresOrder[2]];
-      let criterion = (6 * x) + (3 * y) + z - 10;
+      let criterion = this.stimuli.calculateCriterion(
+        feature_a,
+        feature_b,
+        feature_c
+      );
 
       let monster = new Monster(
         monsterId, 
-        features.feature_a, 
-        features.feature_b, 
-        features.feature_c,
+        feature_a, 
+        feature_b, 
+        feature_c,
         criterion
       );
       this.monsters.push(monster);

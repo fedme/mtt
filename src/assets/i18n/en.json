@@ -36,11 +36,13 @@
     "NEXT": "next",
     "PAIR_COMPARISON": {
       "TITLE": "Pair comparison test title",
-      "BODY": "Pair comparison test body<br><br>aaaaa<strong>bbbb</strong>"
+      "BODY": "Pair comparison test body",
+      "NEXT_QUESTION": "Next question"
     },
     "OUTPUT_ESTIMATION": {
       "TITLE": "Output estimation test title",
-      "BODY": "Output estimation test body<br><br>aaaaa<strong>bbbb</strong>"
+      "BODY": "Output estimation test body",
+      "NEXT_QUESTION": "Next question"
     }
   }
 
