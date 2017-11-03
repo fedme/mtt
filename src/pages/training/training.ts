@@ -24,6 +24,7 @@ export class TrainingPage {
   waitingForReveal: boolean = false;
   ended:boolean = false;
   cardsDeactivated: boolean = true;
+  secondInstructionsShown: boolean = false;
 
   @ViewChildren(CardComponent) cardComponents: QueryList<CardComponent>;
   cards: CardComponent[];
@@ -46,7 +47,6 @@ export class TrainingPage {
 
   handleCardRevealed(monster: Monster) {
     this.deactivateCards();
-    //this.revealedMonsters.push(monster);
     this.training.addRevealedMonster(monster);
     this.waitingForReveal = false;
     if (this.training.getRevealedMonstersCount() == 22) {
@@ -64,6 +64,14 @@ export class TrainingPage {
 
   nextPick() {
     if (this.waitingForReveal) return;
+
+    // if button clicked after the 1st revealed card, go to instructions 2
+    if (this.training.getRevealedMonstersCount() == 1
+      && !this.secondInstructionsShown ) {
+      this.secondInstructionsShown = true;
+      return this.navCtrl.push("TrainingInstructions2Page");
+    }
+
     this.waitingForReveal = true;
     if (this.stimuli.isPassive()) {
       this.highlightRandomCard();

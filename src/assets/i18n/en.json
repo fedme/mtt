@@ -7,9 +7,16 @@
   },
 
   "TRAINING_INSTRUCTIONS": {
-    "TITLE": "Training instructions title",
-    "BODY": "Training instructions body<br><br>aaaaa<strong>bbbb</strong>",
-    "NEXT": "Let's play!"
+    "FIRST": {
+      "TITLE": "Training instructions title",
+      "BODY": "Training instructions body<br><br>aaaaa<strong>bbbb</strong>",
+      "NEXT": "Let's play!"
+    },
+    "SECOND": {
+      "TITLE": "Training instructions 2 title",
+      "BODY": "Training instructions 2 body<br><br>aaaaa<strong>bbbb</strong>",
+      "NEXT": "Back to game!"
+    }
   },
 
   "TRAINING": {
@@ -45,6 +52,5 @@
       "NEXT_QUESTION": "Next question"
     }
   }
-
   
 }
