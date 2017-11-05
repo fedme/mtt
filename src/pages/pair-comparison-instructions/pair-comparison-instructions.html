@@ -1,0 +1,26 @@
+<ion-content padding>
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col text-center>
+            <div class="content-wrapper">
+              <h1 translate [translateParams]="">TEST_INSTRUCTIONS.PAIR_COMPARISON.TITLE</h1>
+              <p [innerHTML]="'TEST_INSTRUCTIONS.PAIR_COMPARISON.BODY' | translate"></p>
+            </div>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+  
+      <ion-row>
+          <ion-col></ion-col>
+          <ion-col text-center>
+              <button ion-button large (click)="next()">{{'TEST_INSTRUCTIONS.NEXT' | translate}}</button>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+    </ion-grid>
+  
+    
+  </ion-content>
+  

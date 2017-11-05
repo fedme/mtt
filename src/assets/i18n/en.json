@@ -16,6 +16,13 @@
       "TITLE": "Training instructions 2 title",
       "BODY": "Training instructions 2 body<br><br>aaaaa<strong>bbbb</strong>",
       "NEXT": "Back to game!"
+    },
+    "THIRD": {
+      "TITLE_ACTIVE": "Training instructions 3 active title",
+      "BODY_ACTIVE": "Training instructions 3 active body<br><br>aaaaa<strong>bbbb</strong>",
+      "TITLE_PASSIVE": "Training instructions 3 passive title",
+      "BODY_PASSIVE": "Training instructions 3 passive body<br><br>aaaaa<strong>bbbb</strong>",
+      "NEXT": "Back to game!"
     }
   },
 

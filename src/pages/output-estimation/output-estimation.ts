@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PairComparisonQuestion } from '../../models/pair-comparison-question';
-import { Stimuli, PairComparisonProvider } from '../../providers/providers';
+import { OutputEstimationQuestion } from '../../models/output-estimation-question';
+import { Stimuli, OutputEstimationProvider } from '../../providers/providers';
 import { CardComponent } from '../../components/card/card';
 
 /**
@@ -13,49 +13,45 @@ import { CardComponent } from '../../components/card/card';
 
 @IonicPage()
 @Component({
-  selector: 'page-pair-comparison',
-  templateUrl: 'pair-comparison.html',
+  selector: 'page-output-estimation',
+  templateUrl: 'output-estimation.html',
 })
-export class PairComparisonPage {
+export class OutputEstimationPage {
 
-  question: PairComparisonQuestion;
-  chosenCard: CardComponent;
+  question: OutputEstimationQuestion;
+  guessedCriterion: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private stimuli: Stimuli, private pairComparison: PairComparisonProvider) {
+    private stimuli: Stimuli, private outputEstimation: OutputEstimationProvider) {
       this.updateCurrentQuestion();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TestPairComparisonPage');
-  }
-
-  handleCardTapped(card: CardComponent) {
-    if (this.chosenCard != null) {
-      this.chosenCard.removeHighlight();
-    }
-    this.chosenCard = card;
-    card.highlightCard();
+    console.log('ionViewDidLoad OutputEstimationPage');
   }
 
   next() {
-    if (this.chosenCard == null) return;
-    if (this.pairComparison.runOutOfQuestions()) {
+    if (this.guessedCriterion == null) return; // TODO: check slider moved
+    if (this.outputEstimation.runOutOfQuestions()) {
       return this.end();
     }
 
+    // TODO: ...
+
+    /*
     const chosenMonster = this.chosenCard.getMonster();
     this.question.answer(chosenMonster);
     this.pairComparison.recordAnswer(this.question);
 
     this.chosenCard.removeHighlight();
-    this.chosenCard = null;
+    */
 
+    this.guessedCriterion = null;
     this.updateCurrentQuestion();
   }
 
   updateCurrentQuestion() {
-    this.question = this.pairComparison.getNextQuestion();
+    this.question = this.outputEstimation.getNextQuestion();
   }
 
   end() {

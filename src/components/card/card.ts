@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Monster } from '../../models/monster';
-import { Stimuli } from '../../providers/providers';
 
 /**
  * Generated class for the CardComponent component.
@@ -21,7 +20,7 @@ export class CardComponent {
   revealed: boolean = false;
   highlighted: boolean = false;
 
-  constructor(private stimuli: Stimuli) {
+  constructor() {
     //console.log('Hello CardComponent Component');
   }
 

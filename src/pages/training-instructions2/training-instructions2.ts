@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the TrainingInstructionsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Stimuli } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -15,7 +9,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TrainingInstructions2Page {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private stimuli: Stimuli) {
+      console.log("[DEBUG] trainig type:", this.stimuli.trainingType);
   }
 
   ionViewDidLoad() {

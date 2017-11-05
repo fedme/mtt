@@ -6,6 +6,7 @@ import { Data } from './data/data';
 import { Stimuli } from './stimuli/stimuli';
 import { TrainingProvider } from './training/training';
 import { PairComparisonProvider } from './pair-comparison/pair-comparison';
+import { OutputEstimationProvider } from './output-estimation/output-estimation';
 
 
 export {
@@ -16,5 +17,6 @@ export {
     Data,
     Stimuli,
     TrainingProvider,
-    PairComparisonProvider   
+    PairComparisonProvider,
+    OutputEstimationProvider   
 };

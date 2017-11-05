@@ -1,0 +1,37 @@
+page-output-estimation {
+
+    background: url("../assets/img/table-pattern.jpg");
+    
+      ion-content {
+        background: none;
+        background-color: transparent !important;
+      }
+
+      h1 {
+        color: white;
+      }
+
+      p {
+        color: white;
+      }
+    
+      ion-grid {
+        margin-top: 50px;
+      }
+    
+      ion-row {
+        padding-top: 15px;
+      }
+    
+      .content-wrapper {
+        padding: 50px;
+        background: beige;
+        border-radius: 50px;
+        font-size: large;
+    
+        h1 {
+          margin-bottom: 30px;
+        }
+    
+      } 
+}

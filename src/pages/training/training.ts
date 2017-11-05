@@ -100,6 +100,12 @@ export class TrainingPage {
   }
 
   endTraining() {
-    this.navCtrl.push("TestInstructionsPage");
+    const test = this.stimuli.getNextTestType();
+    if (test == "comparison") {
+      this.navCtrl.push("PairComparisonInstructionsPage");
+    }
+    else {
+      this.navCtrl.push("OutputEstimationInstructionsPage");               
+    }
   }
 }

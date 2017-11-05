@@ -11,7 +11,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { Settings, User, Api} from '../providers/providers';
-import { Utils, Data, Stimuli, TrainingProvider, PairComparisonProvider} from '../providers/providers';
+import { Utils, Data, Stimuli, TrainingProvider, PairComparisonProvider, OutputEstimationProvider} from '../providers/providers';
 import { MyApp } from './app.component';
 
 // The translate loader needs to know where to load i18n files
@@ -70,7 +70,8 @@ export function provideSettings(storage: Storage) {
     Data,
     Stimuli,
     TrainingProvider,
-    PairComparisonProvider
+    PairComparisonProvider,
+    OutputEstimationProvider
   ]
 })
 export class AppModule { }

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Monster } from '../../models/monster';
 import { Pair } from '../../models/pair';
+import { PairComparisonQuestion } from '../../models/pair-comparison-question';
 import { Utils } from '../utils/utils';
 import { Stimuli } from '../stimuli/stimuli';
 import 'rxjs/add/operator/map';
-import { allPairComparisons } from '../stimuli/constants';
+import { NUMBERS, PAIR_COMPARISONS } from '../stimuli/constants';
 
 /*
   Generated class for the PairComparisonProvider provider.
@@ -15,21 +16,20 @@ import { allPairComparisons } from '../stimuli/constants';
 @Injectable()
 export class PairComparisonProvider {
 
-  pairsNumber: number = 8;
-  pairs: Pair[] = [];
-  chosenMonsters: Monster[] = [];
+  questions: PairComparisonQuestion[] = [];
+  questionsCounter: number = -1;
 
   constructor(private utils: Utils, private stimuli: Stimuli) {
     console.log('Hello PairComparisonProvider Provider');
-    this.generatePairs();
+    this.generateQuestions();
   }
 
-  generatePairs() {
+  generateQuestions() {
 
     // generate monsters IDs
     let ids = [];
-    let counter = 28;
-    while (ids.length < (this.pairsNumber*2)) {
+    let counter = NUMBERS.TRAINING_CARDS + 1;
+    while (ids.length < (NUMBERS.PAIR_COMPARISONS*2)) {
       ids.push("monster"+counter);
       counter++;
     }
@@ -38,12 +38,12 @@ export class PairComparisonProvider {
 
     // generate pairs
     let j=0;
-    for (let i=0; i<this.pairsNumber; i++) {
+    for (let i=0; i < NUMBERS.PAIR_COMPARISONS; i++) {
 
       let pairMonsters = [];
 
       // generate monster a
-      const features_a = allPairComparisons[i][0];
+      const features_a = PAIR_COMPARISONS[i][0];
       const criterion_a = this.stimuli.calculateCriterion(
         features_a[0],
         features_a[1],
@@ -53,7 +53,7 @@ export class PairComparisonProvider {
       j++;
 
       // generate monster b
-      let features_b = allPairComparisons[i][1];
+      let features_b = PAIR_COMPARISONS[i][1];
       const criterion_b = this.stimuli.calculateCriterion(
         features_b[0],
         features_b[1],
@@ -64,15 +64,24 @@ export class PairComparisonProvider {
 
       // generate pair
       this.utils.shuffleArray(pairMonsters);
-      this.pairs.push(new Pair(pairMonsters[0], pairMonsters[1]));
+      const pair = new Pair(pairMonsters[0], pairMonsters[1]);
+      const question = new PairComparisonQuestion(pair);
+      this.questions.push(question);
     }
-
-    console.log(this.pairs);
     
   }
 
-  addChosenMonster(monster: Monster) {
-    this.chosenMonsters.push(monster);
+  getNextQuestion() {
+    this.questionsCounter++;
+    return this.questions[this.questionsCounter];
+  }
+
+  recordAnswer(answer: PairComparisonQuestion) {
+    this.questions[this.questionsCounter] = answer;
+  }
+
+  runOutOfQuestions() {
+    return this.questionsCounter >= (this.questions.length - 1);
   }
 
 }

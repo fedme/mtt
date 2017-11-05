@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { TestInstructionsPage } from './test-instructions';
+import { PairComparisonInstructionsPage } from './pair-comparison-instructions';
 
 @NgModule({
   declarations: [
-    TestInstructionsPage,
+    PairComparisonInstructionsPage,
   ],
   imports: [
-    IonicPageModule.forChild(TestInstructionsPage),
+    IonicPageModule.forChild(PairComparisonInstructionsPage),
     TranslateModule.forChild()
   ],
 })
-export class TestInstructionsPageModule {}
+export class PairComparisonInstructionsPageModule {}

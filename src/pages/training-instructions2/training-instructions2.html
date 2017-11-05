@@ -3,10 +3,13 @@
   <ion-grid>
     <ion-row>
       <ion-col></ion-col>
-      <ion-col text-center>
+      <ion-col col-8 text-center>
           <div class="instructions-wrapper">
             <h1 translate [translateParams]="">TRAINING_INSTRUCTIONS.SECOND.TITLE</h1>
-            <p [innerHTML]="'TRAINING_INSTRUCTIONS.BODY' | translate"></p>
+            <p [innerHTML]="'TRAINING_INSTRUCTIONS.SECOND.BODY' | translate"></p>
+            <br>
+            <p *ngIf="stimuli.isActive()" [innerHTML]="'TRAINING_INSTRUCTIONS.THIRD.BODY_ACTIVE' | translate"></p>
+            <p *ngIf="stimuli.isPassive()" [innerHTML]="'TRAINING_INSTRUCTIONS.THIRD.BODY_PASSIVE' | translate"></p>
           </div>
       </ion-col>
       <ion-col></ion-col>
@@ -15,7 +18,7 @@
     <ion-row>
         <ion-col></ion-col>
         <ion-col text-center>
-            <button ion-button large (click)="next()">{{'TRAINING_INSTRUCTIONS.SECOND.NEXT' | translate}}</button>
+            <button ion-button large (click)="next()">{{'TRAINING_INSTRUCTIONS.THIRD.NEXT' | translate}}</button>
         </ion-col>
         <ion-col></ion-col>
       </ion-row>

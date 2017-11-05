@@ -4,8 +4,8 @@
     <ion-row>
       <ion-col></ion-col>
       <ion-col text-center>
-        <h1 translate [translateParams]="">TEST.PAIR_COMPARISON.TITLE</h1>
-        <p [innerHTML]="'TEST.PAIR_COMPARISON.BODY' | translate"></p>
+        <h1 translate [translateParams]="">TEST.OUTPUT_ESTIMATION.TITLE</h1>
+        <p [innerHTML]="'TEST.OUTPUT_ESTIMATION.BODY' | translate"></p>
       </ion-col>
       <ion-col></ion-col>
     </ion-row>
@@ -13,10 +13,10 @@
     <ion-row>
       <ion-col></ion-col>
       <ion-col text-center>
-        <card [monster]="question.pair.left" [active]="false" (cardTapped)="handleCardTapped($event)"></card>
+        <card [monster]="question.monster" [active]="false" ></card>
       </ion-col>
       <ion-col text-center>
-        <card [monster]="question.pair.right" [active]="false" (cardTapped)="handleCardTapped($event)"></card>
+        SLIDER
       </ion-col>
       <ion-col></ion-col>
     </ion-row>
@@ -24,7 +24,7 @@
     <ion-row>
       <ion-col></ion-col>
       <ion-col text-center>
-        <button ion-button large (click)="next()">{{'TEST.PAIR_COMPARISON.NEXT_QUESTION' | translate}}</button>
+        <button ion-button large (click)="next()">{{'TEST.OUTPUT_ESTIMATION.NEXT_QUESTION' | translate}}</button>
       </ion-col>
       <ion-col></ion-col>
     </ion-row>

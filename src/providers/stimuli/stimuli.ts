@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Utils } from '../utils/utils';
 import 'rxjs/add/operator/map';
-import { allConditions } from './constants';
+import { CONDITIONS } from './constants';
 
 /*
   Generated class for the StimuliProvider provider.
@@ -15,14 +15,12 @@ export class Stimuli {
   featuresOrder: string[];
   trainingType: string;
   testTypes: string[];
-  currentTestIndex: number;
+  currentTestIndex: number = -1;
 
   constructor(private utils: Utils) {
     console.log('Hello Stimuli Provider');
     this.pickCondition();
     this.pickFeaturesOrder();
-    this.currentTestIndex = 0;
-
     console.log("[featuresOrder]", this.featuresOrder);
     console.log("[trainingType]", this.trainingType);
     console.log("[testTypes]", this.testTypes);
@@ -30,7 +28,7 @@ export class Stimuli {
 
   pickCondition() {
     let counter = this.utils.getCounterValue();
-    let condition = allConditions[counter % allConditions.length];
+    let condition = CONDITIONS[counter % CONDITIONS.length];
     this.trainingType = condition.training;
     this.testTypes = condition.testing;
 
@@ -51,12 +49,13 @@ export class Stimuli {
     return this.trainingType == "active";
   }
 
-  getCurrentTestType() {
+  getNextTestType() {
+    this.currentTestIndex++;
     return this.testTypes[this.currentTestIndex];
   }
 
-  isCurrentTest(testType: string) {
-    return this.getCurrentTestType() === testType;
+  runOutOfTests() {
+    return this.currentTestIndex >= (this.testTypes.length - 1);
   }
 
   calculateCriterion(feature_a: number, feature_b: number, feature_c: number) {
@@ -65,11 +64,9 @@ export class Stimuli {
       "feature_b": feature_b,
       "feature_c": feature_c
     };
-
     let x = features[this.featuresOrder[0]];
     let y = features[this.featuresOrder[1]];
     let z = features[this.featuresOrder[2]];
-    
     return (6 * x) + (3 * y) + z - 10;
   }
 
