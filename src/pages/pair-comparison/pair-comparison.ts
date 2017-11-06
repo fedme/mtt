@@ -46,7 +46,7 @@ export class PairComparisonPage {
 
     const chosenMonster = this.chosenCard.getMonster();
     this.question.answer(chosenMonster);
-    this.pairComparison.recordAnswer(this.question);
+    this.pairComparison.updateQuestion(this.question);
 
     this.chosenCard.removeHighlight();
     this.chosenCard = null;

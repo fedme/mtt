@@ -1,16 +1,9 @@
 import { Component, ViewChildren, QueryList } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
 import { Monster } from '../../models/monster';
+import { TrainingCard } from '../../models/training-card';
 import { Utils, Stimuli, TrainingProvider} from '../../providers/providers';
 import { CardComponent } from '../../components/card/card';
-
-/**
- * Generated class for the TrainingPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -19,7 +12,7 @@ import { CardComponent } from '../../components/card/card';
 })
 export class TrainingPage {
 
-  monsters: Monster[];
+  //monsters: Monster[];
   //revealedMonsters: Monster[];
   waitingForReveal: boolean = false;
   ended:boolean = false;
@@ -32,7 +25,7 @@ export class TrainingPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     private utils: Utils, private stimuli: Stimuli, private training: TrainingProvider) {
 
-    this.monsters = this.training.getAllMonsters();
+    //this.monsters = this.training.getAllMonsters();
     //this.revealedMonsters = []; 
   }
 
@@ -45,11 +38,12 @@ export class TrainingPage {
 
   }
 
-  handleCardRevealed(monster: Monster) {
+  handleTrainingCardRevealed(card: TrainingCard) {
     this.deactivateCards();
-    this.training.addRevealedMonster(monster);
+    card.reveal();
+    this.training.updateCard(card);
     this.waitingForReveal = false;
-    if (this.training.getRevealedMonstersCount() == 22) {
+    if (this.training.runOutOfTasks()) {
       this.ended = true;
     }
   }
@@ -66,7 +60,7 @@ export class TrainingPage {
     if (this.waitingForReveal) return;
 
     // if button clicked after the 1st revealed card, go to instructions 2
-    if (this.training.getRevealedMonstersCount() == 1
+    if (this.training.getRevealedCardsCount() == 1
       && !this.secondInstructionsShown ) {
       this.secondInstructionsShown = true;
       return this.navCtrl.push("TrainingInstructions2Page");

@@ -11,12 +11,12 @@ export class OutputEstimationQuestion {
     this.monster = monster;
   }
 
-  isCorrect() {
+  isAnswerCorrect() {
     return this.monster.criterion == this.guessedCriterion;
   }
 
-  getDistance() {
-    // TODO: ...
+  getAnswerDistance() {
+    return Math.abs(this.guessedCriterion - this.monster.criterion);
   }
 
   public equals(obj: OutputEstimationQuestion) : boolean { 

@@ -22,15 +22,20 @@ export class OutputEstimationProvider {
 
     // generate monsters IDs
     let ids = [];
-    let counter = NUMBERS.TRAINING_CARDS + 1;
-    while (ids.length < (NUMBERS.PAIR_COMPARISONS*2)) {
-      ids.push("monster"+counter);
+    let counter = NUMBERS.TRAINING_CARDS + NUMBERS.PAIR_COMPARISONS + 1;
+    const questionsNumber = NUMBERS.OUTPUT_ESTIMATION_EXTRAPOLATION + NUMBERS.OUTPUT_ESTIMATION_INTERPOLATION
+      + NUMBERS.OUTPUT_ESTIMATION_RECALL;
+    while (ids.length < questionsNumber) {
+      ids.push("monster" + counter);
       counter++;
     }
     this.utils.shuffleArray(ids);
     console.log(ids);
 
     // TODO: generate monsters
+
+
+    this.questions.push(new OutputEstimationQuestion("recall", new Monster(ids[0], 0, 0, 0, 0)));
     
     
   }
@@ -40,8 +45,9 @@ export class OutputEstimationProvider {
     return this.questions[this.questionsCounter];
   }
 
-  recordAnswer(answer: OutputEstimationQuestion) {
-    this.questions[this.questionsCounter] = answer;
+  updateQuestion(question: OutputEstimationQuestion) {
+    const idx = this.questions.indexOf(question);
+    this.questions[idx] = question;
   }
 
   runOutOfQuestions() {

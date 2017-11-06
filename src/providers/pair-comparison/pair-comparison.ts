@@ -76,8 +76,9 @@ export class PairComparisonProvider {
     return this.questions[this.questionsCounter];
   }
 
-  recordAnswer(answer: PairComparisonQuestion) {
-    this.questions[this.questionsCounter] = answer;
+  updateQuestion(question: PairComparisonQuestion) {
+    const idx = this.questions.indexOf(question);
+    this.questions[idx] = question;
   }
 
   runOutOfQuestions() {

@@ -4,22 +4,22 @@
 
     <!-- 1st row of cards -->
     <ion-row>
-      <ion-col *ngFor="let monster of monsters | slice:0:9">
-        <card [monster]="monster" [active]="areCardsActive()" (cardRevealed)="handleCardRevealed($event)"></card>
+      <ion-col *ngFor="let card of training.cards | slice:0:9">
+        <card [trainingCard]="card" [monster]="card.monster" [active]="areCardsActive()" (trainingCardRevealed)="handleTrainingCardRevealed($event)"></card>
       </ion-col>
     </ion-row>
 
     <!-- 2nd row of cards -->
     <ion-row>
-      <ion-col *ngFor="let monster of monsters | slice:9:18">
-        <card [monster]="monster" [active]="areCardsActive()" (cardRevealed)="handleCardRevealed($event)"></card>
+      <ion-col *ngFor="let card of training.cards | slice:9:18">
+        <card [trainingCard]="card" [monster]="card.monster" [active]="areCardsActive()" (trainingCardRevealed)="handleTrainingCardRevealed($event)"></card>
       </ion-col>
     </ion-row>
 
     <!-- 3rd row of cards -->
     <ion-row>
-      <ion-col *ngFor="let monster of monsters | slice:18:27">
-        <card [monster]="monster" [active]="areCardsActive()" (cardRevealed)="handleCardRevealed($event)"></card>
+      <ion-col *ngFor="let card of training.cards | slice:18:27">
+        <card [trainingCard]="card" [monster]="card.monster" [active]="areCardsActive()" (trainingCardRevealed)="handleTrainingCardRevealed($event)"></card>
       </ion-col>
     </ion-row>
 

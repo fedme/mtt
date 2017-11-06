@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Monster } from '../../models/monster';
+import { TrainingCard } from '../../models/training-card';
 
 /**
  * Generated class for the CardComponent component.
@@ -15,8 +16,9 @@ export class CardComponent {
 
   @Input() monster: Monster;
   @Input() active: boolean;
+  @Input() trainingCard: TrainingCard;
   @Output() cardTapped = new EventEmitter();
-  @Output() cardRevealed = new EventEmitter();
+  @Output() trainingCardRevealed = new EventEmitter();
   revealed: boolean = false;
   highlighted: boolean = false;
 
@@ -44,7 +46,7 @@ export class CardComponent {
     if (this.highlighted) {
       this.highlighted = false;
     }
-    this.cardRevealed.emit(this.monster);
+    this.trainingCardRevealed.emit(this.trainingCard);
   }
 
   getMonster() {

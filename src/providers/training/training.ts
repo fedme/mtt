@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Monster } from '../../models/monster';
+import { TrainingCard } from '../../models/training-card';
 import { Utils } from '../utils/utils';
 import { Stimuli } from '../stimuli/stimuli';
+import { NUMBERS } from '../stimuli/constants';
 
 @Injectable()
 export class TrainingProvider {
 
-  monsters: Monster[] = [];
-  revealedMonsters: Monster[] = [];
+  cards: TrainingCard[];
+  revealedCardsCounter: number;
 
   constructor(private utils: Utils, private stimuli: Stimuli) {
     console.log('Hello TrainingMonsters Provider');
-    this.generateMonsters();
+    this.cards = [];
+    this.revealedCardsCounter = 0;
+    this.generateCards();
   }
 
-  generateMonsters() {
+  generateCards() {
     let genes = this.utils.combine([2, 3, 4], 3, "");
     let ids = this.utils.range(1, genes.length + 1)
     this.utils.shuffleArray(genes);
@@ -42,51 +46,77 @@ export class TrainingProvider {
         feature_c,
         criterion
       );
-      this.monsters.push(monster);
+      this.cards.push(new TrainingCard(monster));
       i++;
     }
   }
 
-  getAllMonsters() {
-    return this.monsters;
+  getAllCards() {
+    return this.cards;
   }
 
-  queryMonsters(params?: any) {
-    if (!params) {
-      return this.monsters;
+  addCard(card: TrainingCard) {
+    this.cards.push(card);
+  }
+
+  deleteCard(card: TrainingCard) {
+    this.cards.splice(this.cards.indexOf(card), 1);
+  }
+
+  updateCard(card: TrainingCard) {
+    const idx = this.cards.indexOf(card);
+    this.cards[idx] = card;
+    if (card.hasBeenRevealed()) {
+      this.revealedCardsCounter++;
     }
+  }
 
-    return this.monsters.filter((item) => {
-      for (let key in params) {
-        let field = item[key];
-        if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
-          return item;
-        } else if (field == params[key]) {
-          return item;
-        }
+  getRevealedCardsCount() {
+    return this.revealedCardsCounter;
+  }
+
+  runOutOfTasks() {
+    return this.revealedCardsCounter >= NUMBERS.TRAINING_TASKS;
+  }
+
+  getRevealedCards() {
+    let revealedCards: TrainingCard[] = [];
+    for (let card of this.cards) {
+      if (card.hasBeenRevealed()) {
+        revealedCards.push(card);
       }
-      return null;
-    });
+    }
+    return revealedCards;
   }
 
-  add(monster: Monster) {
-    this.monsters.push(monster);
-  }
-
-  delete(monster: Monster) {
-    this.monsters.splice(this.monsters.indexOf(monster), 1);
-  }
-
-  addRevealedMonster(monster: Monster) {
-    this.revealedMonsters.push(monster);
+  getUnrevealedCards() {
+    let unrevealedCards: TrainingCard[] = [];
+    for (let card of this.cards) {
+      if (!card.hasBeenRevealed()) {
+        unrevealedCards.push(card);
+      }
+    }
+    return unrevealedCards;
   }
 
   getRevealedMonsters() {
-    return this.revealedMonsters;
+    let revealedMonsters: Monster[] = [];
+    for (let card of this.cards) {
+      if (card.hasBeenRevealed()) {
+        revealedMonsters.push(card.monster);
+      }
+    }
+    return revealedMonsters;
   }
 
-  getRevealedMonstersCount() {
-    return this.revealedMonsters.length;
+  getUnrevealedMonsters() {
+    let unrevealedMonsters: Monster[] = [];
+    for (let card of this.cards) {
+      if (!card.hasBeenRevealed()) {
+        unrevealedMonsters.push(card.monster);
+      }
+    }
+    return unrevealedMonsters;
   }
 
 }
