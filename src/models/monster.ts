@@ -16,6 +16,11 @@ export class Monster {
     this.criterion = criterion;
   }
 
+  public updateId(id: string) {
+    this.id = id;
+    this.img = "assets/img/monsters/" + id + ".png";
+  }
+
   public equals(obj: Monster) : boolean { 
     return this.id === obj.id;
   } 

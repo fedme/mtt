@@ -15,7 +15,7 @@ export class TrainingProvider {
     console.log('Hello TrainingMonsters Provider');
     this.cards = [];
     this.revealedCardsCounter = 0;
-    this.generateCards();
+    //this.generateCards();
   }
 
   generateCards() {

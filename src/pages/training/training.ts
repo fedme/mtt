@@ -25,8 +25,8 @@ export class TrainingPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     private utils: Utils, private stimuli: Stimuli, private training: TrainingProvider) {
 
-    //this.monsters = this.training.getAllMonsters();
-    //this.revealedMonsters = []; 
+      this.training.generateCards();
+     
   }
 
   ionViewDidLoad() {

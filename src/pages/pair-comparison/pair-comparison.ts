@@ -23,6 +23,7 @@ export class PairComparisonPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private stimuli: Stimuli, private pairComparison: PairComparisonProvider) {
+      this.pairComparison.generateQuestions();
       this.updateCurrentQuestion();
   }
 

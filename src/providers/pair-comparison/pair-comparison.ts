@@ -21,7 +21,7 @@ export class PairComparisonProvider {
 
   constructor(private utils: Utils, private stimuli: Stimuli) {
     console.log('Hello PairComparisonProvider Provider');
-    this.generateQuestions();
+    //this.generateQuestions();
   }
 
   generateQuestions() {
