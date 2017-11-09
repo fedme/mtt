@@ -23,6 +23,7 @@ export class OutputEstimationPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private stimuli: Stimuli, private outputEstimation: OutputEstimationProvider) {
+      this.outputEstimation.generateQuestions();
       this.updateCurrentQuestion();
   }
 
@@ -37,15 +38,8 @@ export class OutputEstimationPage {
     }
 
     // TODO: ...
-
-    /*
-    const chosenMonster = this.chosenCard.getMonster();
-    this.question.answer(chosenMonster);
-    this.pairComparison.recordAnswer(this.question);
-
-    this.chosenCard.removeHighlight();
-    */
-
+    this.question.guessedCriterion = this.guessedCriterion;
+    this.outputEstimation.updateQuestion(this.question);
     this.guessedCriterion = null;
     this.updateCurrentQuestion();
   }
@@ -56,7 +50,7 @@ export class OutputEstimationPage {
 
   end() {
     if (this.stimuli.runOutOfTests()) {
-      this.navCtrl.push("FinalQuestionsPage");
+      this.navCtrl.push("RankingTaskPage");
       return;
     }
     const test = this.stimuli.getNextTestType();

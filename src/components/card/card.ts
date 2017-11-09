@@ -17,6 +17,7 @@ export class CardComponent {
   @Input() monster: Monster;
   @Input() active: boolean;
   @Input() trainingCard: TrainingCard;
+  @Input() guessedCriterion: number;
   @Output() cardTapped = new EventEmitter();
   @Output() trainingCardRevealed = new EventEmitter();
   revealed: boolean = false;
@@ -58,16 +59,28 @@ export class CardComponent {
     return "assets/img/card/front.png";
   }
 
-  notRevealedOpacity() {
+  getCriterionPlaceholderOpacity() {
+    return this.revealed || this.guessedCriterion != null ? 0 : 1;
+  }
+
+  getCardBackOpacity() {
     return this.revealed ? 0 : 1;
   }
 
-  highlightOpacity() {
+  getCardFrontOpacity() {
+    return this.revealed || this.guessedCriterion != null ? 1 : 0;
+  }
+
+  getCardHighlightOpacity() {
     return this.highlighted ? 1 : 0;
   }
 
-  revealedOpacity() {
+  getCriterionOpacity() {
     return this.revealed ? 1 : 0;
+  }
+
+  getGuessedCriterionOpacity() {
+    return this.guessedCriterion != null ? 1 : 0; 
   }
 
 }

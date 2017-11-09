@@ -19,6 +19,12 @@ export class OutputEstimationQuestion {
     return Math.abs(this.guessedCriterion - this.monster.criterion);
   }
 
+  getAnswerReward() {
+    if (this.getAnswerDistance() <= 5) return 30;
+    if (this.getAnswerDistance() <= 10) return 20;
+    if (this.getAnswerDistance() <= 20) return 10;
+  }
+
   public equals(obj: OutputEstimationQuestion) : boolean { 
     return this.type === obj.type && this.monster === obj.monster;
   } 

@@ -1,0 +1,30 @@
+page-ranking-task {
+
+  background: url("../assets/img/table-pattern.jpg");
+
+  ion-content {
+    background: none;
+    background-color: transparent !important;
+  }
+
+  ion-grid {
+    margin-top: 60px;
+  }
+
+  ion-row {
+    padding-top: 15px;
+  }
+
+  .content-wrapper {
+    padding: 50px;
+    background: beige;
+    border-radius: 50px;
+    font-size: large;
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+  }
+  
+}

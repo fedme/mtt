@@ -1,19 +1,23 @@
 <svg viewBox="0 0 185 268" (click)="handleCardTapped($event)">
 
-  <svg:image href="assets/img/card/back.png" width="185" height="268" x="0" y="0" [attr.opacity]="notRevealedOpacity()" />
-  <svg:image href="assets/img/card/highlight.png" width="185" height="268" x="0" y="0" [attr.opacity]="highlightOpacity()" />
-  <svg:image href="assets/img/card/front.png" width="185" height="268" x="0" y="0" [attr.opacity]="revealedOpacity()" />
+  <svg:image href="assets/img/card/back.png" width="185" height="268" x="0" y="0" [attr.opacity]="getCardBackOpacity()" />
+  <svg:image href="assets/img/card/highlight.png" width="185" height="268" x="0" y="0" [attr.opacity]="getCardHighlightOpacity()" />
+  <svg:image href="assets/img/card/front.png" width="185" height="268" x="0" y="0" [attr.opacity]="getCardFrontOpacity()" />
 
   <svg:image [attr.href]="monster.img" width="95" x="32" y="39" />
 
   <circle cx="140" cy="50" r="25" stroke="black" stroke-width="2" fill="white" />
 
-  <svg:text x="140" y="60" text-anchor="middle" font-family="Verdana" font-size="30" fill="gray" [attr.opacity]="notRevealedOpacity()">
+  <svg:text x="140" y="60" text-anchor="middle" font-family="Verdana" font-size="30" fill="gray" [attr.opacity]="getCriterionPlaceholderOpacity()">
     ??
   </svg:text>
 
-  <svg:text x="140" y="60" text-anchor="middle" font-family="Verdana" font-size="30" [attr.opacity]="revealedOpacity()">
+  <svg:text x="140" y="60" text-anchor="middle" font-family="Verdana" font-size="30" [attr.opacity]="getCriterionOpacity()">
     {{monster.criterion}}
+  </svg:text>
+
+  <svg:text x="140" y="60" text-anchor="middle" font-family="Verdana" font-size="30" [attr.opacity]="getGuessedCriterionOpacity()">
+    {{guessedCriterion}}
   </svg:text>
 
   <svg:text x="19" y="150" font-family="Arial" font-size="17">{{ 'MONSTER.FEATURE_A_LABEL' | translate }}</svg:text>

@@ -16,10 +16,17 @@ export class OutputEstimationProvider {
 
   constructor(private utils: Utils, private stimuli: Stimuli, private training: TrainingProvider) {
     console.log('Hello OutputEstimationProvider Provider');
-    this.generateQuestions();
+    //this.generateQuestions();
   }
 
-  generateQuestions() {
+  generateQuestions(debug: boolean = false) {
+
+    if (debug) {
+      let monster = new Monster("monster42", 3, 1, 5, 42);
+      let question = new OutputEstimationQuestion("extrapolation", monster);
+      this.questions.push(question);
+      return;
+    }
 
     // generate monsters IDs
     const firstId = NUMBERS.TRAINING_CARDS + NUMBERS.PAIR_COMPARISONS + 1;

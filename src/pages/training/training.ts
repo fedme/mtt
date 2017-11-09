@@ -5,7 +5,9 @@ import { TrainingCard } from '../../models/training-card';
 import { Utils, Stimuli, TrainingProvider} from '../../providers/providers';
 import { CardComponent } from '../../components/card/card';
 
-@IonicPage()
+@IonicPage({
+  priority: 'high'
+})
 @Component({
   selector: 'page-training',
   templateUrl: 'training.html',

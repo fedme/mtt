@@ -11,7 +11,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { Settings, User, Api} from '../providers/providers';
-import { Utils, Data, Stimuli, TrainingProvider, PairComparisonProvider, OutputEstimationProvider} from '../providers/providers';
+import { Utils, Data, Stimuli, TrainingProvider, PairComparisonProvider, 
+  OutputEstimationProvider, RankingTaskProvider} from '../providers/providers';
 import { MyApp } from './app.component';
 
 // The translate loader needs to know where to load i18n files
@@ -49,7 +50,9 @@ export function provideSettings(storage: Storage) {
         deps: [HttpClient]
       }
     }),
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      preloadModules: true
+    }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -71,7 +74,8 @@ export function provideSettings(storage: Storage) {
     Stimuli,
     TrainingProvider,
     PairComparisonProvider,
-    OutputEstimationProvider
+    OutputEstimationProvider,
+    RankingTaskProvider
   ]
 })
 export class AppModule { }

@@ -7,6 +7,7 @@ import { Stimuli } from './stimuli/stimuli';
 import { TrainingProvider } from './training/training';
 import { PairComparisonProvider } from './pair-comparison/pair-comparison';
 import { OutputEstimationProvider } from './output-estimation/output-estimation';
+import { RankingTaskProvider } from './ranking-task/ranking-task';
 
 
 export {
@@ -18,5 +19,6 @@ export {
     Stimuli,
     TrainingProvider,
     PairComparisonProvider,
-    OutputEstimationProvider   
+    OutputEstimationProvider,
+    RankingTaskProvider   
 };

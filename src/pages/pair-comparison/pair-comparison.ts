@@ -61,7 +61,7 @@ export class PairComparisonPage {
 
   end() {
     if (this.stimuli.runOutOfTests()) {
-      this.navCtrl.push("FinalQuestionsPage");
+      this.navCtrl.push("RankingTaskPage");
       return;
     }
     const test = this.stimuli.getNextTestType();

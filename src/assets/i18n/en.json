@@ -8,7 +8,7 @@
 
   "TRAINING_INSTRUCTIONS": {
     "FIRST": {
-      "TITLE": "Training instructions title",
+      "TITLE": "Training instructions titleeee",
       "BODY": "Training instructions body<br><br>aaaaa<strong>bbbb</strong>",
       "NEXT": "Let's play!"
     },
@@ -58,6 +58,12 @@
       "BODY": "Output estimation test body",
       "NEXT_QUESTION": "Next question"
     }
+  },
+
+  "RANKING_TASK": {
+    "TITLE": "Ranking task title",
+    "BODY": "Ranking task body",
+    "NEXT": "Next"
   }
   
 }

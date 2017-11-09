@@ -1,0 +1,30 @@
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col col-8 text-center>
+          <div class="content-wrapper">
+            <h1 translate [translateParams]="">RANKING_TASK.TITLE</h1>
+            <p [innerHTML]="'RANKING_TASK.BODY' | translate"></p>
+
+            <ion-list reorder="true" (ionItemReorder)="reorderFeatures($event)">
+              <ion-item *ngFor="let feature of rankingTask.features">{{ feature.label }}</ion-item>
+            </ion-list>
+            
+          </div>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col></ion-col>
+        <ion-col text-center>
+            <button ion-button large (click)="next()">{{'RANKING_TASK.NEXT' | translate}}</button>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+  </ion-grid>
+
+  
+</ion-content>
