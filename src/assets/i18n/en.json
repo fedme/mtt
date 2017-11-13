@@ -1,14 +1,21 @@
 {
-
   "MONSTER": {
     "FEATURE_A_LABEL": "FREUNDLICH",
     "FEATURE_B_LABEL": "PÜNKTLICH",
     "FEATURE_C_LABEL": "WITZIG"
   },
 
+  "REGISTRATION": {
+    "TITLE": "Enter participant data",
+    "CODE_LABEL": "Participant code",
+    "AGE_LABEL": "Participant age",
+    "GRADE_LABEL": "Participant grade",
+    "SUBMIT": "Begin experiment"
+  },
+
   "TRAINING_INSTRUCTIONS": {
     "FIRST": {
-      "TITLE": "Training instructions titleeee",
+      "TITLE": "Training instructions title",
       "BODY": "Training instructions body<br><br>aaaaa<strong>bbbb</strong>",
       "NEXT": "Let's play!"
     },
@@ -47,7 +54,6 @@
   },
 
   "TEST": {
-    "NEXT": "next",
     "PAIR_COMPARISON": {
       "TITLE": "Pair comparison test title",
       "BODY": "Pair comparison test body",
@@ -57,7 +63,8 @@
       "TITLE": "Output estimation test title",
       "BODY": "Output estimation test body",
       "NEXT_QUESTION": "Next question"
-    }
+    },
+    "NEXT": "next"
   },
 
   "RANKING_TASK": {

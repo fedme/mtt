@@ -6,7 +6,6 @@ import { Config, Nav, Platform } from 'ionic-angular';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { FirstRunPage } from '../pages/pages';
-import { Settings } from '../providers/providers';
 
 @Component({
   template: `<ion-menu [content]="content">
@@ -46,7 +45,7 @@ export class MyApp {
     { title: 'Search', component: 'SearchPage' }
   ]
 
-  constructor(private translate: TranslateService, platform: Platform, settings: Settings, 
+  constructor(private translate: TranslateService, platform: Platform, 
     private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen,
     private androidFullScreen: AndroidFullScreen) {
       platform.ready().then(() => {

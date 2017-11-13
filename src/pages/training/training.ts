@@ -1,6 +1,5 @@
 import { Component, ViewChildren, QueryList } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Monster } from '../../models/monster';
 import { TrainingCard } from '../../models/training-card';
 import { Utils, Stimuli, TrainingProvider} from '../../providers/providers';
 import { CardComponent } from '../../components/card/card';

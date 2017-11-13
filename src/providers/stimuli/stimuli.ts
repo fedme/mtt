@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Utils } from '../utils/utils';
-import 'rxjs/add/operator/map';
+import { Participant } from '../../models/participant';
 import { CONDITIONS } from './constants';
 
-/*
-  Generated class for the StimuliProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class Stimuli {
 
+  participant: Participant;
   featuresOrder: string[];
   trainingType: string;
   testTypes: string[];
@@ -19,6 +14,7 @@ export class Stimuli {
 
   constructor(private utils: Utils) {
     console.log('Hello Stimuli Provider');
+    this.participant = new Participant("anonymous-" + this.utils.getCounterValue());
     this.pickCondition();
     this.pickFeaturesOrder();
     console.log("[featuresOrder]", this.featuresOrder);

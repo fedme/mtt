@@ -21,8 +21,8 @@ export class Monster {
     this.img = "assets/img/monsters/" + id + ".png";
   }
 
-  public equals(obj: Monster) : boolean { 
+  public equals(obj: Monster): boolean {
     return this.id === obj.id;
-  } 
+  }
 
 }
