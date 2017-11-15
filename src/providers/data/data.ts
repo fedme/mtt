@@ -5,6 +5,7 @@ import { Stimuli } from '../stimuli/stimuli';
 import { TrainingProvider } from '../training/training';
 import { PairComparisonProvider } from '../pair-comparison/pair-comparison';
 import { OutputEstimationProvider } from '../output-estimation/output-estimation';
+import { RankingTaskProvider } from '../ranking-task/ranking-task';
 
 
 @Injectable()
@@ -12,8 +13,9 @@ export class Data {
 
   constructor(private storage: Storage, private filesystem: File,
     private stimuli: Stimuli, private training: TrainingProvider,
-    private pairComparison: PairComparisonProvider, private outputEstimation: OutputEstimationProvider) {
-    console.log('Hello Data Provider');
+    private pairComparison: PairComparisonProvider, private outputEstimation: OutputEstimationProvider,
+    private rankingTask: RankingTaskProvider) {
+      console.log('Hello Data Provider');
   }
 
   serializeStimuliData() {
@@ -98,6 +100,8 @@ export class Data {
       }
     }
 
+    // save ranking task data
+    //this.rankingTask.
 
     return this.mapToObj(data);
   }
