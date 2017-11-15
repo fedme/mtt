@@ -6,6 +6,7 @@ import { CONDITIONS } from './constants';
 @Injectable()
 export class Stimuli {
 
+  initialTimestamp: number;
   participant: Participant;
   featuresOrder: string[];
   trainingType: string;
@@ -14,6 +15,7 @@ export class Stimuli {
 
   constructor(private utils: Utils) {
     console.log('Hello Stimuli Provider');
+    this.initialTimestamp = Date.now();
     this.participant = new Participant("anonymous-" + this.utils.getCounterValue());
     this.pickCondition();
     this.pickFeaturesOrder();
@@ -64,6 +66,11 @@ export class Stimuli {
     let y = features[this.featuresOrder[1]];
     let z = features[this.featuresOrder[2]];
     return (6 * x) + (3 * y) + z - 10;
+  }
+
+  getParticipantAgeGroup() {
+    if (this.participant.age >= 18) return 18;
+    return this.participant.age;
   }
 
 }

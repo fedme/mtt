@@ -25,4 +25,8 @@ export class Monster {
     return this.id === obj.id;
   }
 
+  public toString() {
+    return this.feature_a + "," + this.feature_b + "," + this.feature_c  + "," + this.criterion + "," + this.id;
+  }
+
 }
