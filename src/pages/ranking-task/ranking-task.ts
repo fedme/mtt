@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, reorderArray } from 'ionic-angular';
-import { RankingTaskProvider } from '../../providers/providers';
+import { RankingTaskProvider, Stimuli, Data } from '../../providers/providers';
 
 
 @IonicPage()
@@ -11,8 +11,11 @@ import { RankingTaskProvider } from '../../providers/providers';
 export class RankingTaskPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private rankingTask: RankingTaskProvider) {
+    private rankingTask: RankingTaskProvider, private data: Data, private stimuli: Stimuli) {
       
+      // Initialize provider
+      this.rankingTask.initialize();
+
   }
 
   ionViewDidLoad() {
@@ -24,7 +27,8 @@ export class RankingTaskPage {
   }
 
   next() {
-    
+    this.data.save();
+    this.navCtrl.push("RewardPage");
   }
 
 }

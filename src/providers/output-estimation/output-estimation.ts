@@ -19,14 +19,13 @@ export class OutputEstimationProvider {
     //this.generateQuestions();
   }
 
-  generateQuestions(debug: boolean = false) {
+  initialize() {
+    this.questions = [];
+    this.questionsCounter = -1;
+    this.generateQuestions();
+  }
 
-    if (debug) {
-      let monster = new Monster("monster42", 3, 1, 5, 42);
-      let question = new OutputEstimationQuestion("extrapolation", monster);
-      this.questions.push(question);
-      return;
-    }
+  generateQuestions() {
 
     // generate monsters IDs
     const firstId = NUMBERS.TRAINING_CARDS + NUMBERS.PAIR_COMPARISONS + 1;
@@ -89,6 +88,14 @@ export class OutputEstimationProvider {
 
   runOutOfQuestions() {
     return this.questionsCounter >= (this.questions.length - 1);
+  }
+
+  getTotalReward() {
+    let total = 0;
+    for (let question of this.questions) {
+      total = total + question.getAnswerReward();
+    }
+    return total;
   }
 
 }

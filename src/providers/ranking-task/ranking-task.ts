@@ -7,10 +7,14 @@ import { TranslateService } from '@ngx-translate/core';
 export class RankingTaskProvider {
 
   features: {id: string, label: string}[];
+  freeText: string;
 
   constructor(private utils: Utils, public translate: TranslateService) {
     console.log('Hello RankingTaskProvider Provider');
+  }
 
+  initialize() {
+    this.freeText = "";
     this.translate.get(['MONSTER.FEATURE_A_LABEL', 'MONSTER.FEATURE_B_LABEL', 'MONSTER.FEATURE_C_LABEL']).subscribe(labels => {
       this.features = [
         {"id": "feature_a", "label": labels["MONSTER.FEATURE_A_LABEL"]},
@@ -18,8 +22,6 @@ export class RankingTaskProvider {
         {"id": "feature_c", "label": labels["MONSTER.FEATURE_C_LABEL"]}
       ];
     });
-
-    //this.generateQuestions();
   }
 
   

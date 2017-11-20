@@ -23,8 +23,11 @@ export class OutputEstimationPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private stimuli: Stimuli, private outputEstimation: OutputEstimationProvider) {
-      this.outputEstimation.generateQuestions();
+    
+      // Initialize provider
+      this.outputEstimation.initialize();
       this.updateCurrentQuestion();
+
   }
 
   ionViewDidLoad() {
@@ -32,19 +35,19 @@ export class OutputEstimationPage {
   }
 
   next() {
-    if (this.guessedCriterion == null) return; // TODO: check slider moved
-    if (this.outputEstimation.runOutOfQuestions()) {
-      return this.end();
-    }
+    if (this.guessedCriterion == null) return;
 
-    // TODO: ...
     this.question.guessedCriterion = this.guessedCriterion;
     this.outputEstimation.updateQuestion(this.question);
     this.guessedCriterion = null;
+
     this.updateCurrentQuestion();
   }
 
   updateCurrentQuestion() {
+    if (this.outputEstimation.runOutOfQuestions()) {
+      return this.end();
+    }
     this.question = this.outputEstimation.getNextQuestion();
   }
 

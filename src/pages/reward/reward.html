@@ -1,0 +1,32 @@
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col col-8 text-center>
+          <div class="content-wrapper">
+            <h1 translate [translateParams]="">REWARD.TITLE</h1>
+            <p [innerHTML]="'REWARD.BODY' | translate"></p>
+
+            <br><br>
+
+            <p class="reward">{{ getTotalReward() }} €</p>
+
+            <br><br>
+            
+          </div>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col></ion-col>
+        <ion-col text-center>
+            <button ion-button large (click)="next()">{{'RESTART_GAME' | translate}}</button>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+  </ion-grid>
+
+  
+</ion-content>

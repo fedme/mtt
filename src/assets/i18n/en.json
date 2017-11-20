@@ -70,7 +70,15 @@
   "RANKING_TASK": {
     "TITLE": "Ranking task title",
     "BODY": "Ranking task body",
+    "QUESTION_ADULTS": "Question for adults...",
     "NEXT": "Next"
-  }
+  },
+
+  "REWARD": {
+    "TITLE": "Reward title",
+    "BODY": "Reward body"
+  },
+
+  "RESTART_GAME": "Restart game"
   
 }

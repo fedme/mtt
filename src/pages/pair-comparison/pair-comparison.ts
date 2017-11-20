@@ -23,8 +23,11 @@ export class PairComparisonPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private stimuli: Stimuli, private pairComparison: PairComparisonProvider) {
-      this.pairComparison.generateQuestions();
+      
+      // Initialize provider
+      this.pairComparison.initialize();
       this.updateCurrentQuestion();
+
   }
 
   ionViewDidLoad() {
@@ -41,10 +44,7 @@ export class PairComparisonPage {
 
   next() {
     if (this.chosenCard == null) return;
-    if (this.pairComparison.runOutOfQuestions()) {
-      return this.end();
-    }
-
+    
     const chosenMonster = this.chosenCard.getMonster();
     this.question.answer(chosenMonster);
     this.pairComparison.updateQuestion(this.question);
@@ -56,6 +56,9 @@ export class PairComparisonPage {
   }
 
   updateCurrentQuestion() {
+    if (this.pairComparison.runOutOfQuestions()) {
+      return this.end();
+    }
     this.question = this.pairComparison.getNextQuestion();
   }
 

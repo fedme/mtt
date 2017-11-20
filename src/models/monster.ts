@@ -26,7 +26,7 @@ export class Monster {
   }
 
   public toString() {
-    return this.feature_a + "," + this.feature_b + "," + this.feature_c  + "," + this.criterion + "," + this.id;
+    return this.feature_a + ";" + this.feature_b + ";" + this.feature_c  + ";" + this.criterion + ";" + this.id;
   }
 
 }

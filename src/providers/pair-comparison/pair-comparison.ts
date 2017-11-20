@@ -21,7 +21,12 @@ export class PairComparisonProvider {
 
   constructor(private utils: Utils, private stimuli: Stimuli) {
     console.log('Hello PairComparisonProvider Provider');
-    //this.generateQuestions();
+  }
+
+  initialize() {
+    this.questions = [];
+    this.questionsCounter = -1;
+    this.generateQuestions();
   }
 
   generateQuestions() {
@@ -83,6 +88,14 @@ export class PairComparisonProvider {
 
   runOutOfQuestions() {
     return this.questionsCounter >= (this.questions.length - 1);
+  }
+
+  getTotalReward() {
+    let total = 0;
+    for (let question of this.questions) {
+      total = total + question.getAnswerReward();
+    }
+    return total;
   }
 
 }

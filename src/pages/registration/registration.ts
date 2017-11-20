@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { Stimuli } from '../../providers/providers';
+import { Stimuli, Data } from '../../providers/providers';
 
 @IonicPage({
   priority: 'high'
@@ -12,7 +12,12 @@ import { Stimuli } from '../../providers/providers';
 export class RegistrationPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    private stimuli: Stimuli, private toastCtrl: ToastController) {
+    private stimuli: Stimuli, private data: Data, private toastCtrl: ToastController) {
+      
+      // Initialize providers
+      this.stimuli.initialize();
+      this.data.initialize();
+
   }
 
   ionViewDidLoad() {

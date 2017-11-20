@@ -15,6 +15,10 @@ export class Stimuli {
 
   constructor(private utils: Utils) {
     console.log('Hello Stimuli Provider');
+    this.participant = new Participant("anonymous-" + this.utils.getCounterValue());
+  }
+
+  initialize() {
     this.initialTimestamp = Date.now();
     this.participant = new Participant("anonymous-" + this.utils.getCounterValue());
     this.pickCondition();
@@ -22,6 +26,7 @@ export class Stimuli {
     console.log("[featuresOrder]", this.featuresOrder);
     console.log("[trainingType]", this.trainingType);
     console.log("[testTypes]", this.testTypes);
+    this.currentTestIndex = -1;
   }
 
   pickCondition() {

@@ -23,6 +23,7 @@ export class OutputEstimationQuestion {
     if (this.getAnswerDistance() <= 5) return 30;
     if (this.getAnswerDistance() <= 10) return 20;
     if (this.getAnswerDistance() <= 20) return 10;
+    return 0;
   }
 
   public equals(obj: OutputEstimationQuestion) : boolean { 

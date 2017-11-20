@@ -11,6 +11,13 @@
             <ion-list reorder="true" (ionItemReorder)="reorderFeatures($event)">
               <ion-item *ngFor="let feature of rankingTask.features">{{ feature.label }}</ion-item>
             </ion-list>
+
+            <br>
+
+            <div *ngIf="stimuli.participant.age >= 18">
+              <p [innerHTML]="'RANKING_TASK.QUESTION_ADULTS' | translate"></p>
+              <ion-textarea [(ngModel)]="rankingTask.freeText" rows="4"></ion-textarea>
+            </div>
             
           </div>
       </ion-col>

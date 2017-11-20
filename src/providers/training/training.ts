@@ -13,9 +13,12 @@ export class TrainingProvider {
 
   constructor(private utils: Utils, private stimuli: Stimuli) {
     console.log('Hello TrainingMonsters Provider');
+  }
+
+  initialize() {
     this.cards = [];
     this.revealedCardsCounter = 0;
-    //this.generateCards();
+    this.generateCards();
   }
 
   generateCards() {

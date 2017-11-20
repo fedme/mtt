@@ -25,18 +25,17 @@ export class TrainingPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     private utils: Utils, private stimuli: Stimuli, private training: TrainingProvider) {
-
-      this.training.generateCards();
      
+      // Initialize provider
+      this.training.initialize();
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TrainingPage');
-
     if (this.stimuli.isPassive()) {
       this.pickRandomCards();
     }
-
   }
 
   handleTrainingCardRevealed(card: TrainingCard) {
