@@ -58,4 +58,4 @@ To change the language of the app, edit `src/app/app.component.ts` and modify
 `translate.use('en')` to use the LANGCODE from `src/assets/i18n/`
 
 ## License
-This software is released under the MIT license. Please see the `LICENSE.txt` file.
+This software is Copyright 2017 iSearch
