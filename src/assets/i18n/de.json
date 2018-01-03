@@ -16,12 +16,12 @@
   "TRAINING_INSTRUCTIONS": {
     "FIRST": {
       "TITLE": "",
-      "BODY": "Wir werden ein Kartenspiel mit Monster spielen. Die Monster leben auf einem Planeten namens Apres. Jeden Tag sammeln sie magische Früchte, um stärker zu werden. Umso mehr Früchte sie sammeln, umso stärker werden sie. Außerdem machen sie Wettkämpfe gegeneinander, um zu sehen, wer die meisten Früchte sammeln kann. Ein paar Sachen wissen wir schon über die Monster, allerdings wollen wir jetzt herausfinden wie wir <strong>mit diesem Wissen herausfinden können, wie viele Früchte die Monster sammeln können</strong>. Lass uns herausfinden, wie das funktioniert!",
+      "BODY": "Wir werden ein Kartenspiel mit Monster spielen. Die Monster leben auf einem Planeten namens Apres. Jeden Tag sammeln sie magische Früchte, um stärker zu werden. Umso mehr Früchte sie sammeln, umso stärker werden sie. Außerdem machen sie Wettkämpfe gegeneinander, um zu sehen, wer die meisten Früchte sammeln kann. Ein paar Sachen wissen wir schon über die Monster, allerdings wollen wir jetzt herausfinden wie wir <strong>mit diesem Wissen aufdecken können, wie viele Früchte die Monster sammeln</strong>. Lass uns herausfinden, wie das funktioniert!",
       "NEXT": "Los geht's!"
     },
     "SECOND": {
       "TITLE": "",
-      "BODY": "Das Ziel des Spiels ist es, vorherzusagen, wie viele Früchte jedes Monster gesammelt hat. Dafür darfst du aber <strong>nur</strong> die Punktzahlen den Eigenschaften benutzen! <strong>Das heißt du musst herausfinden, wie die Eigenschaften der Monster mit der Anzahl der gesammelten Früchte zusammenhängen</strong>! Um dies herauszufinden, kannst du dir als erstes einige der Monster genauer anschauen und herauszufinden, wie viele Früchte sie gesammelt haben. Danach spielen wir zwei Spiele, in denen du dann Vorhersagen machen musst. Für jede richtige Antwort wirst du etwas Geld bekommen! Das bekommst du dann am Ende des gesamten Spiels.",
+      "BODY": "Das Ziel des Spiels ist es, vorherzusagen, wie viele Früchte jedes Monster gesammelt hat. Dafür darfst du aber <strong>nur</strong> die Punktzahlen der Eigenschaften benutzen! <strong>Das heißt du musst herausfinden, wie die Eigenschaften der Monster mit der Anzahl der gesammelten Früchte zusammenhängen</strong>! Um dies herauszufinden, kannst du dir als erstes einige der Monster genauer anschauen und herausfinden, wie viele Früchte sie gesammelt haben. Danach spielen wir zwei Spiele, in denen du dann Vorhersagen machen musst. Für jede richtige Antwort wirst du etwas Geld bekommen! Das bekommst du dann am Ende des gesamten Spiels.",
       "NEXT": "Zurück zum Spiel!"
     },
     "THIRD": {
@@ -69,7 +69,7 @@
 
   "RANKING_TASK": {
     "TITLE": "",
-    "BODY": "Jetzt siehst du nochmal die drei Eigenschaften der Monstern. Kannst du mir zeigen, welche Eigenschaft die wichtigste war, um mehr Früchte zu sammeln? Ordne die Eigenschaften von der wichtigsten (oben) zur unwichtigsten (unten).",
+    "BODY": "Jetzt siehst du nochmal die drei Eigenschaften der Monster. Kannst du mir zeigen, welche Eigenschaft die wichtigste war, um mehr Früchte zu sammeln? Ordne die Eigenschaften von der wichtigsten (oben) zur unwichtigsten (unten).",
     "QUESTION_ADULTS": "Was war die Verbindung zwischen den Eigenschaften und der Anzahl der gesammelten Früchte?",
     "NEXT": "Weiter"
   },
