@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Platform } from 'ionic-angular';
 import { Utils } from '../utils/utils';
 import { Participant } from '../../models/participant';
 import { CONDITIONS } from './constants';
@@ -12,10 +13,13 @@ export class Stimuli {
   trainingType: string;
   testTypes: string[];
   currentTestIndex: number = -1;
+  runInBrowser: boolean = false;
+  conditionCounterOverride: number = null;
 
-  constructor(private utils: Utils) {
+  constructor(private utils: Utils, private platform: Platform) {
     console.log('Hello Stimuli Provider');
     this.participant = new Participant("anonymous-" + this.utils.getCounterValue());
+    this.runInBrowser = this.platform.is('core') || this.platform.is('mobileweb');
   }
 
   initialize() {
@@ -23,25 +27,33 @@ export class Stimuli {
     this.participant = new Participant("anonymous-" + this.utils.getCounterValue());
     this.pickCondition();
     this.pickFeaturesOrder();
-    console.log("[featuresOrder]", this.featuresOrder);
-    console.log("[trainingType]", this.trainingType);
-    console.log("[testTypes]", this.testTypes);
+    
     this.currentTestIndex = -1;
   }
 
   pickCondition() {
-    let counter = this.utils.getCounterValue();
+    let counter = 0;
+    if (this.conditionCounterOverride != null) {
+      console.log("conditionCounterOverride", this.conditionCounterOverride);
+      counter = this.conditionCounterOverride;
+    }
+    else {
+      counter = this.utils.getCounterValue();
+      //TODO: move to the data saving 
+      this.utils.incrementCounter();
+    }
     let condition = CONDITIONS[counter % CONDITIONS.length];
     this.trainingType = condition.training;
     this.testTypes = condition.testing;
-
-    //TODO: move to the data saving 
-    this.utils.incrementCounter();
+    
+    console.log("[trainingType]", this.trainingType);
+    console.log("[testTypes]", this.testTypes);
   }
 
   pickFeaturesOrder() {
     let perms = this.utils.permute(["feature_a", "feature_b", "feature_c"]);
     this.featuresOrder = this.utils.pickRandomFromArray(perms);
+    console.log("[featuresOrder]", this.featuresOrder);
   }
 
   isPassive() {

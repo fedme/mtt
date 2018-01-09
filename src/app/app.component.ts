@@ -31,7 +31,7 @@ export class MyApp {
 
   @ViewChild(Nav) nav: Nav;
 
-  constructor(private translate: TranslateService, platform: Platform, 
+  constructor(private translate: TranslateService, private platform: Platform, 
     private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen,
     private androidFullScreen: AndroidFullScreen) {
       platform.ready().then(() => {
@@ -49,7 +49,15 @@ export class MyApp {
   initTranslate() {
     // Set the default language for translation strings, and the current language.
     this.translate.setDefaultLang('en');
-    this.translate.use('de');
+
+    const runInBrowser = this.platform.is('core') || this.platform.is('mobileweb');
+    if (runInBrowser) {
+      this.translate.use('en');
+    }
+    else {
+      this.translate.use('de');
+    }
+    
 
     /*if (this.translate.getBrowserLang() !== undefined) {
       this.translate.use(this.translate.getBrowserLang());

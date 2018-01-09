@@ -1,12 +1,12 @@
 {
   "MONSTER": {
-    "FEATURE_A_LABEL": "FREUNDLICH",
-    "FEATURE_B_LABEL": "PÜNKTLICH",
-    "FEATURE_C_LABEL": "WITZIG"
+    "FEATURE_A_LABEL": "FRIENDLY",
+    "FEATURE_B_LABEL": "CHEEKY",
+    "FEATURE_C_LABEL": "FUNNY"
   },
 
   "REGISTRATION": {
-    "TITLE": "Please enter participant data",
+    "TITLE": "Enter participant data",
     "CODE_LABEL": "Participant code",
     "AGE_LABEL": "Participant age",
     "GRADE_LABEL": "Participant grade",
@@ -15,70 +15,70 @@
 
   "TRAINING_INSTRUCTIONS": {
     "FIRST": {
-      "TITLE": "Training instructions title",
-      "BODY": "Training instructions body<br><br>aaaaa<strong>bbbb</strong>",
-      "NEXT": "Let's play!"
+      "TITLE": "",
+      "BODY": "You are going to play a card game with some monsters. These monsters live on the planet Apres. Every day, they pick some magic fruit to become stronger. The more fruit they gather, the stronger they get, and they have competitions to see who can collect the most fruit. You already have some information about these monsters, and you need to find out how to use this knowledge to <strong>predict how many fruits the monsters have collected</strong>. Let's find out how it works!",
+      "NEXT": "Let's go!"
     },
     "SECOND": {
-      "TITLE": "Training instructions 2 title",
-      "BODY": "Training instructions 2 body<br><br>aaaaa<strong>bbbb</strong>",
-      "NEXT": "Back to game!"
+      "TITLE": "",
+      "BODY": "Each monster has a score for how funny, cheeky and friendly it is, displayed under its picture. This is called the feature score. The lowest score is 1, and the highest score is 5. The number of fruits collected by each monster <strong> depends on these three feature scores</strong>, and appears in the circle just above its picture. The <strong>maximum</strong> number of fruit is 40, and the <strong>minimum</strong> is 0.<br></br>The aim of the game is to predict how many fruits each monsters has picked, using <strong>only</strong> the three feature scores on each card. <strong>That means you need to learn the relationship between the scores and the number of fruits collected by each monster!</strong> First you will do some training, so you can learn about this relationship by clicking on some cards to find out how many fruits were picked by the monster on the card. Then you will play two prediction games. For every correct answer, you will get some money! You will receive your reward at the end of the game.",
+      "NEXT": "Start the game!"
     },
     "THIRD": {
-      "TITLE_ACTIVE": "Training instructions 3 active title",
-      "BODY_ACTIVE": "Training instructions 3 active body<br><br>aaaaa<strong>bbbb</strong>",
-      "TITLE_PASSIVE": "Training instructions 3 passive title",
-      "BODY_PASSIVE": "Training instructions 3 passive body<br><br>aaaaa<strong>bbbb</strong>",
-      "NEXT": "Back to game!"
+      "TITLE_ACTIVE": "",
+      "BODY_ACTIVE": "Now it's time to find out what the relationship between each monster's feature scores and the number of fruits it picked is. You can click on <strong>some</strong> of the cards on the screen to find out how many fruits the monsters picked, but <strong>not all of them</strong>. Since you cannot click on all the cards, make sure you <strong>start with the most informative ones</strong> so you can learn as much as possible, as quickly as possible. <strong>Remember that you have to learn how the monster's features influence their fruit-picking ability</strong>. This will help you to win the game!",
+      "TITLE_PASSIVE": "",
+      "BODY_PASSIVE": "Now it's time to find out what the relationship between each monster's feature scores and the number of fruits it picked is. You can click on <strong>the cards that turn red</strong> to find out how many fruits the monsters picked. Since you cannot click on all of the cards, try to learn as much as possible, as quickly as possible about <strong>how the monster's features influence their fruit-picking ability</strong>. This will help you to win the game!",
+      "NEXT": "Next"
     }
   },
 
   "TRAINING": {
     "NEXT_PICK_BUTTON_ACTIVE": "Let me pick a card",
     "NEXT_PICK_BUTTON_PASSIVE": "Pick a card for me",
-    "PICK_CARD_INSTRUCTION_ACTIVE": "Tap a card to reveal it",
-    "PICK_CARD_INSTRUCTION_PASSIVE": "Tap the highlighted card to reveal it",
+    "PICK_CARD_INSTRUCTION_ACTIVE": "Click on a card to see how many fruits that monster picked.",
+    "PICK_CARD_INSTRUCTION_PASSIVE": "Click on the red card to see how many fruits that monster picked.",
     "END_BUTTON": "End training"
   },
-  
+
   "TEST_INSTRUCTIONS": {
-    "NEXT": "Let's go",
+    "NEXT": "Let's go!",
     "PAIR_COMPARISON": {
-      "TITLE": "Pair comparison instructions title",
-      "BODY": "Pair comparison instructions body<br><br>aaaaa<strong>bbbb</strong>"
+      "TITLE": "",
+      "BODY": "Now you will play another game, where you will use your new knowledge about the monsters. Remember that you will win some money for every correct answer!"
     },
     "OUTPUT_ESTIMATION": {
-      "TITLE": "Output estimation instructions title",
-      "BODY": "Output estimation instructions body<br><br>aaaaa<strong>bbbb</strong>"
+      "TITLE": "",
+      "BODY": "Now you will play another game, where you will use your new knowledge about the monsters. Remember that you will win some money for every correct answer!"
     }
   },
 
   "TEST": {
     "PAIR_COMPARISON": {
-      "TITLE": "Pair comparison test title",
-      "BODY": "Pair comparison test body",
-      "NEXT_QUESTION": "Next question"
+      "TITLE": "",
+      "BODY": "Look at these two monsters. Which one do you think has picked the most fruit? Click on the one you think.",
+      "NEXT_QUESTION": "Next"
     },
     "OUTPUT_ESTIMATION": {
-      "TITLE": "Output estimation test title",
-      "BODY": "Output estimation test body",
-      "NEXT_QUESTION": "Next question"
+      "TITLE": "",
+      "BODY": "Look at the monster on the screen. How many fruits do you think it has picked? Move the slider below to select the number you think.",
+      "NEXT_QUESTION": "Next"
     },
-    "NEXT": "next"
+    "NEXT": "Next game"
   },
 
   "RANKING_TASK": {
-    "TITLE": "Ranking task title",
-    "BODY": "Ranking task body",
-    "QUESTION_ADULTS": "Question for adults...",
+    "TITLE": "",
+    "BODY": "Below you see the three monster features again. Order them from the most important (top) to the least important (bottom) for predicting how many fruits each monster picked.",
+    "QUESTION_ADULTS": "What was the relationship between the monster features and the number of fruits picked by each monster? Write your answer in the text box below.",
     "NEXT": "Next"
   },
 
   "REWARD": {
-    "TITLE": "Reward title",
-    "BODY": "Reward body"
+    "TITLE": "",
+    "BODY": "Well done! here is your reward:"
   },
 
-  "RESTART_GAME": "Restart game"
-  
+  "RESTART_GAME": ""
+
 }

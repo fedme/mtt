@@ -14,7 +14,7 @@
 
             <br>
 
-            <div *ngIf="stimuli.participant.age >= 18">
+            <div *ngIf="stimuli.participant.age >= 18 || stimuli.runInBrowser">
               <p [innerHTML]="'RANKING_TASK.QUESTION_ADULTS' | translate"></p>
               <ion-textarea [(ngModel)]="rankingTask.freeText" rows="4"></ion-textarea>
             </div>

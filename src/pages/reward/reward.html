@@ -4,29 +4,38 @@
     <ion-row>
       <ion-col></ion-col>
       <ion-col col-8 text-center>
-          <div class="content-wrapper">
-            <h1 translate [translateParams]="">REWARD.TITLE</h1>
-            <p [innerHTML]="'REWARD.BODY' | translate"></p>
+        <div class="content-wrapper">
+          <h1 translate [translateParams]="">REWARD.TITLE</h1>
+          <p [innerHTML]="'REWARD.BODY' | translate"></p>
 
-            <br><br>
+          <br>
 
-            <p class="reward">{{ getTotalReward() }} €</p>
+          <p class="reward">{{ getTotalReward() }} €</p>
 
-            <br><br>
-            
-          </div>
+          <br>
+          <br>
+
+          <strong *ngIf="stimuli.runInBrowser">
+            Now please go back to the Mturk page and enter the following completion code: <br><br>
+            <span class="reward">MTT-ONLINE-2018</span>
+          </strong>
+
+          <br>
+          <br>
+
+        </div>
       </ion-col>
       <ion-col></ion-col>
     </ion-row>
 
-    <ion-row>
-        <ion-col></ion-col>
-        <ion-col text-center>
-            <button ion-button large (click)="next()">{{'RESTART_GAME' | translate}}</button>
-        </ion-col>
-        <ion-col></ion-col>
-      </ion-row>
+    <ion-row *ngIf="!stimuli.runInBrowser">
+      <ion-col></ion-col>
+      <ion-col text-center>
+        <button ion-button large (click)="next()">{{'RESTART_GAME' | translate}}</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
   </ion-grid>
 
-  
+
 </ion-content>

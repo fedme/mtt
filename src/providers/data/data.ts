@@ -24,6 +24,24 @@ export class Data {
     this.updateRecordsNumber();
   }
 
+  save() {
+    console.log("[DEBUG] DB driver: " + this.storage.driver);
+    const recordId = "record_" + this.stimuli.participant.code;
+    let dataObject = this.serializeStimuliData();
+    console.log("[DEBUG] Serialized data: ", dataObject);
+
+    if (this.stimuli.runInBrowser) {
+      const jsonData = JSON.stringify(dataObject);
+      console.log("[saving data][browser][participant_code]", this.stimuli.participant.code);
+      console.log("[saving data][browser][data]", dataObject);
+      console.log("[saving data][browser][jsonData]", jsonData);
+    }
+    else {
+      console.log("[saving data][app][data]", dataObject);
+      this.storage.set(recordId, dataObject);
+    }
+  }
+
   serializeStimuliData() {
     // calculate exp duration
     const duration = Math.floor((Date.now() - this.stimuli.initialTimestamp) / 1000);
@@ -130,14 +148,6 @@ export class Data {
     data.set("reward_total_euros", (totalReward / 100).toFixed(2));
 
     return this.mapToObj(data);
-  }
-
-  save() {
-    console.log("[DEBUG] DB driver: " + this.storage.driver);
-    const recordId = "record_" + this.stimuli.participant.code;
-    let dataObject = this.serializeStimuliData();
-    console.log("[DEBUG] Serialized data: ", dataObject);
-    this.storage.set(recordId, dataObject);
   }
 
   exportRecordsAsCsv() {

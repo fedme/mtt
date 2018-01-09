@@ -21,7 +21,10 @@ export class RewardPage {
   }
 
   getTotalReward() {
-    const totalReward = this.pairComparison.getTotalReward() + this.outputEstimation.getTotalReward();
+    let totalReward = this.pairComparison.getTotalReward() + this.outputEstimation.getTotalReward();
+    if (this.stimuli.runInBrowser) {
+      totalReward = totalReward / 5;
+    }
     return (totalReward / 100).toFixed(2);
   }
 
