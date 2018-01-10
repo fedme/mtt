@@ -9,6 +9,7 @@ import { NUMBERS } from '../stimuli/constants';
 export class TrainingProvider {
 
   cards: TrainingCard[];
+  revealedCards: TrainingCard[];
   revealedCardsCounter: number;
 
   constructor(private utils: Utils, private stimuli: Stimuli) {
@@ -17,7 +18,8 @@ export class TrainingProvider {
 
   initialize() {
     this.cards = [];
-    this.revealedCardsCounter = 0;
+    this.revealedCards = [];
+    this.revealedCardsCounter = 0; //TODO: now redundant
     this.generateCards();
   }
 
@@ -70,6 +72,7 @@ export class TrainingProvider {
     const idx = this.cards.indexOf(card);
     this.cards[idx] = card;
     if (card.hasBeenRevealed()) {
+      this.revealedCards.push(card);
       this.revealedCardsCounter++;
     }
   }

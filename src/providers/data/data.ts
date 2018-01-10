@@ -77,11 +77,20 @@ export class Data {
     data.set("condition_tests_order_1", this.stimuli.testTypes[0]);
     data.set("condition_tests_order_2", this.stimuli.testTypes[1]);
 
-    // save training data
+    // save training data (revealed cards)
+    i = 1;
+    for (let card of this.training.revealedCards) {
+      data.set("training_revealed_"+i+"_card", card.monster != null ? card.monster.toString() : null);
+      i++;
+    }
+
+    // save training data (unrevealed cards)
     i = 1;
     for (let card of this.training.cards) {
-      data.set("training_"+i+"_card", card.monster != null ? card.monster.toString() : null);
+      if (!card.hasBeenRevealed()) {
+        data.set("training_unrevealed_"+i+"_card", card.monster != null ? card.monster.toString() : null);
       i++;
+      }
     }
 
     // save test "pair comparison" data
