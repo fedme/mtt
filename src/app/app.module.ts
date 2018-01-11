@@ -10,7 +10,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 import { File } from '@ionic-native/file';
 
-import { Utils, Data, Stimuli, TrainingProvider, PairComparisonProvider, 
+import { Api, Utils, Data, Stimuli, TrainingProvider, PairComparisonProvider, 
   OutputEstimationProvider, RankingTaskProvider} from '../providers/providers';
 import { MyApp } from './app.component';
 
@@ -64,6 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     File,
+    Api,
     Utils,
     Data,
     Stimuli,

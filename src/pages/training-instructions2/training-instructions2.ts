@@ -18,8 +18,17 @@ export class TrainingInstructions2Page {
     console.log('ionViewDidLoad TrainingInstructions2Page');
   }
 
+  showErrorMessage() {
+    return this.stimuli.questionsCheckCounter > 0;
+  }
+
   next() {
-    this.navCtrl.pop();
+    if (!this.stimuli.runInBrowser) {
+      this.navCtrl.pop();
+    }
+    else {
+      this.navCtrl.push("InstructionsCheckPage");
+    }
   }
 
 }

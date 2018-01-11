@@ -1,4 +1,5 @@
 import { Settings } from './settings/settings';
+import { Api } from './api/api';
 import { Utils } from './utils/utils';
 import { Data } from './data/data';
 import { Stimuli } from './stimuli/stimuli';
@@ -10,6 +11,7 @@ import { RankingTaskProvider } from './ranking-task/ranking-task';
 
 export {
     Settings,
+    Api,
     Utils,
     Data,
     Stimuli,

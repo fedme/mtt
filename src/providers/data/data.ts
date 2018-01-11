@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { File } from '@ionic-native/file';
 import { Stimuli } from '../stimuli/stimuli';
+import { Api } from '../api/api';
 import { TrainingProvider } from '../training/training';
 import { PairComparisonProvider } from '../pair-comparison/pair-comparison';
 import { OutputEstimationProvider } from '../output-estimation/output-estimation';
@@ -13,7 +14,7 @@ export class Data {
 
   recordsNumber: number;
 
-  constructor(private storage: Storage, private filesystem: File,
+  constructor(private storage: Storage, private filesystem: File, private api: Api,
     private stimuli: Stimuli, private training: TrainingProvider,
     private pairComparison: PairComparisonProvider, private outputEstimation: OutputEstimationProvider,
     private rankingTask: RankingTaskProvider) {
@@ -34,7 +35,22 @@ export class Data {
       const jsonData = JSON.stringify(dataObject);
       console.log("[saving data][browser][participant_code]", this.stimuli.participant.code);
       console.log("[saving data][browser][data]", dataObject);
-      console.log("[saving data][browser][jsonData]", jsonData);
+      //console.log("[saving data][browser][jsonData]", jsonData);
+
+      const requestBody = {
+        participant_code: this.stimuli.participant.code,
+        condition: this.stimuli.conditionIndex,
+        reward: dataObject["reward_mturk_total_euros"],
+        data: jsonData
+      };
+      this.api.post('store-data/mtt', requestBody).subscribe(
+        (resp) => {
+          console.log("[saving data][browser][POST] resp", resp);
+        }, 
+        (err) => {
+          console.log("[saving data][browser][POST] ERROR!!!", err);
+        }
+      );
     }
     else {
       console.log("[saving data][app][data]", dataObject);
@@ -70,12 +86,17 @@ export class Data {
     data.set("session_duration_seconds", duration);
 
     // save conditions data
+    data.set("condition_index", this.stimuli.conditionIndex);
     data.set("condition_features_weigth_6", this.stimuli.featuresOrder[0]);
     data.set("condition_features_weigth_3", this.stimuli.featuresOrder[1]);
     data.set("condition_features_weigth_1", this.stimuli.featuresOrder[2]);
     data.set("condition_training_type", this.stimuli.trainingType);
     data.set("condition_tests_order_1", this.stimuli.testTypes[0]);
     data.set("condition_tests_order_2", this.stimuli.testTypes[1]);
+
+    // save instructions check data
+    data.set("instructions_check_attempts_counter", this.stimuli.questionsCheckCounter);
+    data.set("instructions_check_answers", JSON.stringify(this.stimuli.questionsCheck));
 
     // save training data (revealed cards)
     i = 1;
@@ -155,6 +176,7 @@ export class Data {
     const totalReward = this.pairComparison.getTotalReward() + this.outputEstimation.getTotalReward();
     data.set("reward_total_cents", totalReward);
     data.set("reward_total_euros", (totalReward / 100).toFixed(2));
+    data.set("reward_mturk_total_euros", ((totalReward / 5) / 100).toFixed(2));
 
     return this.mapToObj(data);
   }

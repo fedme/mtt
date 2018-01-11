@@ -1,0 +1,30 @@
+page-consent-form {
+
+  background: url("../assets/img/table-pattern.jpg");
+
+  ion-content {
+    background: none;
+    background-color: transparent !important;
+  }
+
+  ion-grid {
+    margin-top: 20px;
+  }
+
+  ion-row {
+    padding-top: 10px;
+  }
+
+  .instructions-wrapper {
+    padding: 40px;
+    background: beige;
+    border-radius: 40px;
+    font-size: medium;
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+  }
+  
+}

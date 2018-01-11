@@ -6,6 +6,10 @@
       <ion-col col-8 text-center>
           <div class="instructions-wrapper">
             <h1 translate [translateParams]="">TRAINING_INSTRUCTIONS.SECOND.TITLE</h1>
+            <p *ngIf="showErrorMessage()" style="color:red;">
+              One or more of your answers were wrong. Plese read the instructions again.<br>
+            </p>
+            
             <p [innerHTML]="'TRAINING_INSTRUCTIONS.SECOND.BODY' | translate"></p>
             <br>
             <p *ngIf="stimuli.isActive()" [innerHTML]="'TRAINING_INSTRUCTIONS.THIRD.BODY_ACTIVE' | translate"></p>

@@ -1,0 +1,86 @@
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col col-8>
+        <div class="instructions-wrapper">
+          <h1 text-center>Questions</h1>
+
+
+          <form [formGroup]="questionsForm">
+            <ion-list radio-group formControlName="question-goal">
+              <ion-list-header>
+                What is your goal?
+              </ion-list-header>
+              <ion-item>
+                <ion-label>Learn the relationship between the features and the fruits collected</ion-label>
+                <ion-radio value="correct"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Memorise monster’s feature scores</ion-label>
+                <ion-radio value="wrong1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Find the monster with the highest number of fruits collected</ion-label>
+                <ion-radio value="wrong2"></ion-radio>
+              </ion-item>
+            </ion-list>
+
+            <br>
+
+            <ion-list radio-group formControlName="question-cards">
+              <ion-list-header>
+                How many cards can you click?
+              </ion-list-header>
+              <ion-item>
+                <ion-label>All</ion-label>
+                <ion-radio value="wrong1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Some</ion-label>
+                <ion-radio value="correct"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>None</ion-label>
+                <ion-radio value="wrong2"></ion-radio>
+              </ion-item>
+            </ion-list>
+
+            <br>
+
+            <ion-list radio-group formControlName="question-fruits">
+              <ion-list-header>
+                What determines how many fruits a monster picks?
+              </ion-list-header>
+              <ion-item>
+                <ion-label>The kind of monster</ion-label>
+                <ion-radio value="wrong1"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>How strong it is</ion-label>
+                <ion-radio value="wrong2"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>The monster’s feature scores</ion-label>
+                <ion-radio value="correct"></ion-radio>
+              </ion-item>
+            </ion-list>
+
+          </form>
+        </div>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col text-center>
+        <button ion-button large (click)="next()">Next</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

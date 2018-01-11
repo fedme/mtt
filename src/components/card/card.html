@@ -1,37 +1,40 @@
-<svg viewBox="0 0 185 268" (click)="handleCardTapped($event)">
+<object>
+    <svg viewBox="0 0 185 268" (click)="handleCardTapped($event)">
 
-  <svg:image href="assets/img/card/back.png" width="185" height="268" x="0" y="0" [attr.opacity]="getCardBackOpacity()" />
-  <svg:image href="assets/img/card/highlight.png" width="185" height="268" x="0" y="0" [attr.opacity]="getCardHighlightOpacity()" />
-  <svg:image href="assets/img/card/front.png" width="185" height="268" x="0" y="0" [attr.opacity]="getCardFrontOpacity()" />
+        <svg:image href="assets/img/card/back.png" xlink:href="assets/img/card/back.png" width="185" height="268" x="0" y="0" [attr.opacity]="getCardBackOpacity()" />
+        <svg:image href="assets/img/card/highlight.png" xlink:href="assets/img/card/highlight.png" width="185" height="268" x="0" y="0" [attr.opacity]="getCardHighlightOpacity()" />
+        <svg:image href="assets/img/card/front.png" xlink:href="assets/img/card/front.png" width="185" height="268" x="0" y="0" [attr.opacity]="getCardFrontOpacity()" />
+      
+        <svg:image [attr.href]="monster.img" [attr.xlink:href]="monster.img" width="95" height="90" x="32" y="35" />
+      
+        <circle cx="140" cy="50" r="25" stroke="black" stroke-width="2" fill="white" />
+      
+        <svg:text x="140" y="60" text-anchor="middle" font-family="Verdana" font-size="30" fill="gray" [attr.opacity]="getCriterionPlaceholderOpacity()">
+          ??
+        </svg:text>
+      
+        <svg:text x="140" y="60" text-anchor="middle" font-family="Verdana" font-size="30" [attr.opacity]="getCriterionOpacity()">
+          {{monster.criterion}}
+        </svg:text>
+      
+        <svg:text x="140" y="60" text-anchor="middle" font-family="Verdana" font-size="30" [attr.opacity]="getGuessedCriterionOpacity()">
+          {{guessedCriterion}}
+        </svg:text>
+      
+        <svg:text x="19" y="150" font-family="Arial" font-size="17">{{ 'MONSTER.FEATURE_A_LABEL' | translate }}</svg:text>
+        <svg:text x="142" y="154" font-family="Verdana" font-size="30">{{monster.feature_a}}</svg:text>
+      
+        <svg:text x="19" y="196" font-family="Arial" font-size="17">{{ 'MONSTER.FEATURE_B_LABEL' | translate }}</svg:text>
+        <svg:text x="142" y="201" font-family="Verdana" font-size="30">{{monster.feature_b}}</svg:text>
+      
+        <svg:text x="19" y="239" font-family="Arial" font-size="17">{{ 'MONSTER.FEATURE_C_LABEL' | translate }}</svg:text>
+        <svg:text x="142" y="244" font-family="Verdana" font-size="30">{{monster.feature_c}}</svg:text>
+      
+      
+        <!--<svg:g [attr.opacity]="getBackOpacity()">
+         <svg:image href="assets/img/card/back.png" width="185" height="268" x="0" y="0" />
+          <svg:text x="73" y="175" font-family="Verdana" font-size="34">{{monster.criterion}}</svg:text>
+        </svg:g>-->
+      </svg>
+</object>
 
-  <svg:image [attr.href]="monster.img" width="95" height="90" x="32" y="35" />
-
-  <circle cx="140" cy="50" r="25" stroke="black" stroke-width="2" fill="white" />
-
-  <svg:text x="140" y="60" text-anchor="middle" font-family="Verdana" font-size="30" fill="gray" [attr.opacity]="getCriterionPlaceholderOpacity()">
-    ??
-  </svg:text>
-
-  <svg:text x="140" y="60" text-anchor="middle" font-family="Verdana" font-size="30" [attr.opacity]="getCriterionOpacity()">
-    {{monster.criterion}}
-  </svg:text>
-
-  <svg:text x="140" y="60" text-anchor="middle" font-family="Verdana" font-size="30" [attr.opacity]="getGuessedCriterionOpacity()">
-    {{guessedCriterion}}
-  </svg:text>
-
-  <svg:text x="19" y="150" font-family="Arial" font-size="17">{{ 'MONSTER.FEATURE_A_LABEL' | translate }}</svg:text>
-  <svg:text x="142" y="154" font-family="Verdana" font-size="30">{{monster.feature_a}}</svg:text>
-
-  <svg:text x="19" y="196" font-family="Arial" font-size="17">{{ 'MONSTER.FEATURE_B_LABEL' | translate }}</svg:text>
-  <svg:text x="142" y="201" font-family="Verdana" font-size="30">{{monster.feature_b}}</svg:text>
-
-  <svg:text x="19" y="239" font-family="Arial" font-size="17">{{ 'MONSTER.FEATURE_C_LABEL' | translate }}</svg:text>
-  <svg:text x="142" y="244" font-family="Verdana" font-size="30">{{monster.feature_c}}</svg:text>
-
-
-  <!--<svg:g [attr.opacity]="getBackOpacity()">
-   <svg:image href="assets/img/card/back.png" width="185" height="268" x="0" y="0" />
-    <svg:text x="73" y="175" font-family="Verdana" font-size="34">{{monster.criterion}}</svg:text>
-  </svg:g>-->
-</svg>

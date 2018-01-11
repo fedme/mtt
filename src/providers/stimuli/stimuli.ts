@@ -7,6 +7,7 @@ import { CONDITIONS } from './constants';
 @Injectable()
 export class Stimuli {
 
+  conditionIndex: number;
   initialTimestamp: number;
   participant: Participant;
   featuresOrder: string[];
@@ -15,6 +16,8 @@ export class Stimuli {
   currentTestIndex: number = -1;
   runInBrowser: boolean = false;
   conditionCounterOverride: number = null;
+  questionsCheck: any[] = [];
+  questionsCheckCounter: number = 0;
 
   constructor(private utils: Utils, private platform: Platform) {
     console.log('Hello Stimuli Provider');
@@ -43,6 +46,7 @@ export class Stimuli {
       this.utils.incrementCounter();
     }
     let condition = CONDITIONS[counter % CONDITIONS.length];
+    this.conditionIndex = counter % CONDITIONS.length;
     this.trainingType = condition.training;
     this.testTypes = condition.testing;
     

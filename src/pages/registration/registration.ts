@@ -24,7 +24,7 @@ export class RegistrationPage {
     console.log('ionViewDidLoad RegistrationPage');
     if (this.parseUrlParams()) {
       console.log("participant:", this.stimuli.participant);
-      this.navCtrl.push('TrainingInstructionsPage');
+      this.navCtrl.push('ConsentFormPage');
     }
   }
 
