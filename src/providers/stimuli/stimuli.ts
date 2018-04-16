@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Utils } from '../utils/utils';
 import { Participant } from '../../models/participant';
-import { CONDITIONS } from './constants';
+import { CONDITIONS, CONDITIONS_ACTIVE_ONLY } from './constants';
 
 @Injectable()
 export class Stimuli {
 
+  activeOnlyVersion: boolean = true; //TODO: hardcoded
   conditionIndex: number;
   initialTimestamp: number;
   participant: Participant;
@@ -28,10 +29,12 @@ export class Stimuli {
   initialize() {
     this.initialTimestamp = Date.now();
     this.participant = new Participant("anonymous-" + this.utils.getCounterValue());
+    this.currentTestIndex = -1;
+  }
+
+  onAferRegistration() {
     this.pickCondition();
     this.pickFeaturesOrder();
-    
-    this.currentTestIndex = -1;
   }
 
   pickCondition() {
@@ -45,8 +48,18 @@ export class Stimuli {
       //TODO: move to the data saving 
       this.utils.incrementCounter();
     }
-    let condition = CONDITIONS[counter % CONDITIONS.length];
-    this.conditionIndex = counter % CONDITIONS.length;
+
+    let condition = null;
+
+    if (this.activeOnlyVersion) {
+      condition = CONDITIONS_ACTIVE_ONLY[counter % CONDITIONS_ACTIVE_ONLY.length];
+      this.conditionIndex = counter % CONDITIONS_ACTIVE_ONLY.length;
+    }
+    else {
+      condition = CONDITIONS[counter % CONDITIONS.length];
+      this.conditionIndex = counter % CONDITIONS.length;
+    }
+      
     this.trainingType = condition.training;
     this.testTypes = condition.testing;
     

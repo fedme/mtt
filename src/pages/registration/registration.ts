@@ -30,6 +30,7 @@ export class RegistrationPage {
 
   handleRegistration() {
     if (this.validateRegistration()) {
+      this.stimuli.onAferRegistration();
       this.navCtrl.push('TrainingInstructionsPage');
     }
   }

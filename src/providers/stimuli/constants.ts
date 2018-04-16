@@ -5,6 +5,11 @@ export const CONDITIONS = [
   { "training": "passive", "testing": ["estimation", "comparison"] }
 ];
 
+export const CONDITIONS_ACTIVE_ONLY = [
+  { "training": "active", "testing": ["comparison", "estimation"] },
+  { "training": "active", "testing": ["estimation", "comparison"] }
+];
+
 export const NUMBERS = {
   TRAINING_CARDS: 27,
   TRAINING_TASKS: 22,

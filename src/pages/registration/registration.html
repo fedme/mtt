@@ -37,6 +37,10 @@
                 <ion-label>{{'REGISTRATION.GRADE_LABEL' | translate}}</ion-label>
                 <ion-input #focusInput type="number" [(ngModel)]="stimuli.participant.grade" name="grade" autocomplete="off" autocorrect="off"></ion-input>
               </ion-item>
+              <ion-item>
+                <ion-label>Play ACTIVE ONLY version</ion-label>
+                <ion-checkbox [(ngModel)]="stimuli.activeOnlyVersion" name="activeOnlyVersion"></ion-checkbox>
+              </ion-item>
             </ion-list>
           </form>
         </div>
