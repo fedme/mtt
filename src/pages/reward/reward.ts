@@ -22,7 +22,7 @@ export class RewardPage {
 
   getTotalReward() {
     let totalReward = this.pairComparison.getTotalReward() + this.outputEstimation.getTotalReward();
-    if (this.stimuli.runInBrowser) {
+    if (this.stimuli.onlineVersion) {
       totalReward = totalReward / 5;
     }
     return (totalReward / 100).toFixed(2);

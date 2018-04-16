@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Stimuli, Data } from '../../providers/providers';
+import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage({
   priority: 'high'
@@ -11,12 +12,30 @@ import { Stimuli, Data } from '../../providers/providers';
 })
 export class RegistrationPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private stimuli: Stimuli, private data: Data, private toastCtrl: ToastController) {
+  isActiveOnlyVersion: boolean = false;
+  lang: string = "en";
+  availableLangs: string[];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private stimuli: Stimuli, 
+    private data: Data, private toastCtrl: ToastController, private translate: TranslateService) {
+
+      // Parse available langs
+      this.availableLangs = this.translate.langs;
+      console.log('available langs: ', this.availableLangs);
+
+      // Get if active-only-version from localStorage
+      if (localStorage.getItem('active-only-version') != null && localStorage.getItem('active-only-version') != '') {
+        this.isActiveOnlyVersion = localStorage.getItem('active-only-version') == 'true';
+      }
       
       // Initialize providers
       this.stimuli.initialize();
       this.data.initialize();
+
+      // Get language from localStorage
+      if (localStorage.getItem('lang') != null && localStorage.getItem('lang') != '') {
+        this.lang = localStorage.getItem('lang');
+      }
 
   }
 
@@ -30,7 +49,15 @@ export class RegistrationPage {
 
   handleRegistration() {
     if (this.validateRegistration()) {
-      this.stimuli.onAferRegistration();
+      // Remember if active-only version
+      localStorage.setItem('active-only-version', this.isActiveOnlyVersion ? 'true' : 'false');
+
+      // set Language
+      this.stimuli.setLang(this.lang);
+      localStorage.setItem('lang', this.lang);
+   
+      // initialize stimuli
+      this.stimuli.onAferRegistration(this.isActiveOnlyVersion);
       this.navCtrl.push('TrainingInstructionsPage');
     }
   }
@@ -78,6 +105,7 @@ export class RegistrationPage {
         }
       }
     }
+    this.stimuli.onlineVersion = codeProvided != false;
     return codeProvided;
   }
  

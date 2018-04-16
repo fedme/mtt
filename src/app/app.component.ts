@@ -6,6 +6,7 @@ import { Config, Nav, Platform } from 'ionic-angular';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { FirstRunPage } from '../pages/pages';
+import { Stimuli} from '../providers/providers';
 
 @Component({
   template: `<ion-menu [content]="content">
@@ -33,7 +34,7 @@ export class MyApp {
 
   constructor(private translate: TranslateService, private platform: Platform, 
     private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen,
-    private androidFullScreen: AndroidFullScreen) {
+    private androidFullScreen: AndroidFullScreen, private stimuli: Stimuli) {
       platform.ready().then(() => {
         // Okay, so the platform is ready and our plugins are available.
         // Here you can do any higher level native things you might need.
@@ -47,28 +48,20 @@ export class MyApp {
   }
 
   initTranslate() {
-    // Set the default language for translation strings, and the current language.
+    // Set the default language
+    this.translate.addLangs(['en', 'de']);
     this.translate.setDefaultLang('en');
 
-    const runInBrowser = this.platform.is('core') || this.platform.is('mobileweb');
-    if (runInBrowser) {
-      this.translate.use('en');
-    }
-    else {
-      this.translate.use('de');
-    }
-    
-
-    /*if (this.translate.getBrowserLang() !== undefined) {
-      this.translate.use(this.translate.getBrowserLang());
-    } else {
-      this.translate.use('en'); // Set your language here
+    // Get language from local storage
+    if (localStorage.getItem('lang') != null && localStorage.getItem('lang') != '') {
+      this.translate.use(localStorage.getItem('lang'));
     }
 
-    this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
-      this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
+    // Update language when changed by an app component
+    this.stimuli.langChangedEvent.subscribe(lang => {
+      console.log('language change evend emitted: ', lang);
+      this.translate.use(lang);
     });
-    */
   }
 
   openPage(page) {

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Utils } from '../utils/utils';
 import { Participant } from '../../models/participant';
@@ -7,7 +7,11 @@ import { CONDITIONS, CONDITIONS_ACTIVE_ONLY } from './constants';
 @Injectable()
 export class Stimuli {
 
-  activeOnlyVersion: boolean = true; //TODO: hardcoded
+  public langChangedEvent: EventEmitter<string> = new EventEmitter();
+
+  activeOnlyVersion: boolean;
+  onlineVersion: boolean = false;
+  
   conditionIndex: number;
   initialTimestamp: number;
   participant: Participant;
@@ -32,7 +36,8 @@ export class Stimuli {
     this.currentTestIndex = -1;
   }
 
-  onAferRegistration() {
+  onAferRegistration(isActiveOnly: boolean = false) {
+    this.activeOnlyVersion = isActiveOnly;
     this.pickCondition();
     this.pickFeaturesOrder();
   }
@@ -105,6 +110,10 @@ export class Stimuli {
   getParticipantAgeGroup() {
     if (this.participant.age >= 18) return 18;
     return this.participant.age;
+  }
+
+  setLang(langCode: string) {
+    this.langChangedEvent.emit(langCode);
   }
 
 }

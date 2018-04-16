@@ -38,8 +38,14 @@
                 <ion-input #focusInput type="number" [(ngModel)]="stimuli.participant.grade" name="grade" autocomplete="off" autocorrect="off"></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label>Play ACTIVE ONLY version</ion-label>
-                <ion-checkbox [(ngModel)]="stimuli.activeOnlyVersion" name="activeOnlyVersion"></ion-checkbox>
+                <ion-label>Play active-only version</ion-label>
+                <ion-checkbox [(ngModel)]="isActiveOnlyVersion" name="isActiveOnlyVersion"></ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-label>Language</ion-label>
+                <ion-select [(ngModel)]="lang" name="lang">
+                  <ion-option *ngFor="let lang of availableLangs" value="{{lang}}">{{lang}}</ion-option>
+                </ion-select>
               </ion-item>
             </ion-list>
           </form>
