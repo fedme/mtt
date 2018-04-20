@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController } from 'ionic-angular';
 import { Stimuli, Data } from '../../providers/providers';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -17,7 +17,8 @@ export class RegistrationPage {
   availableLangs: string[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private stimuli: Stimuli, 
-    private data: Data, private toastCtrl: ToastController, private translate: TranslateService) {
+    private data: Data, private toastCtrl: ToastController, private translate: TranslateService,
+    private modalCtrl: ModalController) {
 
       // Parse available langs
       this.availableLangs = this.translate.langs;
@@ -73,6 +74,11 @@ export class RegistrationPage {
       return false;
     }
     return true;
+  }
+
+  showRecords() {
+    let recordsModal = this.modalCtrl.create("ViewRecordsPage");
+    recordsModal.present();
   }
 
   parseUrlParams() {

@@ -6,8 +6,11 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button outline color="secondary" (click)="data.exportRecordsAsCsv()">
-        CSV Export
+      <button ion-button outline color="secondary" (click)="showRecords()">
+        Show records
+      </button>
+      <button ion-button outline color="secondary" (click)="data.exportRecordsAsJSON()">
+        Records to json file
       </button>
     </ion-buttons>
     <ion-title>iSearch MTT</ion-title>
@@ -20,7 +23,7 @@
   <ion-grid>
     <ion-row>
       <ion-col></ion-col>
-      <ion-col text-center>
+      <ion-col col-6 text-center>
         <div class="content-wrapper">
           <h1 translate [translateParams]="">REGISTRATION.TITLE</h1>
           <form>

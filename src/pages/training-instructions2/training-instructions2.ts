@@ -23,7 +23,7 @@ export class TrainingInstructions2Page {
   }
 
   next() {
-    if (!this.stimuli.runInBrowser) {
+    if (!this.stimuli.onlineVersion) {
       this.navCtrl.pop();
     }
     else {

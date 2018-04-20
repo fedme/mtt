@@ -13,6 +13,7 @@ import { RankingTaskProvider } from '../ranking-task/ranking-task';
 export class Data {
 
   recordsNumber: number;
+  allRecords: any;
 
   constructor(private storage: Storage, private filesystem: File, private api: Api,
     private stimuli: Stimuli, private training: TrainingProvider,
@@ -31,7 +32,7 @@ export class Data {
     let dataObject = this.serializeStimuliData();
     console.log("[DEBUG] Serialized data: ", dataObject);
 
-    if (this.stimuli.runInBrowser) {
+    if (this.stimuli.onlineVersion) {
       const jsonData = JSON.stringify(dataObject);
       console.log("[saving data][browser][participant_code]", this.stimuli.participant.code);
       console.log("[saving data][browser][data]", dataObject);
@@ -181,13 +182,32 @@ export class Data {
     return this.mapToObj(data);
   }
 
+  loadAllRecords() {
+    this.storageGetAll()
+      .then(records => {
+        console.log("[debug] storage.loadAllRecords()");
+        this.allRecords = records;
+        console.log(this.allRecords);
+      });
+  }
+
+  exportRecordsAsJSON() {
+    this.storageGetAll()
+      .then(records => {
+        console.log("records:");
+        console.log(records);
+        let fileContent = JSON.stringify(records);
+        this.saveOutputFile(fileContent, "json");
+      });
+  }
+
   exportRecordsAsCsv() {
     this.storageGetAll()
       .then(records => {
         console.log("records:");
         console.log(records);
         let csvContent = this.fromRecordsToCsv(records);
-        this.saveCsvFile(csvContent);
+        this.saveOutputFile(csvContent, "csv");
       });
   }
 
@@ -226,14 +246,13 @@ export class Data {
     return csvContent;
   }
 
-
-  saveCsvFile(csvContent) {
+  saveOutputFile(csvContent, fileExt = "csv") {
     // build file name
     let currentdate = new Date();
     let day = ("0" + currentdate.getDate()).slice(-2);
     let month = ("0" + (currentdate.getMonth() + 1)).slice(-2);
     let filename = "data-" + day + month + currentdate.getFullYear() + "-"
-      + currentdate.getHours() + currentdate.getMinutes() + ".csv";
+      + currentdate.getHours() + currentdate.getMinutes() + "." + fileExt;
 
     // access file system
     this.filesystem.resolveDirectoryUrl(this.filesystem.externalDataDirectory)
