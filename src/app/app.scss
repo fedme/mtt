@@ -15,6 +15,15 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-.platform-core ion-grid, .platform-mobilebrowser ion-grid {
-    max-width: 1690px;
-}
+// Large screens fix
+@media (min-width: 1250px) {
+    ion-grid {
+      width: 1250px !important;
+      margin: auto !important;
+      position: relative;
+    }
+  
+    .scroll-content {
+      overflow-y:auto;
+    }
+  }

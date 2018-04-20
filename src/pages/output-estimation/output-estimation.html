@@ -11,12 +11,12 @@
     </ion-row>
 
     <ion-row>
-      <ion-col></ion-col>
-      <ion-col text-center>
+      <ion-col col-2></ion-col>
+      <ion-col col-3 text-center>
         <card [monster]="question.monster" [active]="false" [guessedCriterion]="guessedCriterion" ></card>
       </ion-col>
-      <ion-col justify-content-center align-items-center>
-        <div class="content-wrapper">
+      <ion-col col-5 justify-content-center align-items-center>
+        <div class="slider-wrapper">
           <ion-range min="0" max="40" step="1" [(ngModel)]="guessedCriterion">
             <ion-label range-left>0</ion-label>
             <ion-label range-right>40</ion-label>
@@ -25,7 +25,7 @@
               
         
       </ion-col>
-      <ion-col></ion-col>
+      <ion-col col-2></ion-col>
     </ion-row>
 
     <ion-row>
