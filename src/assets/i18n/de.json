@@ -4,7 +4,6 @@
     "FEATURE_B_LABEL": "FRECH",
     "FEATURE_C_LABEL": "WITZIG"
   },
-
   "REGISTRATION": {
     "TITLE": "Enter participant data",
     "CODE_LABEL": "Participant code",
@@ -12,7 +11,6 @@
     "GRADE_LABEL": "Participant grade",
     "SUBMIT": "Begin experiment"
   },
-
   "TRAINING_INSTRUCTIONS": {
     "FIRST": {
       "TITLE": "",
@@ -21,7 +19,7 @@
     },
     "SECOND": {
       "TITLE": "",
-      "BODY": "Das Ziel des Spiels ist es, vorherzusagen, wie viele Früchte jedes Monster gesammelt hat. Dafür darfst du aber <strong>nur</strong> die Punktzahlen der Eigenschaften benutzen! <strong>Das heißt du musst herausfinden, wie die Eigenschaften der Monster mit der Anzahl der gesammelten Früchte zusammenhängen</strong>! Um dies herauszufinden, kannst du dir als erstes einige der Monster genauer anschauen und herausfinden, wie viele Früchte sie gesammelt haben. Danach spielen wir zwei Spiele, in denen du dann Vorhersagen machen musst. Für jede richtige Antwort wirst du etwas Geld bekommen! Das bekommst du dann am Ende des gesamten Spiels.",
+      "BODY": "Das Ziel des Spiels ist es, vorherzusagen, wie viele Früchte jedes Monster gesammelt hat. Dafür darfst du aber <strong>nur</strong> die Punktzahlen der Eigenschaften benutzen! <strong>Das heißt du musst herausfinden, wie die Eigenschaften der Monster mit der Anzahl der gesammelten Früchte zusammenhängen</strong>! Um dies herauszufinden, kannst du dir als erstes einige der Monster genauer anschauen und herausfinden, wie viele Früchte sie gesammelt haben. Danach spielen wir zwei Spiele, in denen du dann Vorhersagen machen musst. ",
       "NEXT": "Zurück zum Spiel!"
     },
     "THIRD": {
@@ -32,7 +30,6 @@
       "NEXT": "Weiter"
     }
   },
-
   "TRAINING": {
     "NEXT_PICK_BUTTON_ACTIVE": "Lass mich eine Karte auswählen",
     "NEXT_PICK_BUTTON_PASSIVE": "Wähle eine Karte für mich aus",
@@ -40,19 +37,17 @@
     "PICK_CARD_INSTRUCTION_PASSIVE": "Tippe auf die rote Karte, um die Anzahl der gesammelten Früchte zu sehen.",
     "END_BUTTON": "Ende des Trainings"
   },
-
   "TEST_INSTRUCTIONS": {
     "NEXT": "Los geht's!",
     "PAIR_COMPARISON": {
       "TITLE": "",
-      "BODY": "Nun wirst du ein weiteres Spiel spielen, in dem du dein neues Wissen verwenden kannst. Denk daran, dass du für jede richtige Antwort Geld bekommst!"
+      "BODY": "Nun wirst du ein weiteres Spiel spielen, in dem du dein neues Wissen verwenden kannst. "
     },
     "OUTPUT_ESTIMATION": {
       "TITLE": "",
-      "BODY": "Nun wirst du ein weiteres Spiel spielen. Denk daran, dass du für jede richtige Antwort Geld bekommst!"
+      "BODY": "Nun wirst du ein weiteres Spiel spielen. "
     }
   },
-
   "TEST": {
     "PAIR_COMPARISON": {
       "TITLE": "",
@@ -66,19 +61,15 @@
     },
     "NEXT": "Nächstes Spiel"
   },
-
   "RANKING_TASK": {
     "TITLE": "",
     "BODY": "Jetzt siehst du nochmal die drei Eigenschaften der Monster. Kannst du mir zeigen, welche Eigenschaft die wichtigste war, um mehr Früchte zu sammeln? Ordne die Eigenschaften von der wichtigsten (oben) zur unwichtigsten (unten).",
     "QUESTION_ADULTS": "Was war die Verbindung zwischen den Eigenschaften und der Anzahl der gesammelten Früchte?",
     "NEXT": "Weiter"
   },
-
   "REWARD": {
-    "TITLE": "Gut gespielt!",
+    "TITLE": "",
     "BODY": "Gut gespielt! Hier ist deine Belohnung:"
   },
-
   "RESTART_GAME": "Nochmal spielen"
-
 }
