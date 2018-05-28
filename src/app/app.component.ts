@@ -8,6 +8,8 @@ import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 import { FirstRunPage } from '../pages/pages';
 import { Stimuli} from '../providers/providers';
 
+declare var cordova: any;
+
 @Component({
   template: `<ion-menu [content]="content">
     <ion-header>
@@ -41,16 +43,35 @@ export class MyApp {
     private stimuli: Stimuli
   ) {
       this.platform.ready().then(() => {
-        // Okay, so the platform is ready and our plugins are available.
-        // Here you can do any higher level native things you might need.
-        this.androidFullScreen.isImmersiveModeSupported()
-        .then(() => this.androidFullScreen.immersiveMode())
-        .catch((error: any) => console.log(error))
         this.statusBar.styleDefault();
         this.splashScreen.hide();
+        this.enterPinnedMode();
+        this.enterImmersiveMode();
       });
       this.initTranslate();
   }
+
+  /**
+	 * enterPinnedMode()
+	 */
+	enterPinnedMode() {
+		if (typeof cordova !== 'undefined') {
+			cordova.plugins.screenPinning.enterPinnedMode(
+				() => { console.log('entered pinned mode') },
+				(error) => { console.log('error when entering pinned mode: ' + error) },
+				true
+			);
+		}
+	}
+
+	/**
+	 * enterImmersiveMode()
+	 */
+	enterImmersiveMode() {
+		this.androidFullScreen.isImmersiveModeSupported()
+			.then(() => this.androidFullScreen.immersiveMode())
+			.catch((error: any) => console.log(error));
+	}
 
   initTranslate() {
     // Set the default language

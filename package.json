@@ -1,6 +1,6 @@
 {
   "name": "org.isearchlab.mtt",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "author": "Federico Meini",
   "homepage": "http://isearchlab.org/",
   "private": true,
@@ -31,6 +31,7 @@
     "@ionic/storage": "2.0.1",
     "@ngx-translate/core": "8.0.0",
     "@ngx-translate/http-loader": "^2.0.0",
+    "ScreenPinning": "git+https://github.com/raimaj/cordova-plugin-screen-pinning.git",
     "cordova-android": "^6.2.3",
     "cordova-plugin-compat": "^1.0.0",
     "cordova-plugin-device": "^1.1.4",
@@ -68,7 +69,8 @@
         "WARN_DEBUG": "false",
         "UPDATE_API": "https://api.ionicjs.com",
         "MAX_STORE": "2"
-      }
+      },
+      "cordova-plugin-screen-pinning": {}
     },
     "platforms": [
       "android"
