@@ -3,9 +3,12 @@ import { Platform } from 'ionic-angular';
 import { Utils } from '../utils/utils';
 import { Participant } from '../../models/participant';
 import { CONDITIONS, CONDITIONS_ACTIVE_ONLY } from './constants';
+import { AppInfo } from './app-info';
 
 @Injectable()
 export class Stimuli {
+
+  appInfo: AppInfo = AppInfo;
 
   public langChangedEvent: EventEmitter<string> = new EventEmitter();
 
@@ -114,6 +117,10 @@ export class Stimuli {
 
   setLang(langCode: string) {
     this.langChangedEvent.emit(langCode);
+  }
+
+  hi() {
+    
   }
 
 }

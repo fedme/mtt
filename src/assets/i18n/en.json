@@ -10,7 +10,10 @@
     "CODE_LABEL": "Participant code",
     "AGE_LABEL": "Participant age",
     "GRADE_LABEL": "Participant grade",
-    "SUBMIT": "Begin experiment"
+    "SUBMIT": "Begin experiment",
+    "GENDER_LABEL": "Participant gender",
+      "MALE": "Male",
+      "FEMALE": "Female"
   },
 
   "TRAINING_INSTRUCTIONS": {

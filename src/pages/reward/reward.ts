@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, reorderArray } from 'ionic-angular';
-import { Stimuli, Data, PairComparisonProvider, OutputEstimationProvider } from '../../providers/providers';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Stimuli, PairComparisonProvider, OutputEstimationProvider } from '../../providers/providers';
 
 
 @IonicPage()
@@ -10,9 +10,13 @@ import { Stimuli, Data, PairComparisonProvider, OutputEstimationProvider } from 
 })
 export class RewardPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private data: Data, private stimuli: Stimuli, private pairComparison: PairComparisonProvider,
-    private outputEstimation: OutputEstimationProvider) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private stimuli: Stimuli, 
+    private pairComparison: PairComparisonProvider,
+    private outputEstimation: OutputEstimationProvider
+  ) {
 
   }
 

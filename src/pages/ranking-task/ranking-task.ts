@@ -10,11 +10,17 @@ import { RankingTaskProvider, Stimuli, Data } from '../../providers/providers';
 })
 export class RankingTaskPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private rankingTask: RankingTaskProvider, private data: Data, private stimuli: Stimuli) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private rankingTask: RankingTaskProvider, 
+    private data: Data,
+    private stimuli: Stimuli
+  ) {
       
       // Initialize provider
       this.rankingTask.initialize();
+      this.stimuli.hi();
 
   }
 

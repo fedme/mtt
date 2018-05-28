@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Stimuli } from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -9,8 +8,10 @@ import { Stimuli } from '../../providers/providers';
 })
 export class ConsentFormPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private stimuli: Stimuli) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams
+  ) {
       
   }
 

@@ -2,14 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { OutputEstimationQuestion } from '../../models/output-estimation-question';
 import { Stimuli, OutputEstimationProvider } from '../../providers/providers';
-import { CardComponent } from '../../components/card/card';
-
-/**
- * Generated class for the TestInstructionsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

@@ -1,6 +1,7 @@
 export class Participant {
 
   code: string;
+  gender: string;
   age: number;
   ageGroup: string;
   dob: Date;

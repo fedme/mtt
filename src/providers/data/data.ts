@@ -7,6 +7,7 @@ import { TrainingProvider } from '../training/training';
 import { PairComparisonProvider } from '../pair-comparison/pair-comparison';
 import { OutputEstimationProvider } from '../output-estimation/output-estimation';
 import { RankingTaskProvider } from '../ranking-task/ranking-task';
+import { AppInfo } from '../stimuli/app-info';
 
 
 @Injectable()
@@ -63,17 +64,9 @@ export class Data {
     // calculate exp duration
     const duration = Math.floor((Date.now() - this.stimuli.initialTimestamp) / 1000);
 
-    // build date and time strings
-    const currentdate = new Date();
-    const day = ("0" + currentdate.getDate()).slice(-2);
-    const month = ("0" + (currentdate.getMonth() + 1)).slice(-2);
-    const year = currentdate.getFullYear();
-    const dateString = day + "/" + month + "/" + year;
-    const timeString = currentdate.getHours().toFixed(2) + ":" + currentdate.getMinutes().toFixed(2);
-
     // data map
     let data = new Map();
-    let i, j = 0;
+    let i = 0;
 
     // save participant data
     data.set("participant_code", this.stimuli.participant.code);
@@ -81,9 +74,14 @@ export class Data {
     data.set("participant_age_group", this.stimuli.getParticipantAgeGroup())
     data.set("participant_grade", this.stimuli.participant.grade);
 
+    // save app data
+    data.set("app_id", AppInfo.id);
+    data.set("app_version", AppInfo.version);
+    data.set("app_nameLabel", AppInfo.nameLabel);
+
     // save session data
-    data.set("session_date", dateString);
-    data.set("session_time", timeString);
+    data.set("session_datetime", Date.now());
+    data.set("session_datetime_human", Date.now().toLocaleString());
     data.set("session_duration_seconds", duration);
 
     // save conditions data

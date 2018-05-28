@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Monster } from '../../models/monster';
-import { Pair } from '../../models/pair';
 import { OutputEstimationQuestion } from '../../models/output-estimation-question';
 import { Utils } from '../utils/utils';
 import { Stimuli } from '../stimuli/stimuli';

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Utils } from '../utils/utils';
 import 'rxjs/add/operator/map';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -9,7 +8,9 @@ export class RankingTaskProvider {
   features: {id: string, label: string}[];
   freeText: string;
 
-  constructor(private utils: Utils, public translate: TranslateService) {
+  constructor(
+    public translate: TranslateService
+  ) {
     console.log('Hello RankingTaskProvider Provider');
   }
 

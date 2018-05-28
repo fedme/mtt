@@ -4,12 +4,6 @@ import { PairComparisonQuestion } from '../../models/pair-comparison-question';
 import { Stimuli, PairComparisonProvider } from '../../providers/providers';
 import { CardComponent } from '../../components/card/card';
 
-/**
- * Generated class for the TestInstructionsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -21,8 +15,12 @@ export class PairComparisonPage {
   question: PairComparisonQuestion;
   chosenCard: CardComponent;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private stimuli: Stimuli, private pairComparison: PairComparisonProvider) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private stimuli: Stimuli, 
+    private pairComparison: PairComparisonProvider
+  ) {
       
       // Initialize provider
       this.pairComparison.initialize();
