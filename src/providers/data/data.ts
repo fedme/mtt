@@ -71,8 +71,9 @@ export class Data {
     // save participant data
     data.set("participant_code", this.stimuli.participant.code);
     data.set("participant_age", this.stimuli.participant.age);
-    data.set("participant_age_group", this.stimuli.getParticipantAgeGroup())
+    data.set("participant_age_group", this.stimuli.participant.age);
     data.set("participant_grade", this.stimuli.participant.grade);
+    data.set("participant_gender", this.stimuli.participant.gender);
 
     // save app data
     data.set("app_id", AppInfo.id);
