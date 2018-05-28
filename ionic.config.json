@@ -1,6 +1,6 @@
 {
   "name": "mtt",
-  "app_id": "",
+  "app_id": "5c42aff5",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
