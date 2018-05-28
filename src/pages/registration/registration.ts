@@ -71,6 +71,11 @@ export class RegistrationPage {
     const ageNull = this.stimuli.participant.age == null;
     const genderNull = this.stimuli.participant.gender == null;
     if (ageNull || genderNull) {
+
+      if (ageNull) {
+        this.stimuli.participant.age = 0;
+      }
+
       let alert = this.alertCtrl.create({
         title: 'Proceed without age/gender?',
         message: 'Are you sure you want to proceed without entering age/gender?',
