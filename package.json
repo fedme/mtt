@@ -1,6 +1,6 @@
 {
   "name": "org.isearchlab.mtt",
-  "version": "2.4.3",
+  "version": "2.5.0",
   "author": "Federico Meini",
   "homepage": "http://isearchlab.org/",
   "private": true,
@@ -23,6 +23,7 @@
     "@ionic-native/android-full-screen": "^4.3.2",
     "@ionic-native/camera": "4.3.1",
     "@ionic-native/core": "^4.3.3",
+    "@ionic-native/device": "^4.7.0",
     "@ionic-native/file": "4.3.3",
     "@ionic-native/splash-screen": "4.3.0",
     "@ionic-native/status-bar": "4.3.0",

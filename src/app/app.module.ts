@@ -9,11 +9,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 import { File } from '@ionic-native/file';
+import { Device } from '@ionic-native/device';
 import { Pro } from '@ionic/pro';
 
 import { Api, Utils, Data, Stimuli, TrainingProvider, PairComparisonProvider, 
   OutputEstimationProvider, RankingTaskProvider} from '../providers/providers';
-  import { AppInfo } from '../providers/stimuli/app-info';
+import { AppInfo } from '../providers/stimuli/app-info';
 import { MyApp } from './app.component';
 
 
@@ -87,6 +88,7 @@ export class MyErrorHandler implements ErrorHandler {
     IonicErrorHandler,
     [{ provide: ErrorHandler, useClass: MyErrorHandler }],
     File,
+    Device,
     Api,
     Utils,
     Data,
