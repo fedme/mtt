@@ -29,7 +29,7 @@
         <button ion-button large *ngIf="!waitingForReveal && stimuli.isPassive()" (click)="nextPick()">{{ 'TRAINING.NEXT_PICK_BUTTON_PASSIVE' | translate }}</button>
         <p *ngIf="waitingForReveal && stimuli.isActive()">{{ 'TRAINING.PICK_CARD_INSTRUCTION_ACTIVE' | translate }}</p>
         <p *ngIf="waitingForReveal && stimuli.isPassive()">{{ 'TRAINING.PICK_CARD_INSTRUCTION_PASSIVE' | translate }}</p>
-      </ion-col>
+      </ion-col> 
     </ion-row>
 
     <ion-row *ngIf="ended">
