@@ -82,7 +82,7 @@ export class TrainingProvider {
   }
 
   runOutOfTasks() {
-    return this.revealedCardsCounter >= NUMBERS.TRAINING_TASKS;
+    return this.revealedCardsCounter >= this.stimuli.trainingTasksNuber;
   }
 
   getRevealedCards() {

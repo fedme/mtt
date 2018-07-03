@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Utils } from '../utils/utils';
 import { Participant } from '../../models/participant';
-import { CONDITIONS, CONDITIONS_ACTIVE_ONLY } from './constants';
+import { TESTS_ORDER, CONDITIONS, CONDITIONS_ACTIVE_ONLY } from './constants';
 import { AppInfo } from './app-info';
 
 @Injectable()
@@ -16,6 +16,9 @@ export class Stimuli {
   onlineVersion: boolean = false;
   
   conditionIndex: number;
+  criterionFunctionIndex: number;
+  trainingTasksNuber: number;
+
   initialTimestamp: number;
   participant: Participant;
   featuresOrder: string[];
@@ -31,6 +34,8 @@ export class Stimuli {
     console.log('Hello Stimuli Provider');
     this.participant = new Participant("anonymous-" + this.utils.getCounterValue());
     this.runInBrowser = this.platform.is('core') || this.platform.is('mobileweb');
+
+    this.detectOnlineVersion();
   }
 
   initialize() {
@@ -39,7 +44,13 @@ export class Stimuli {
     this.currentTestIndex = -1;
   }
 
-  onAferRegistration(isActiveOnly: boolean = false) {
+  detectOnlineVersion() {
+    console.log(document.location.search);
+    const params = new URLSearchParams(document.location.search);
+    console.log("params", params)
+  }
+
+  initializeConditions(isActiveOnly: boolean = false) {
     this.activeOnlyVersion = isActiveOnly;
     this.pickCondition();
     this.pickFeaturesOrder();
@@ -57,19 +68,21 @@ export class Stimuli {
       this.utils.incrementCounter();
     }
 
-    let condition = null;
+    let condition = CONDITIONS[counter % CONDITIONS.length];
 
     if (this.activeOnlyVersion) {
       condition = CONDITIONS_ACTIVE_ONLY[counter % CONDITIONS_ACTIVE_ONLY.length];
       this.conditionIndex = counter % CONDITIONS_ACTIVE_ONLY.length;
     }
     else {
-      condition = CONDITIONS[counter % CONDITIONS.length];
       this.conditionIndex = counter % CONDITIONS.length;
     }
       
     this.trainingType = condition.training;
-    this.testTypes = condition.testing;
+    this.testTypes = TESTS_ORDER[condition.testingOrder];
+
+    this.criterionFunctionIndex = condition.func;
+    this.trainingTasksNuber = condition.trainingTasks;
     
     console.log("[trainingType]", this.trainingType);
     console.log("[testTypes]", this.testTypes);
@@ -98,16 +111,78 @@ export class Stimuli {
     return this.currentTestIndex >= (this.testTypes.length - 1);
   }
 
-  calculateCriterion(feature_a: number, feature_b: number, feature_c: number) {
-    let features = {
+  calculateCriterion(feature_a: number, feature_b: number, feature_c: number): number {
+    if (this.criterionFunctionIndex == 1) {
+      return this.criterionFunction1(feature_a, feature_b, feature_c);
+    }
+    if (this.criterionFunctionIndex == 2) {
+      return this.criterionFunction2(feature_a, feature_b, feature_c);
+    }
+
+    return this.criterionFunction1(feature_a, feature_b, feature_c);
+  }
+
+  criterionFunction1(feature_a: number, feature_b: number, feature_c: number): number {
+    const features = {
       "feature_a": feature_a,
       "feature_b": feature_b,
       "feature_c": feature_c
     };
-    let x = features[this.featuresOrder[0]];
-    let y = features[this.featuresOrder[1]];
-    let z = features[this.featuresOrder[2]];
+    const x = features[this.featuresOrder[0]];
+    const y = features[this.featuresOrder[1]];
+    const z = features[this.featuresOrder[2]];
     return (6 * x) + (3 * y) + z - 10;
+  }
+
+  // TODO: function 2
+  criterionFunction2(feature_a: number, feature_b: number, feature_c: number): number {
+    const features = {
+      "feature_a": feature_a,
+      "feature_b": feature_b,
+      "feature_c": feature_c
+    };
+    const x = features[this.featuresOrder[0]];
+    const y = features[this.featuresOrder[1]];
+    const z = features[this.featuresOrder[2]];
+    return x + y + z;
+  }
+
+
+
+  
+
+  parseUrlParams_old() {
+    let codeProvided = false;
+    if (document.URL.indexOf("?") > 0) {
+      let splitURL = document.URL.split("?");
+      let splitParams = splitURL[1].split("&");
+      let i: any;
+      for (i in splitParams) {
+        let singleURLParam = splitParams[i].split('=');
+        if (singleURLParam[0] == "uid") {
+          this.participant.code = singleURLParam[1];
+          codeProvided = true;
+        }
+        else if (singleURLParam[0] == "wid") {
+          this.participant.code = singleURLParam[1];
+          codeProvided = true;
+        }
+        else if (singleURLParam[0] == "age") {
+          this.participant.age = parseInt(singleURLParam[1]);
+        }
+        else if (singleURLParam[0] == "grade") {
+          this.participant.grade = parseInt(singleURLParam[1]);
+        }
+        else if (singleURLParam[0] == "cond") {
+          this.conditionCounterOverride = parseInt(singleURLParam[1]);
+          
+          console.log("[param][conditionCounterOverride]", parseInt(singleURLParam[1]));
+          console.log( this.conditionCounterOverride);
+        }
+      }
+    }
+    this.onlineVersion = codeProvided != false;
+    return codeProvided;
   }
 
   getParticipantAgeGroup() {
