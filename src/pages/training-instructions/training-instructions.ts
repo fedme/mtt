@@ -21,7 +21,7 @@ export class TrainingInstructionsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TrainingInstructionsPage');
+    //console.log('ionViewDidLoad TrainingInstructionsPage');
   }
 
   next() {

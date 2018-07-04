@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 export class Utils {
 
   constructor() {
-    console.log('Hello Utils Provider');
+    //console.log('Hello Utils Provider');
   }
 
   getRandomInt(min, max) {

@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Utils } from '../utils/utils';
 import { Participant } from '../../models/participant';
-import { TESTS_ORDER, CONDITIONS, CONDITIONS_ACTIVE_ONLY } from './constants';
+import { TESTS_ORDER, CONDITIONS, CONDITIONS_ACTIVE_ONLY, ONLINE_DEFAULT_CONDITION } from './constants';
 import { AppInfo } from './app-info';
 
 @Injectable()
@@ -13,9 +13,12 @@ export class Stimuli {
   public langChangedEvent: EventEmitter<string> = new EventEmitter();
 
   activeOnlyVersion: boolean;
+
+  // onlineVersion
   onlineVersion: boolean = false;
-  
+ 
   conditionIndex: number;
+  condition: { trainingTasks: number, func: number, training: string, testingOrder: number };
   criterionFunctionIndex: number;
   trainingTasksNuber: number;
 
@@ -31,11 +34,9 @@ export class Stimuli {
   questionsCheckCounter: number = 0;
 
   constructor(private utils: Utils, private platform: Platform) {
-    console.log('Hello Stimuli Provider');
+    //console.log('Hello Stimuli Provider');
     this.participant = new Participant("anonymous-" + this.utils.getCounterValue());
     this.runInBrowser = this.platform.is('core') || this.platform.is('mobileweb');
-
-    this.detectOnlineVersion();
   }
 
   initialize() {
@@ -44,10 +45,14 @@ export class Stimuli {
     this.currentTestIndex = -1;
   }
 
-  detectOnlineVersion() {
-    console.log(document.location.search);
-    const params = new URLSearchParams(document.location.search);
-    console.log("params", params)
+  public setCondition(nTraining: number, func: number, trainingType: string, testingOrder: number) {
+    const condition = { 
+      "trainingTasks": nTraining ? nTraining : ONLINE_DEFAULT_CONDITION.trainingTasks, 
+      "func": func ? func : ONLINE_DEFAULT_CONDITION.func, 
+      "training": trainingType ? trainingType : ONLINE_DEFAULT_CONDITION.training, 
+      "testingOrder": testingOrder ? testingOrder : ONLINE_DEFAULT_CONDITION.testingOrder 
+    }
+    this.condition = condition;
   }
 
   initializeConditions(isActiveOnly: boolean = false) {
@@ -57,41 +62,55 @@ export class Stimuli {
   }
 
   pickCondition() {
-    let counter = 0;
-    if (this.conditionCounterOverride != null) {
-      console.log("conditionCounterOverride", this.conditionCounterOverride);
-      counter = this.conditionCounterOverride;
-    }
-    else {
-      counter = this.utils.getCounterValue();
-      //TODO: move to the data saving 
-      this.utils.incrementCounter();
+
+    let condition: { trainingTasks: number, func: number, training: string, testingOrder: number };
+
+    if (this.condition != null) {
+      condition = this.condition;
+      console.log("[DEBUG] Using condition override", condition);
     }
 
-    let condition = CONDITIONS[counter % CONDITIONS.length];
-
-    if (this.activeOnlyVersion) {
-      condition = CONDITIONS_ACTIVE_ONLY[counter % CONDITIONS_ACTIVE_ONLY.length];
-      this.conditionIndex = counter % CONDITIONS_ACTIVE_ONLY.length;
-    }
     else {
-      this.conditionIndex = counter % CONDITIONS.length;
+
+      let counter = 0;
+
+      if (this.conditionCounterOverride != null) {
+        //console.log("conditionCounterOverride", this.conditionCounterOverride);
+        counter = this.conditionCounterOverride;
+      }
+      else {
+        counter = this.utils.getCounterValue();
+        //TODO: move to the data saving 
+        this.utils.incrementCounter();
+      }
+
+      condition = CONDITIONS[counter % CONDITIONS.length];
+
+      if (this.activeOnlyVersion) {
+        condition = CONDITIONS_ACTIVE_ONLY[counter % CONDITIONS_ACTIVE_ONLY.length];
+        this.conditionIndex = counter % CONDITIONS_ACTIVE_ONLY.length;
+      }
+      else {
+        this.conditionIndex = counter % CONDITIONS.length;
+      }
+
     }
-      
+
+    this.condition = condition;
     this.trainingType = condition.training;
     this.testTypes = TESTS_ORDER[condition.testingOrder];
 
     this.criterionFunctionIndex = condition.func;
     this.trainingTasksNuber = condition.trainingTasks;
-    
-    console.log("[trainingType]", this.trainingType);
-    console.log("[testTypes]", this.testTypes);
+
+    //console.log("[trainingType]", this.trainingType);
+    //console.log("[testTypes]", this.testTypes);
   }
 
   pickFeaturesOrder() {
     let perms = this.utils.permute(["feature_a", "feature_b", "feature_c"]);
     this.featuresOrder = this.utils.pickRandomFromArray(perms);
-    console.log("[featuresOrder]", this.featuresOrder);
+    //console.log("[DEBUG] Features Order]", this.featuresOrder);
   }
 
   isPassive() {
@@ -147,44 +166,6 @@ export class Stimuli {
     return x + y + z;
   }
 
-
-
-  
-
-  parseUrlParams_old() {
-    let codeProvided = false;
-    if (document.URL.indexOf("?") > 0) {
-      let splitURL = document.URL.split("?");
-      let splitParams = splitURL[1].split("&");
-      let i: any;
-      for (i in splitParams) {
-        let singleURLParam = splitParams[i].split('=');
-        if (singleURLParam[0] == "uid") {
-          this.participant.code = singleURLParam[1];
-          codeProvided = true;
-        }
-        else if (singleURLParam[0] == "wid") {
-          this.participant.code = singleURLParam[1];
-          codeProvided = true;
-        }
-        else if (singleURLParam[0] == "age") {
-          this.participant.age = parseInt(singleURLParam[1]);
-        }
-        else if (singleURLParam[0] == "grade") {
-          this.participant.grade = parseInt(singleURLParam[1]);
-        }
-        else if (singleURLParam[0] == "cond") {
-          this.conditionCounterOverride = parseInt(singleURLParam[1]);
-          
-          console.log("[param][conditionCounterOverride]", parseInt(singleURLParam[1]));
-          console.log( this.conditionCounterOverride);
-        }
-      }
-    }
-    this.onlineVersion = codeProvided != false;
-    return codeProvided;
-  }
-
   getParticipantAgeGroup() {
     if (this.participant.age >= 18) return 18;
     return this.participant.age;
@@ -195,7 +176,7 @@ export class Stimuli {
   }
 
   hi() {
-    
+
   }
 
 }

@@ -32,7 +32,7 @@ export class TrainingPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TrainingPage');
+    //console.log('ionViewDidLoad TrainingPage');
     if (this.stimuli.isPassive()) {
       this.pickRandomCards();
     }

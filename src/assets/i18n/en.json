@@ -12,8 +12,19 @@
     "GRADE_LABEL": "Participant grade",
     "SUBMIT": "Begin experiment",
     "GENDER_LABEL": "Participant gender",
-      "MALE": "Male",
-      "FEMALE": "Female"
+    "MALE": "Male",
+    "FEMALE": "Female"
+  },
+
+  "REGISTRATION_ONLINE": {
+    "TITLE": "Please fill in this form",
+    "CODE_LABEL": "Your code",
+    "AGE_LABEL": "Your age in years",
+    "GRADE_LABEL": "The school grade you are in",
+    "SUBMIT": "Begin experiment",
+    "GENDER_LABEL": "Your gender",
+    "MALE": "Male",
+    "FEMALE": "Female"
   },
 
   "TRAINING_INSTRUCTIONS": {

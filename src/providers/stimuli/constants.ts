@@ -3,6 +3,8 @@ export const TESTS_ORDER: string[][] = [
   ["estimation", "comparison"]
 ];
 
+export const ONLINE_DEFAULT_CONDITION: {trainingTasks: number, func: number, training: string, testingOrder: number} = {"trainingTasks": 22, "func": 1, "training": "active", "testingOrder": 0};
+
 export const CONDITIONS: {trainingTasks: number, func: number, training: string, testingOrder: number}[] = [
   {"trainingTasks": 22, "func": 1, "training": "active", "testingOrder": 0},
   {"trainingTasks": 22, "func": 1, "training": "passive", "testingOrder": 0},

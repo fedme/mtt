@@ -20,7 +20,7 @@ export class PairComparisonProvider {
   questionsCounter: number = -1;
 
   constructor(private utils: Utils, private stimuli: Stimuli) {
-    console.log('Hello PairComparisonProvider Provider');
+    //console.log('Hello PairComparisonProvider Provider');
   }
 
   initialize() {
@@ -39,7 +39,7 @@ export class PairComparisonProvider {
       counter++;
     }
     this.utils.shuffleArray(ids);
-    console.log(ids);
+    //console.log(ids);
 
     // generate pairs
     let j=0;

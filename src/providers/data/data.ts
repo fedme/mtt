@@ -31,7 +31,7 @@ export class Data {
     private outputEstimation: OutputEstimationProvider,
     private rankingTask: RankingTaskProvider
   ) {
-      console.log('Hello Data Provider');
+      //console.log('Hello Data Provider');
   }
 
   initialize() {
@@ -43,6 +43,7 @@ export class Data {
     let i = 0;
 
     // save conditions data
+    data.set("condition", this.stimuli.condition);
     data.set("condition_index", this.stimuli.conditionIndex);
     data.set("condition_features_weigth_6", this.stimuli.featuresOrder[0]);
     data.set("condition_features_weigth_3", this.stimuli.featuresOrder[1]);

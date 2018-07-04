@@ -13,7 +13,7 @@ export class ViewRecordsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ViewRecordsPage');
+    //console.log('ionViewDidLoad ViewRecordsPage');
     this.data.loadAllRecords();
   }
 

@@ -11,11 +11,11 @@ export class TrainingInstructions2Page {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private stimuli: Stimuli) {
-      console.log("[DEBUG] trainig type:", this.stimuli.trainingType);
+      //console.log("[DEBUG] trainig type:", this.stimuli.trainingType);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TrainingInstructions2Page');
+    //console.log('ionViewDidLoad TrainingInstructions2Page');
   }
 
   showErrorMessage() {

@@ -12,7 +12,7 @@ export class OutputEstimationInstructionsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OutputEstimationInstructionsPage');
+    //console.log('ionViewDidLoad OutputEstimationInstructionsPage');
   }
 
   next() {

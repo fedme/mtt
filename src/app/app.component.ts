@@ -5,8 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Nav, Platform } from 'ionic-angular';
 import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
-import { FirstRunPage } from '../pages/pages';
-import { Stimuli} from '../providers/providers';
+import { FirstRunPage, OnlineFirstRunPage } from '../pages/pages';
+import { Stimuli, Data } from '../providers/providers';
 
 declare var cordova: any;
 
@@ -30,6 +30,7 @@ declare var cordova: any;
   <ion-nav #content [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
+
   rootPage = FirstRunPage;
 
   @ViewChild(Nav) nav: Nav;
@@ -40,15 +41,62 @@ export class MyApp {
     private statusBar: StatusBar, 
     private splashScreen: SplashScreen,
     private androidFullScreen: AndroidFullScreen, 
-    private stimuli: Stimuli
+    private stimuli: Stimuli,
+    private data: Data
   ) {
+
+      // Set mobile full screen and pinned mode
       this.platform.ready().then(() => {
         this.statusBar.styleDefault();
         this.splashScreen.hide();
         this.enterPinnedMode();
         this.enterImmersiveMode();
       });
+
+
+      // Initialize providers
+      this.stimuli.initialize();
+      this.data.initialize();
+
+      // Initialize translation system
       this.initTranslate();
+
+      // Parse URL params and detect online version
+      this.parseUrlParams();
+  }
+
+  /**
+	 * ParseUrlParams()
+	 */
+  parseUrlParams() {
+
+    // Parse URL params
+    const params = new URLSearchParams(window.location.search);
+    
+    // Check if online version...
+    if (params.get("uid")) {
+
+      console.log("[DEBUG] Online Version");
+
+      // Parse participant info
+      this.stimuli.onlineVersion = true;
+      this.stimuli.participant.code = params.get("uid");
+      this.stimuli.participant.age = Number(params.get("age"));
+      this.stimuli.participant.grade = Number(params.get("grade"));
+      this.stimuli.participant.dob = new Date(params.get("dob"));
+      this.stimuli.participant.gender = params.get("gender");
+
+      // Parse conditions
+      this.stimuli.setCondition(
+        Number(params.get("nTraining")),
+        Number(params.get("func")),
+        params.get("trainingType"),
+        Number(params.get("testingOrder")),
+      );
+
+      // Go to online registration page
+      this.rootPage = OnlineFirstRunPage;
+    }
   }
 
   /**
@@ -85,7 +133,7 @@ export class MyApp {
 
     // Update language when changed by an app component
     this.stimuli.langChangedEvent.subscribe(lang => {
-      console.log('language change evend emitted: ', lang);
+      console.log('[DEBUG] language change evend emitted: ', lang);
       this.translate.use(lang);
     });
   }

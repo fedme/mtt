@@ -16,7 +16,7 @@ export class ConsentFormPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ConsentFormPage');
+    //console.log('ionViewDidLoad ConsentFormPage');
   }
 
   next() {

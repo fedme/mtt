@@ -11,7 +11,7 @@ export class RankingTaskProvider {
   constructor(
     public translate: TranslateService
   ) {
-    console.log('Hello RankingTaskProvider Provider');
+    //console.log('Hello RankingTaskProvider Provider');
   }
 
   initialize() {

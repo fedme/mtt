@@ -1,5 +1,5 @@
 export abstract class AppInfo {
     static id: string = "5c42aff5";
     static nameLabel: string = "MTT";
-    static version: string = "2.5.0";
+    static version: string = "2.6.0";
 }

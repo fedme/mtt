@@ -21,7 +21,7 @@ export class RewardPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RewardPage');
+    //console.log('ionViewDidLoad RewardPage');
   }
 
   getTotalReward() {

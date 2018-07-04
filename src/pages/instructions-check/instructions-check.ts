@@ -27,12 +27,12 @@ export class InstructionsCheckPage {
   }*/
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InstructionsCheckPage');
+    //console.log('ionViewDidLoad InstructionsCheckPage');
   }
 
   next() {
     //this.navCtrl.pop();
-    console.log('Submitting form', this.questionsForm.value);
+    //console.log('Submitting form', this.questionsForm.value);
     if (this.questionsForm.value["question-goal"] == null || this.questionsForm.value["question-fruits"] == null || this.questionsForm.value["question-cards"] == null) return;
 
     this.stimuli.questionsCheck.push(this.questionsForm.value);

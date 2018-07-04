@@ -13,7 +13,7 @@ export class TrainingProvider {
   revealedCardsCounter: number;
 
   constructor(private utils: Utils, private stimuli: Stimuli) {
-    console.log('Hello TrainingMonsters Provider');
+    //console.log('Hello TrainingMonsters Provider');
   }
 
   initialize() {

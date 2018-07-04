@@ -25,7 +25,7 @@ export class RankingTaskPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RankingTaskPage');
+    //console.log('ionViewDidLoad RankingTaskPage');
   }
 
   reorderFeatures(indexes) {

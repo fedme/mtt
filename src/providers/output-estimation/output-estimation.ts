@@ -14,7 +14,7 @@ export class OutputEstimationProvider {
   questionsCounter: number = -1;
 
   constructor(private utils: Utils, private stimuli: Stimuli, private training: TrainingProvider) {
-    console.log('Hello OutputEstimationProvider Provider');
+    //console.log('Hello OutputEstimationProvider Provider');
     //this.generateQuestions();
   }
 
@@ -32,7 +32,7 @@ export class OutputEstimationProvider {
       + NUMBERS.OUTPUT_ESTIMATION_RECALL;
     let ids = this.utils.range(firstId, firstId + questionsNumber);
     this.utils.shuffleArray(ids);
-    console.log(ids);
+    //console.log(ids);
 
     // generate interpolation questions
     let unrevealedMonsters = this.training.getUnrevealedMonsters();
@@ -55,11 +55,11 @@ export class OutputEstimationProvider {
     // generate extrapolation questions
     let genes = this.utils.combine([1, 5], 3, "");
     baseIdIndex = this.questions.length;
-    console.log("extr base index", baseIdIndex);
+    //console.log("extr base index", baseIdIndex);
     let i = 0;
     for (let gene of genes) {
       let monsterId = "monster" + ids[baseIdIndex + i];
-      console.log("extr monsterId", monsterId);
+      //console.log("extr monsterId", monsterId);
       let feature_a = parseInt(gene.charAt(0));
       let feature_b = parseInt(gene.charAt(1));
       let feature_c = parseInt(gene.charAt(2));
@@ -71,7 +71,7 @@ export class OutputEstimationProvider {
     }
 
     this.utils.shuffleArray(this.questions);
-    console.log("[DEBUG] OtputEstimation questions", this.questions);
+    //console.log("[DEBUG] OutputEstimation questions", this.questions);
         
   }
 

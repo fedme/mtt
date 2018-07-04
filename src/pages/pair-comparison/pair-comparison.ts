@@ -29,7 +29,7 @@ export class PairComparisonPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TestPairComparisonPage');
+    //console.log('ionViewDidLoad TestPairComparisonPage');
   }
 
   handleCardTapped(card: CardComponent) {

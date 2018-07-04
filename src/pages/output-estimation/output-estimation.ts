@@ -23,7 +23,7 @@ export class OutputEstimationPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OutputEstimationPage');
+    //console.log('ionViewDidLoad OutputEstimationPage');
   }
 
   next() {

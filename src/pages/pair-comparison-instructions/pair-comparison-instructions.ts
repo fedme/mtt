@@ -12,7 +12,7 @@ export class PairComparisonInstructionsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PairComparisonInstructionsPage');
+    //console.log('ionViewDidLoad PairComparisonInstructionsPage');
   }
 
   next() {
