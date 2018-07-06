@@ -39,7 +39,7 @@ release-image:
 deploy:
   stage: deploy
   image: gitlab/dind:latest
-  environment: production
+  environment: web-production
   only:
     - web-production
   before_script:
