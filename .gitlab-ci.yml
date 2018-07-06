@@ -3,8 +3,8 @@ services:
   - docker:dind
 
 stages:
-  - build
-  - release
+#  - build
+#  - release
   - deploy
 
 variables:
@@ -38,6 +38,8 @@ release-image:
 
 deploy:
   stage: deploy
+  image: gitlab/dind:latest
+  environment: production
   only:
     - web-production
   before_script:
