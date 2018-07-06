@@ -4,6 +4,8 @@ services:
   - docker:dind
 
 stages:
+  - build
+  - release
   - deploy
 
 variables:
@@ -13,6 +15,27 @@ variables:
   CONTAINER_NAME: mtt-web-production
   CONTAINER_EXT_PORT: 4001
   CONTAINER_INT_PORT: 80
+
+before_script:
+  - docker info
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+
+build:
+  stage: build
+  script:
+    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+  only:
+    - web-production
+
+release-image:
+  stage: release
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+  only:
+    - web-production
 
 deploy:
   stage: deploy
