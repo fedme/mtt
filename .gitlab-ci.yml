@@ -1,0 +1,39 @@
+image: docker:git
+services:
+  - docker:dind
+
+stages:
+  - build
+  - release
+#  - deploy
+
+variables:
+  CONTAINER_TEST_IMAGE: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt:$CI_BUILD_REF_NAME
+  CONTAINER_RELEASE_IMAGE: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt:latest
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.git.mpib-berlin.mpg.de
+
+build:
+  stage: build
+  script:
+    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+  only:
+    - web
+
+release-image:
+  stage: release
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+  only:
+    - web
+
+#deploy:
+#  stage: deploy
+#  script:
+#    - ./deploy.sh
+#  only:
+#    - web
