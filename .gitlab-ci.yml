@@ -1,6 +1,7 @@
 image: docker:git
-services:
-  - docker:dind
+
+#services:
+#  - docker:dind
 
 stages:
   - build
@@ -12,6 +13,7 @@ variables:
   CONTAINER_RELEASE_IMAGE: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt:latest
 
 before_script:
+  - docker info
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.git.mpib-berlin.mpg.de
 
 build:
