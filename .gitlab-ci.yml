@@ -50,5 +50,6 @@ deploy:
     - eval "$(ssh-agent -s)"
     - ssh-add ~/.ssh/id_rsa
     - ssh-keyscan -H $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
   script:
     - ssh -p $DEPLOYMENT_SERVER_PORT gitlabci@$DEPLOYMENT_SERVER_IP "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY; docker pull $CONTAINER_RELEASE_IMAGE; docker container stop $CONTAINER_NAME; docker container rm $CONTAINER_NAME; docker run --name $CONTAINER_NAME -d --restart always -p $CONTAINER_EXT_PORT:$CONTAINER_INT_PORT $CONTAINER_RELEASE_IMAGE"
