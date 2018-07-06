@@ -3,6 +3,10 @@
 #services:
 #  - docker:dind
 
+image: docker:latest
+services:
+- docker:dind
+
 stages:
   - build
   - release
