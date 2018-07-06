@@ -1,11 +1,6 @@
-#image: docker:git
-
-#services:
-#  - docker:dind
-
 image: docker:latest
 services:
-- docker:dind
+  - docker:dind
 
 stages:
   - build
@@ -42,4 +37,5 @@ release-image:
 #  script:
 #    - ./deploy.sh
 #  only:
+#
 #    - web-production
