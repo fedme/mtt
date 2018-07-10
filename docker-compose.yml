@@ -1,14 +1,17 @@
 version: "3"
 services:
   exp:
-    image: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt-exp:latest
+    image: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-exp:latest
     ports:
       - "4001:80"
+    restart: always
   srv:
-    image: node:8-alpine
+    image: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-srv:latest
     ports:
-      - "5001:80"
+      - "5001:8080"
+    restart: always
     depends_on:
       - db
   db:
     image: postgres
+    restart: always

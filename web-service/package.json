@@ -1,0 +1,13 @@
+{
+    "name": "mtt-srv",
+    "version": "1.0.0",
+    "description": "MTT Web Service",
+    "author": "Federico Meini <meini@mpib-berlin.mpg.de>",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.16.1"
+    }
+  }
