@@ -1,0 +1,14 @@
+version: "3"
+services:
+  exp:
+    image: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt-exp:latest
+    ports:
+      - "4001:80"
+  srv:
+    image: node:8-alpine
+    ports:
+      - "5001:80"
+    depends_on:
+      - db
+  db:
+    image: postgres

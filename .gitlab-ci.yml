@@ -4,15 +4,15 @@ services:
   - docker:dind
 
 stages:
-  - build
-  - release
+  - build-exp
+  - release-exp
   - deploy
 
 variables:
   CI_REGISTRY: registry.git.mpib-berlin.mpg.de
-  CONTAINER_TEST_IMAGE: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt:$CI_BUILD_REF_NAME
-  CONTAINER_RELEASE_IMAGE: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt:latest
-  CONTAINER_NAME: mtt-web-production
+  CONTAINER_TEST_IMAGE: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt-exp:$CI_BUILD_REF_NAME
+  CONTAINER_RELEASE_IMAGE: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt-exp:latest
+  CONTAINER_NAME: mtt-exp-production
   CONTAINER_EXT_PORT: 4001
   CONTAINER_INT_PORT: 80
 
@@ -20,16 +20,20 @@ before_script:
   - docker info
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
 
-build:
-  stage: build
+build-exp-image:
+  stage: build-exp
   script:
     - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
   only:
     - web-production
+  artifacts:
+    paths:
+      - www/
+    expire_in: 4 weeks
 
 release-image:
-  stage: release
+  stage: release-exp
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE

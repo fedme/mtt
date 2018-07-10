@@ -45,5 +45,5 @@ RUN mv www ../ && \
 
 # Serve app
 EXPOSE 80
-CMD ["hs", "./www", "-p", "80"]
+CMD ["hs", "./www", "-p", "80", "--silent"]
 
