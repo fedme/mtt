@@ -37,7 +37,8 @@ build-exp-image:
 build-srv-image:
   stage: build
   script:
-    - docker build -t $SRV_IMG_TEST ./web-server
+    - cd ./web-service
+    - docker build -t $SRV_IMG_TEST .
     - docker push $SRV_IMG_TEST
   only:
     - web-production
