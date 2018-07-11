@@ -25,9 +25,6 @@ COPY package*.json ./
 
 RUN npm install
 
-# TODO DEBUG
-RUN ionic info
-
 # Copy app source
 COPY . .
 
@@ -39,6 +36,7 @@ COPY . .
 #    ionic cordova platform rm osx
 
 # Build Ionic app
+RUN ionic integrations disable cordova
 RUN ionic build --prod
 
 # Delete everything apart from the compiled web app
