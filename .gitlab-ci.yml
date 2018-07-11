@@ -209,6 +209,7 @@ deploy-web-prod:
     - apk add openssh-client bash
     - mkdir -p ~/.ssh
     - echo "$DEPLOYSRV_PK_WEB_PROD" | tr -d '\r' > ~/.ssh/id_rsa
+    - cat ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - eval "$(ssh-agent -s)"
     - ssh-add ~/.ssh/id_rsa
