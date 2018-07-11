@@ -32,11 +32,11 @@ RUN ionic info
 COPY . .
 
 # Remove cordova platforms
-RUN ionic cordova platform rm android && \
-    ionic cordova platform rm ios && \
-    ionic cordova platform rm windows && \
-    ionic cordova platform rm browser && \
-    ionic cordova platform rm osx
+#RUN ionic cordova platform rm android && \
+#    ionic cordova platform rm ios && \
+#    ionic cordova platform rm windows && \
+#    ionic cordova platform rm browser && \
+#    ionic cordova platform rm osx
 
 # Build Ionic app
 RUN ionic build --prod
