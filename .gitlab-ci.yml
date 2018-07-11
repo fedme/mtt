@@ -1,3 +1,17 @@
+########################################################
+## MTT - Gitlab CI file                               
+## =====================================================
+## Expects the following secret vars:
+##
+## DEPLOYSRV_PK_WEB_DEV  Private key
+## DEPLOYSRV_IP_WEB_DEV  IP address
+## DEPLOYSRV_SSH_PORT_WEB_DEV  Port
+##
+## DEPLOYSRV_PK_WEB_PROD
+## DEPLOYSRV_IP_WEB_PROD
+## DEPLOYSRV_SSH_PORT_WEB_PROD
+########################################################
+
 image: docker:latest
 
 services:
@@ -9,79 +23,205 @@ stages:
   - deploy
 
 variables:
-  PROJECT_NAME: mtt
-  CI_REGISTRY: registry.git.mpib-berlin.mpg.de
-  EXP_IMG_TEST: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-exp:$CI_BUILD_REF_NAME
-  EXP_IMG_RELEASE: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-exp:latest
-  EXP_CONT_NAME: mtt-exp-production
-  EXP_CONT_EXT_PORT: 4001
-  EXP_CONT_INT_PORT: 80
-  SRV_IMG_TEST: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-srv:$CI_BUILD_REF_NAME
-  SRV_IMG_RELEASE: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-srv:latest
 
+  # Name of the project
+  PROJECT_NAME: mtt
+
+  # Image registry
+  CI_REGISTRY: registry.git.mpib-berlin.mpg.de
+
+  # Web-dev vars
+  EXP_D_FILE_WEB_DEV: Dockerfile.web-dev
+  SRV_D_FILE_WEB_DEV: Dockerfile.web-dev
+  DC_FILE_WEB_DEV: docker-compose.web-dev.yml
+  EXP_IMG_WEB_DEV: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-exp:web-dev
+  SRV_IMG_WEB_DEV: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-srv:web-dev
+
+  # Web-prod vars
+  EXP_D_FILE_WEB_PROD: Dockerfile.web-prod
+  SRV_D_FILE_WEB_PROD: Dockerfile.web-prod
+  DC_FILE_WEB_PROD: docker-compose.web-prod.yml
+  EXP_IMG_WEB_PROD: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-exp:web-prod
+  SRV_IMG_WEB_PROD: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-srv:web-prod
+
+
+# Log into the registry first
 before_script:
   - docker info
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
 
-build-exp-image-prod:
+
+
+########################################################
+##                   BUILD STAGE                      ##
+## ================================================== ##
+## Build the docker images for the experiment and     ##
+## the web service.                                   ##
+########################################################
+
+
+########################################################
+## BUILD - WEB DEV BRANCH                             ##
+########################################################
+
+build-exp-image-web-dev:
   stage: build
   script:
-    - docker build -t $EXP_IMG_TEST .
-    - docker push $EXP_IMG_TEST
+    - docker build -t ${EXP_IMG_WEB_DEV}-internal -f $EXP_D_FILE_WEB_DEV .
+    - docker push ${EXP_IMG_WEB_DEV}-internal
   only:
-    - web-production
+    - web-dev
 
-build-srv-image-prod:
+build-srv-image-web-dev:
   stage: build
   script:
     - cd ./web-service
-    - docker build -t $SRV_IMG_TEST .
-    - docker push $SRV_IMG_TEST
+    - docker build -t ${SRV_IMG_WEB_DEV}-internal -f $SRV_D_FILE_WEB_DEV .
+    - docker push ${SRV_IMG_WEB_DEV}-internal
   only:
-    - web-production
+    - web-dev
 
-release-exp-image-prod:
+########################################################
+## BUILD - WEB PRODUCTION BRANCH                      ##
+########################################################
+
+build-exp-image-web-prod:
+  stage: build
+  script:
+    - docker build -t ${EXP_IMG_WEB_PROD}-internal -f $EXP_FILE_WEB_PROD .
+    - docker push ${EXP_IMG_WEB_PROD}-internal
+  only:
+    - web-prod
+
+build-srv-image-web-prod:
+  stage: build
+  script:
+    - cd ./web-service
+    - docker build -t ${SRV_IMG_WEB_PROD}-internal -f $SRV_FILE_WEB_PROD .
+    - docker push ${SRV_IMG_WEB_PROD}-internal
+  only:
+    - web-prod
+
+
+
+########################################################
+##                   RELEASE STAGE                    ##
+## ================================================== ##
+## Release the images on the Registry.                ##
+########################################################
+
+
+########################################################
+## RELEASE - WEB DEV BRANCH                           ##
+########################################################
+
+release-exp-image-web-dev:
   stage: release
   script:
-    - docker pull $EXP_IMG_TEST
-    - docker tag $EXP_IMG_TEST $EXP_IMG_RELEASE
-    - docker push $EXP_IMG_RELEASE
+    - docker pull ${EXP_IMG_WEB_DEV}-internal
+    - docker tag ${EXP_IMG_WEB_DEV}-internal $EXP_IMG_WEB_DEV
+    - docker push $EXP_IMG_WEB_DEV
   only:
-    - web-production
+    - web-dev
 
-release-srv-image-prod:
+release-srv-image-web-dev:
   stage: release
   script:
-    - docker pull $SRV_IMG_TEST
-    - docker tag $SRV_IMG_TEST $SRV_IMG_RELEASE
-    - docker push $SRV_IMG_RELEASE
+    - docker pull ${SRV_IMG_WEB_DEV}-internal
+    - docker tag ${SRV_IMG_WEB_DEV}-internal $SRV_IMG_WEB_DEV
+    - docker push $SRV_IMG_WEB_DEV
   only:
-    - web-production
+    - web-dev
 
-deploy-prod:
+########################################################
+## RELEASE - WEB PRODUCTION BRANCH                    ##
+########################################################
+
+release-exp-image-web-prod:
+  stage: release
+  script:
+    - docker pull ${EXP_IMG_WEB_PROD}-internal
+    - docker tag ${EXP_IMG_WEB_PROD}-internal $EXP_IMG_WEB_PROD
+    - docker push $EXP_IMG_WEB_PROD
+  only:
+    - web-prod
+
+release-srv-image-web-prod:
+  stage: release
+  script:
+    - docker pull ${SRV_IMG_WEB_PROD}-internal
+    - docker tag ${SRV_IMG_WEB_PROD}-internal $SRV_IMG_WEB_PROD
+    - docker push $SRV_IMG_WEB_PROD
+  only:
+    - web-prod
+
+
+
+########################################################
+##                   DEPLOY STAGE                     ##
+## ================================================== ##
+## Deploy the new images to the server.               ##
+########################################################
+
+
+########################################################
+## DEPLOY - WEB DEV BRANCH                            ##
+########################################################
+
+deploy-web-dev:
   stage: deploy
   image: alpine:latest
-  environment: web-production
-  only:
-    - web-production
   before_script:
     - apk update
     - apk add openssh-client bash
     - mkdir -p ~/.ssh
-    - echo "$DEPLOY_SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - echo "$DEPLOYSRV_PK_WEB_DEV" | tr -d '\r' > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - eval "$(ssh-agent -s)"
     - ssh-add ~/.ssh/id_rsa
-    - ssh-keyscan -H -p $DEPLOYMENT_SERVER_PORT $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
+    - ssh-keyscan -H -p $DEPLOYSRV_SSH_PORT_WEB_DEV $DEPLOYSRV_IP_WEB_DEV >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh -p $DEPLOYMENT_SERVER_PORT gitlabci@$DEPLOYMENT_SERVER_IP "mkdir -p ~/dc-configs/${PROJECT_NAME}_prod/"
-    - scp -P $DEPLOYMENT_SERVER_PORT -r ./docker-compose.yml gitlabci@$DEPLOYMENT_SERVER_IP:~/dc-configs/${PROJECT_NAME}_prod/docker-compose.yml
-    - ssh -p $DEPLOYMENT_SERVER_PORT gitlabci@$DEPLOYMENT_SERVER_IP "
-        cd ~/dc-configs/${PROJECT_NAME}_prod/ &&
+    - ssh -p $DEPLOYSRV_SSH_PORT_WEB_DEV gitlabci@$DEPLOYSRV_IP_WEB_DEV "mkdir -p ~/dc-configs/${PROJECT_NAME}/"
+    - scp -P $DEPLOYSRV_SSH_PORT_WEB_DEV -r ./${DC_FILE_WEB_DEV} gitlabci@$DEPLOYSRV_IP_WEB_DEV:~/dc-configs/${PROJECT_NAME}/${DC_FILE_WEB_DEV}
+    - ssh -p $DEPLOYSRV_SSH_PORT_WEB_DEV gitlabci@$DEPLOYSRV_IP_WEB_DEV "
+        cd ~/dc-configs/${PROJECT_NAME}/ &&
         docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY &&
-        docker-compose stop; docker-compose rm --force &&
-        docker pull $EXP_IMG_RELEASE &&
-        docker pull $SRV_IMG_RELEASE &&
-        docker-compose up -d
-        "
+        docker-compose -f ${DC_FILE_WEB_DEV} stop &&
+        docker-compose -f ${DC_FILE_WEB_DEV} rm --force &&
+        docker pull $EXP_IMG_WEB_DEV &&
+        docker pull $SRV_IMG_WEB_DEV &&
+        docker-compose -f ${DC_FILE_WEB_DEV} -p ${PROJECT_NAME}_web-dev up -d"
+  only:
+    - web-dev
+
+########################################################
+## DEPLOY - WEB PRODUCTION BRANCH                     ##
+########################################################
+
+deploy-web-prod:
+  stage: deploy
+  image: alpine:latest
+  before_script:
+    - apk update
+    - apk add openssh-client bash
+    - mkdir -p ~/.ssh
+    - echo "$DEPLOYSRV_PK_WEB_PROD" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - ssh-keyscan -H -p $DEPLOYSRV_SSH_PORT_WEB_PROD $DEPLOYSRV_IP_WEB_PROD >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - ssh -p $DEPLOYSRV_SSH_PORT_WEB_PROD gitlabci@$DEPLOYSRV_IP_WEB_PROD "mkdir -p ~/dc-configs/${PROJECT_NAME}/"
+    - scp -P $DEPLOYSRV_SSH_PORT_WEB_PROD -r ./${DC_FILE_WEB_PROD} gitlabci@$DEPLOYSRV_IP_WEB_PROD:~/dc-configs/${PROJECT_NAME}/${DC_FILE_WEB_PROD}
+    - ssh -p $DEPLOYSRV_SSH_PORT_WEB_PROD gitlabci@$DEPLOYSRV_IP_WEB_PROD "
+        cd ~/dc-configs/${PROJECT_NAME}/ &&
+        docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY &&
+        docker-compose -f ${DC_FILE_WEB_PROD} stop &&
+        docker-compose -f ${DC_FILE_WEB_PROD} rm --force &&
+        docker pull $EXP_IMG_WEB_PROD &&
+        docker pull $SRV_IMG_WEB_PROD &&
+        docker-compose -f ${DC_FILE_WEB_PROD} -p ${PROJECT_NAME}_web-prod up -d"
+  only:
+    - web-prod
