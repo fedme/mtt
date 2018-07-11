@@ -6,7 +6,7 @@ RUN apk add --no-cache \
     openssh
 
 # Install Ionic, Cordova and HTTP server
-RUN npm i -g --unsafe-perm ionic http-server && \
+RUN npm i -g --unsafe-perm ionic cordova http-server && \
     ionic --no-interactive config set -g daemon.updates false
 
 # Create app directory
