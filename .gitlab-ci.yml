@@ -9,6 +9,7 @@ stages:
   - deploy
 
 variables:
+  PROJECT_NAME: mtt
   CI_REGISTRY: registry.git.mpib-berlin.mpg.de
   EXP_IMG_TEST: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-exp:$CI_BUILD_REF_NAME
   EXP_IMG_RELEASE: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-exp:latest
@@ -78,5 +79,10 @@ deploy:
     - ssh-keyscan -H -p $DEPLOYMENT_SERVER_PORT $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - scp -P $DEPLOYMENT_SERVER_PORT -r ./docker-compose.yml gitlabci@$DEPLOYMENT_SERVER_IP:~/
-    - ssh -p $DEPLOYMENT_SERVER_PORT gitlabci@$DEPLOYMENT_SERVER_IP "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY; docker-compose stop; docker-compose rm --force; docker pull $EXP_IMG_RELEASE; docker pull $SRV_IMG_RELEASE; docker-compose up -d"
+    - ssh -p $DEPLOYMENT_SERVER_PORT gitlabci@$DEPLOYMENT_SERVER_IP 'mkdir -p ~/dc-configs/$PROJECT_NAME'
+    - scp -P $DEPLOYMENT_SERVER_PORT -r ./docker-compose.yml gitlabci@$DEPLOYMENT_SERVER_IP:~/dc-configs/$PROJECT_NAME
+    - ssh -p $DEPLOYMENT_SERVER_PORT gitlabci@$DEPLOYMENT_SERVER_IP \
+    "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY;
+    docker-compose stop; docker-compose rm --force;
+    docker pull $EXP_IMG_RELEASE; docker pull $SRV_IMG_RELEASE;
+    docker-compose up -d -p $PROJECT_NAME"

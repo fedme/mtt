@@ -9,7 +9,7 @@ RUN apk add --no-cache \
 RUN npm i -g --unsafe-perm http-server
 
 # Install Cordova
-RUN npm i -g --unsafe-perm cordova
+#RUN npm i -g --unsafe-perm cordova
 
 # Install Ionic
 RUN npm i -g --unsafe-perm ionic && \
@@ -24,6 +24,9 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
+
+# TODO DEBUG
+RUN ionic info
 
 # Copy app source
 COPY . .
