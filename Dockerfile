@@ -5,14 +5,8 @@ RUN apk add --no-cache \
     git \
     openssh
 
-# Install http-server
-RUN npm i -g --unsafe-perm http-server
-
-# Install Cordova
-#RUN npm i -g --unsafe-perm cordova
-
-# Install Ionic
-RUN npm i -g --unsafe-perm ionic && \
+# Install Ionic, Cordova and HTTP server
+RUN npm i -g --unsafe-perm ionic http-server && \
     ionic --no-interactive config set -g daemon.updates false
 
 # Create app directory
@@ -36,8 +30,9 @@ COPY . .
 #    ionic cordova platform rm osx
 
 # Build Ionic app
-RUN ionic integrations disable cordova
-RUN ionic build --prod
+# TODO: remove exit 0!!
+RUN ionic integrations disable cordova && \
+    ionic build --prod; exit 0
 
 # Delete everything apart from the compiled web app
 RUN mv www ../ && \
