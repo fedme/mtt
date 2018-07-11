@@ -23,19 +23,15 @@ before_script:
   - docker info
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
 
-build-exp-image:
+build-exp-image-prod:
   stage: build
   script:
     - docker build -t $EXP_IMG_TEST .
     - docker push $EXP_IMG_TEST
   only:
     - web-production
-  artifacts:
-    paths:
-      - www/
-    expire_in: 4 weeks
 
-build-srv-image:
+build-srv-image-prod:
   stage: build
   script:
     - cd ./web-service
@@ -44,7 +40,7 @@ build-srv-image:
   only:
     - web-production
 
-release-exp-image:
+release-exp-image-prod:
   stage: release
   script:
     - docker pull $EXP_IMG_TEST
@@ -53,7 +49,7 @@ release-exp-image:
   only:
     - web-production
 
-release-srv-image:
+release-srv-image-prod:
   stage: release
   script:
     - docker pull $SRV_IMG_TEST
@@ -62,7 +58,7 @@ release-srv-image:
   only:
     - web-production
 
-deploy:
+deploy-prod:
   stage: deploy
   image: alpine:latest
   environment: web-production
@@ -79,6 +75,13 @@ deploy:
     - ssh-keyscan -H -p $DEPLOYMENT_SERVER_PORT $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh -p $DEPLOYMENT_SERVER_PORT gitlabci@$DEPLOYMENT_SERVER_IP "mkdir -p ~/dc-configs/${PROJECT_NAME}-prod/"
-    - scp -P $DEPLOYMENT_SERVER_PORT -r ./docker-compose.yml gitlabci@$DEPLOYMENT_SERVER_IP:~/dc-configs/${PROJECT_NAME}-prod/docker-compose.yml
-    - ssh -p $DEPLOYMENT_SERVER_PORT gitlabci@$DEPLOYMENT_SERVER_IP "cd ~/dc-configs/${PROJECT_NAME}-prod/; docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY; docker-compose stop; docker-compose rm --force; docker pull $EXP_IMG_RELEASE; docker pull $SRV_IMG_RELEASE; docker-compose up -d -p ${PROJECT_NAME}-prod"
+    - ssh -p $DEPLOYMENT_SERVER_PORT gitlabci@$DEPLOYMENT_SERVER_IP "mkdir -p ~/dc-configs/${PROJECT_NAME}_prod/"
+    - scp -P $DEPLOYMENT_SERVER_PORT -r ./docker-compose.yml gitlabci@$DEPLOYMENT_SERVER_IP:~/dc-configs/${PROJECT_NAME}_prod/docker-compose.yml
+    - ssh -p $DEPLOYMENT_SERVER_PORT gitlabci@$DEPLOYMENT_SERVER_IP "
+        cd ~/dc-configs/${PROJECT_NAME}_prod/ &&
+        docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY &&
+        docker-compose stop; docker-compose rm --force &&
+        docker pull $EXP_IMG_RELEASE &&
+        docker pull $SRV_IMG_RELEASE &&
+        docker-compose up -d
+        "
