@@ -3,10 +3,12 @@
 ## =====================================================
 ## Expects the following secret vars:
 ##
+## DEPLOYSRV_USER_WEB_DEV
 ## DEPLOYSRV_PK_WEB_DEV  Private key
 ## DEPLOYSRV_IP_WEB_DEV  IP address
 ## DEPLOYSRV_SSH_PORT_WEB_DEV  Port
 ##
+## DEPLOYSRV_USER_WEB_PROD
 ## DEPLOYSRV_PK_WEB_PROD
 ## DEPLOYSRV_IP_WEB_PROD
 ## DEPLOYSRV_SSH_PORT_WEB_PROD
@@ -88,7 +90,7 @@ build-srv-image-web-dev:
 build-exp-image-web-prod:
   stage: build
   script:
-    - docker build -t ${EXP_IMG_WEB_PROD}-internal -f $EXP_FILE_WEB_PROD .
+    - docker build -t ${EXP_IMG_WEB_PROD}-internal -f $EXP_D_FILE_WEB_PROD .
     - docker push ${EXP_IMG_WEB_PROD}-internal
   only:
     - web-prod
@@ -97,7 +99,7 @@ build-srv-image-web-prod:
   stage: build
   script:
     - cd ./web-service
-    - docker build -t ${SRV_IMG_WEB_PROD}-internal -f $SRV_FILE_WEB_PROD .
+    - docker build -t ${SRV_IMG_WEB_PROD}-internal -f $SRV_D_FILE_WEB_PROD .
     - docker push ${SRV_IMG_WEB_PROD}-internal
   only:
     - web-prod
@@ -182,9 +184,9 @@ deploy-web-dev:
     - ssh-keyscan -H -p $DEPLOYSRV_SSH_PORT_WEB_DEV $DEPLOYSRV_IP_WEB_DEV >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh -p $DEPLOYSRV_SSH_PORT_WEB_DEV gitlabci@$DEPLOYSRV_IP_WEB_DEV "mkdir -p ~/dc-configs/${PROJECT_NAME}/"
-    - scp -P $DEPLOYSRV_SSH_PORT_WEB_DEV -r ./${DC_FILE_WEB_DEV} gitlabci@$DEPLOYSRV_IP_WEB_DEV:~/dc-configs/${PROJECT_NAME}/${DC_FILE_WEB_DEV}
-    - ssh -p $DEPLOYSRV_SSH_PORT_WEB_DEV gitlabci@$DEPLOYSRV_IP_WEB_DEV "
+    - ssh -p $DEPLOYSRV_SSH_PORT_WEB_DEV ${DEPLOYSRV_USER_WEB_DEV}@$DEPLOYSRV_IP_WEB_DEV "mkdir -p ~/dc-configs/${PROJECT_NAME}/"
+    - scp -P $DEPLOYSRV_SSH_PORT_WEB_DEV -r ./${DC_FILE_WEB_DEV} ${DEPLOYSRV_USER_WEB_DEV}@$DEPLOYSRV_IP_WEB_DEV:~/dc-configs/${PROJECT_NAME}/${DC_FILE_WEB_DEV}
+    - ssh -p $DEPLOYSRV_SSH_PORT_WEB_DEV ${DEPLOYSRV_USER_WEB_DEV}@$DEPLOYSRV_IP_WEB_DEV "
         cd ~/dc-configs/${PROJECT_NAME}/ &&
         docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY &&
         docker-compose -f ${DC_FILE_WEB_DEV} stop &&
@@ -213,9 +215,9 @@ deploy-web-prod:
     - ssh-keyscan -H -p $DEPLOYSRV_SSH_PORT_WEB_PROD $DEPLOYSRV_IP_WEB_PROD >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh -p $DEPLOYSRV_SSH_PORT_WEB_PROD gitlabci@$DEPLOYSRV_IP_WEB_PROD "mkdir -p ~/dc-configs/${PROJECT_NAME}/"
-    - scp -P $DEPLOYSRV_SSH_PORT_WEB_PROD -r ./${DC_FILE_WEB_PROD} gitlabci@$DEPLOYSRV_IP_WEB_PROD:~/dc-configs/${PROJECT_NAME}/${DC_FILE_WEB_PROD}
-    - ssh -p $DEPLOYSRV_SSH_PORT_WEB_PROD gitlabci@$DEPLOYSRV_IP_WEB_PROD "
+    - ssh -p $DEPLOYSRV_SSH_PORT_WEB_PROD ${DEPLOYSRV_USER_WEB_PROD}@$DEPLOYSRV_IP_WEB_PROD "mkdir -p ~/dc-configs/${PROJECT_NAME}/"
+    - scp -P $DEPLOYSRV_SSH_PORT_WEB_PROD -r ./${DC_FILE_WEB_PROD} ${DEPLOYSRV_USER_WEB_PROD}@$DEPLOYSRV_IP_WEB_PROD:~/dc-configs/${PROJECT_NAME}/${DC_FILE_WEB_PROD}
+    - ssh -p $DEPLOYSRV_SSH_PORT_WEB_PROD ${DEPLOYSRV_USER_WEB_PROD}@$DEPLOYSRV_IP_WEB_PROD "
         cd ~/dc-configs/${PROJECT_NAME}/ &&
         docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY &&
         docker-compose -f ${DC_FILE_WEB_PROD} stop &&
