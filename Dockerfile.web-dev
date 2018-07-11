@@ -20,6 +20,6 @@ COPY package*.json ./
 RUN npm install
 
 # Serve app
-EXPOSE 8081
-CMD ["ionic", "serve", "-p", "8081", "--no-open"]
+EXPOSE 80
+CMD ["ionic", "serve", "-p", "80", "--no-open"]
 
