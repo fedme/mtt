@@ -23,16 +23,13 @@ RUN npm install
 COPY . .
 
 # Remove cordova platforms
-#RUN ionic cordova platform rm android && \
-#    ionic cordova platform rm ios && \
-#    ionic cordova platform rm windows && \
-#    ionic cordova platform rm browser && \
-#    ionic cordova platform rm osx
-
-# Build Ionic app
-# TODO: remove exit 0!!
-RUN ionic integrations disable cordova && \
-    ionic build --prod; exit 0
+# and build Ionic app
+RUN ionic cordova platform rm android && \
+    ionic cordova platform rm ios && \
+    ionic cordova platform rm windows && \
+    ionic cordova platform rm browser && \
+    ionic cordova platform rm osx && \
+    ionic build --prod
 
 # Delete everything apart from the compiled web app
 RUN mv www ../ && \
