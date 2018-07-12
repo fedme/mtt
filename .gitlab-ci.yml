@@ -46,6 +46,9 @@ variables:
   EXP_IMG_WEB_PROD: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-exp:web-prod
   SRV_IMG_WEB_PROD: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-srv:web-prod
 
+  # Other vars
+  PREBUILD_SUFFIX: prebuild
+
 
 # Log into the registry first
 before_script:
@@ -69,8 +72,8 @@ before_script:
 build-exp-image-web-dev:
   stage: build
   script:
-    - docker build -t ${EXP_IMG_WEB_DEV}-internal -f $EXP_D_FILE_WEB_DEV .
-    - docker push ${EXP_IMG_WEB_DEV}-internal
+    - docker build -t ${EXP_IMG_WEB_DEV}-${PREBUILD_SUFFIX} -f $EXP_D_FILE_WEB_DEV .
+    - docker push ${EXP_IMG_WEB_DEV}-${PREBUILD_SUFFIX}
   only:
     - web-dev
 
@@ -78,8 +81,8 @@ build-srv-image-web-dev:
   stage: build
   script:
     - cd ./web-service
-    - docker build -t ${SRV_IMG_WEB_DEV}-internal -f $SRV_D_FILE_WEB_DEV .
-    - docker push ${SRV_IMG_WEB_DEV}-internal
+    - docker build -t ${SRV_IMG_WEB_DEV}-${PREBUILD_SUFFIX} -f $SRV_D_FILE_WEB_DEV .
+    - docker push ${SRV_IMG_WEB_DEV}-${PREBUILD_SUFFIX}
   only:
     - web-dev
 
@@ -90,8 +93,8 @@ build-srv-image-web-dev:
 build-exp-image-web-prod:
   stage: build
   script:
-    - docker build -t ${EXP_IMG_WEB_PROD}-internal -f $EXP_D_FILE_WEB_PROD .
-    - docker push ${EXP_IMG_WEB_PROD}-internal
+    - docker build -t ${EXP_IMG_WEB_PROD}-${PREBUILD_SUFFIX} -f $EXP_D_FILE_WEB_PROD .
+    - docker push ${EXP_IMG_WEB_PROD}-${PREBUILD_SUFFIX}
   only:
     - web-prod
 
@@ -99,8 +102,8 @@ build-srv-image-web-prod:
   stage: build
   script:
     - cd ./web-service
-    - docker build -t ${SRV_IMG_WEB_PROD}-internal -f $SRV_D_FILE_WEB_PROD .
-    - docker push ${SRV_IMG_WEB_PROD}-internal
+    - docker build -t ${SRV_IMG_WEB_PROD}-${PREBUILD_SUFFIX} -f $SRV_D_FILE_WEB_PROD .
+    - docker push ${SRV_IMG_WEB_PROD}-${PREBUILD_SUFFIX}
   only:
     - web-prod
 
@@ -120,8 +123,8 @@ build-srv-image-web-prod:
 release-exp-image-web-dev:
   stage: release
   script:
-    - docker pull ${EXP_IMG_WEB_DEV}-internal
-    - docker tag ${EXP_IMG_WEB_DEV}-internal $EXP_IMG_WEB_DEV
+    - docker pull ${EXP_IMG_WEB_DEV}-${PREBUILD_SUFFIX}
+    - docker tag ${EXP_IMG_WEB_DEV}-${PREBUILD_SUFFIX} $EXP_IMG_WEB_DEV
     - docker push $EXP_IMG_WEB_DEV
   only:
     - web-dev
@@ -129,8 +132,8 @@ release-exp-image-web-dev:
 release-srv-image-web-dev:
   stage: release
   script:
-    - docker pull ${SRV_IMG_WEB_DEV}-internal
-    - docker tag ${SRV_IMG_WEB_DEV}-internal $SRV_IMG_WEB_DEV
+    - docker pull ${SRV_IMG_WEB_DEV}-${PREBUILD_SUFFIX}
+    - docker tag ${SRV_IMG_WEB_DEV}-${PREBUILD_SUFFIX} $SRV_IMG_WEB_DEV
     - docker push $SRV_IMG_WEB_DEV
   only:
     - web-dev
@@ -142,8 +145,8 @@ release-srv-image-web-dev:
 release-exp-image-web-prod:
   stage: release
   script:
-    - docker pull ${EXP_IMG_WEB_PROD}-internal
-    - docker tag ${EXP_IMG_WEB_PROD}-internal $EXP_IMG_WEB_PROD
+    - docker pull ${EXP_IMG_WEB_PROD}-${PREBUILD_SUFFIX}
+    - docker tag ${EXP_IMG_WEB_PROD}-${PREBUILD_SUFFIX} $EXP_IMG_WEB_PROD
     - docker push $EXP_IMG_WEB_PROD
   only:
     - web-prod
@@ -151,8 +154,8 @@ release-exp-image-web-prod:
 release-srv-image-web-prod:
   stage: release
   script:
-    - docker pull ${SRV_IMG_WEB_PROD}-internal
-    - docker tag ${SRV_IMG_WEB_PROD}-internal $SRV_IMG_WEB_PROD
+    - docker pull ${SRV_IMG_WEB_PROD}-${PREBUILD_SUFFIX}
+    - docker tag ${SRV_IMG_WEB_PROD}-${PREBUILD_SUFFIX} $SRV_IMG_WEB_PROD
     - docker push $SRV_IMG_WEB_PROD
   only:
     - web-prod
