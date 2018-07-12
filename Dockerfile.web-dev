@@ -5,8 +5,9 @@ RUN apk add --no-cache \
     git \
     openssh
 
-# Install Ionic, Cordova and HTTP server
-RUN npm i -g --unsafe-perm ionic && \
+# Install Ionic
+# TODO: Remove @rc when Ionic CLI 4 is out!
+RUN npm i -g --unsafe-perm ionic@rc && \
     ionic --no-interactive config set -g daemon.updates false
 
 # Create app directory
@@ -19,7 +20,10 @@ COPY package*.json ./
 
 RUN npm install
 
+# Copy app source
+COPY . .
+
 # Serve app
-EXPOSE 8081
-CMD ["ionic", "serve", "-p", "8081", "--no-open"]
+EXPOSE 80
+CMD ["ionic", "serve", "-p", "80", "--no-open"]
 

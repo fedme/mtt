@@ -5,8 +5,9 @@ RUN apk add --no-cache \
     git \
     openssh
 
-# Install Ionic, Cordova and HTTP server
-RUN npm i -g --unsafe-perm ionic cordova http-server && \
+# Install Ionic and HTTP server
+# TODO: Remove @rc when Ionic CLI 4 is out!
+RUN npm i -g --unsafe-perm ionic@rc http-server && \
     ionic --no-interactive config set -g daemon.updates false
 
 # Create app directory
@@ -22,14 +23,8 @@ RUN npm install
 # Copy app source
 COPY . .
 
-# Remove cordova platforms
-# and build Ionic app
-RUN ionic cordova platform rm android && \
-    ionic cordova platform rm ios && \
-    ionic cordova platform rm windows && \
-    ionic cordova platform rm browser && \
-    ionic cordova platform rm osx && \
-    ionic build --prod
+# Build Ionic app
+RUN ionic build --prod
 
 # Delete everything apart from the compiled web app
 RUN mv www ../ && \

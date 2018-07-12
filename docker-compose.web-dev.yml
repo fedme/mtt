@@ -3,7 +3,7 @@ services:
   exp:
     image: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-exp:web-dev
     ports:
-      - "4002:8081"
+      - "4002:80"
     restart: always
   srv:
     image: registry.git.mpib-berlin.mpg.de/isearch-lab/mtt/mtt-srv:web-dev
