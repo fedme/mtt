@@ -61,26 +61,49 @@ export class RegistrationPage {
   }
 
   validateRegistration() {
-    const ageNull = this.stimuli.participant.age == null;
-    const genderNull = this.stimuli.participant.gender == null;
-    if (ageNull || genderNull) {
 
-      if (ageNull) {
-        this.stimuli.participant.age = 0;
-      }
+    const codeNull = this.stimuli.participant.code == null
+      || this.stimuli.participant.code == "";
 
+    const genderNull = this.stimuli.participant.gender == null
+      || this.stimuli.participant.gender == "";
+
+    const ageNull = this.stimuli.participant.age == null
+      || this.stimuli.participant.age == 0;
+
+    // If some info is missing...
+    if (codeNull || ageNull || genderNull) {
+
+      let alertMsg: string = "You are missing: ";
+      if (codeNull) alertMsg += "<br>- Participant Code";
+      if (ageNull) alertMsg += "<br>- Age";
+      if (genderNull) alertMsg += "<br>- Gender";
+
+      // Present alert
       let alert = this.alertCtrl.create({
-        title: 'Proceed without age/gender?',
-        message: 'Are you sure you want to proceed without entering age/gender?',
+        title: 'Missing some info. Proceed?',
+        message: alertMsg,
         buttons: [
           {
-            text: 'Yes',
+            text: 'Proceed',
             handler: () => {
+
+              // Fill default info
+
+              if (ageNull) {
+                this.stimuli.participant.age = 0;
+                this.stimuli.participant.grade = 0;
+              }
+
+              if (codeNull) {
+                this.stimuli.participant.code = "nocode";
+              }
+
               this.handleRegistration();
             }
           },
           {
-            text: 'No',
+            text: 'Stay here',
             role: 'cancel',
             handler: () => {}
           }
@@ -88,9 +111,12 @@ export class RegistrationPage {
       });
       alert.present();
     }
+
+    // Otherwise, proceed to registration
     else {
       this.handleRegistration();
     }
+
   }
 
   showRecords() {
