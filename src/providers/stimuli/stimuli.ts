@@ -11,6 +11,7 @@ export class Stimuli {
   appInfo: AppInfo = AppInfo;
 
   public langChangedEvent: EventEmitter<string> = new EventEmitter();
+  lang: string = "en";
 
   activeOnlyVersion: boolean;
 
@@ -37,6 +38,10 @@ export class Stimuli {
     //console.log('Hello Stimuli Provider');
     this.participant = new Participant("");
     this.runInBrowser = this.platform.is('core') || this.platform.is('mobileweb');
+
+    if (localStorage.getItem('lang') != null && localStorage.getItem('lang') != "") {
+      this.lang = localStorage.getItem('lang')
+    }
   }
 
   initialize() {
