@@ -10,6 +10,7 @@ import { PairComparisonProvider } from '../pair-comparison/pair-comparison';
 import { OutputEstimationProvider } from '../output-estimation/output-estimation';
 import { RankingTaskProvider } from '../ranking-task/ranking-task';
 import { AppInfo } from '../stimuli/app-info';
+import shortid from 'shortid';
 
 
 @Injectable()
@@ -140,12 +141,17 @@ export class Data {
   }
 
   save() {
-    // Generate record ID
+    
     console.log("[DEBUG] DB driver: " + this.storage.driver);
-    const recordId = "record_" + this.stimuli.participant.code;
+
+    // Generate unique short id
+    const recordId = shortid.generate();
+
+    console.log("[DEBUG] Saving data to DB...", recordId);
 
     // Create data object
     let dataObject = {
+      "id": recordId,
       "participant": this.getParticipantInfo(),
       "app": this.getAppInfo(),
       "session": this.getSessionInfo(),
@@ -154,9 +160,16 @@ export class Data {
     }
     console.log("[DEBUG] Serialized data: ", dataObject);
 
-    // Save data
-    if (this.stimuli.runInBrowser) this.postDataToServer(dataObject);
-    else this.storage.set(recordId, dataObject);
+    // Save data...
+    if (this.stimuli.runInBrowser) {
+      // online
+      this.postDataToServer(dataObject);
+    }
+    else {
+      // locally
+      this.storage.set(recordId, dataObject);
+    }
+
   }
 
   getParticipantInfo() {

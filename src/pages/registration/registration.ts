@@ -122,6 +122,8 @@ export class RegistrationPage {
 
   }
 
+  public convertToNumber(event):number {  return +event; }
+
   showRecords() {
     let recordsModal = this.modalCtrl.create("ViewRecordsPage");
     recordsModal.present();
