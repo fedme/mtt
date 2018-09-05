@@ -54,6 +54,9 @@ export class RegistrationPage {
     // set Language
     this.stimuli.setLang(this.lang);
     localStorage.setItem('lang', this.lang);
+
+    // Set additional participant props
+    this.stimuli.participant.ageGroup = this.stimuli.getParticipantAgeGroup(this.stimuli.participant.age);
   
     // initialize stimuli
     this.stimuli.initializeConditions(this.isActiveOnlyVersion);
