@@ -1,14 +1,14 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <ion-buttons start>
-     
+
     </ion-buttons>
     <ion-buttons end>
-     
+
     </ion-buttons>
     <ion-title>{{stimuli.appInfo.nameLabel}} v{{stimuli.appInfo.version}} - Online Version</ion-title>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
 
 <ion-content padding>
@@ -21,6 +21,7 @@
           <h1 translate [translateParams]="">REGISTRATION_ONLINE.TITLE</h1>
           <form>
             <ion-list>
+
               <ion-item>
                 <ion-label>{{'REGISTRATION_ONLINE.GENDER_LABEL' | translate}}</ion-label>
                 <ion-select [(ngModel)]="stimuli.participant.gender" name="gender">
@@ -28,20 +29,44 @@
                   <ion-option value="female">{{'REGISTRATION_ONLINE.FEMALE' | translate}}</ion-option>
                 </ion-select>
               </ion-item>
+
               <ion-item>
                 <ion-label>{{'REGISTRATION_ONLINE.AGE_LABEL' | translate}}</ion-label>
-                <ion-input #focusInput type="number" [(ngModel)]="stimuli.participant.age" name="age" autocomplete="off" autocorrect="off"></ion-input>
+                <ion-input #focusInput type="number" [(ngModel)]="stimuli.participant.age" name="age" autocomplete="off"
+                  autocorrect="off"></ion-input>
               </ion-item>
+
               <ion-item *ngIf="stimuli.participant.age != null && stimuli.participant.age < 18">
                 <ion-label>{{'REGISTRATION_ONLINE.GRADE_LABEL' | translate}}</ion-label>
-                <ion-input #focusInput type="number" [(ngModel)]="stimuli.participant.grade" name="grade" autocomplete="off" autocorrect="off"></ion-input>
+                <ion-input #focusInput type="number" [(ngModel)]="stimuli.participant.grade" name="grade" autocomplete="off"
+                  autocorrect="off"></ion-input>
               </ion-item>
+
               <ion-item>
+                <ion-label>{{'REGISTRATION_ONLINE.PLAYED_BEFORE' | translate}}</ion-label>
+                <ion-select [(ngModel)]="stimuli.participant.playedBefore" name="playedBefore">
+                  <ion-option [value]="true">{{'REGISTRATION_ONLINE.YES' | translate}}</ion-option>
+                  <ion-option [value]="false">{{'REGISTRATION_ONLINE.NO' | translate}}</ion-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>{{'REGISTRATION_ONLINE.LANG_PROFICIENCY_QUESTION' | translate}}</ion-label>
+                <ion-select [(ngModel)]="stimuli.participant.languageProficiency" name="langProficiency">
+                  <ion-option [value]="1">{{'REGISTRATION_ONLINE.LANG_PROFICIENCY_1' | translate}}</ion-option>
+                  <ion-option [value]="2">{{'REGISTRATION_ONLINE.LANG_PROFICIENCY_2' | translate}}</ion-option>
+                  <ion-option [value]="3">{{'REGISTRATION_ONLINE.LANG_PROFICIENCY_3' | translate}}</ion-option>
+                  <ion-option [value]="4">{{'REGISTRATION_ONLINE.LANG_PROFICIENCY_4' | translate}}</ion-option>
+                  <ion-option [value]="5">{{'REGISTRATION_ONLINE.LANG_PROFICIENCY_5' | translate}}</ion-option>
+                </ion-select>
+              </ion-item>
+
+              <!-- <ion-item>
                 <ion-label>Language</ion-label>
                 <ion-select [(ngModel)]="lang" name="lang">
                   <ion-option *ngFor="let lang of availableLangs" value="{{lang}}">{{lang}}</ion-option>
                 </ion-select>
-              </ion-item>
+              </ion-item> -->
             </ion-list>
           </form>
         </div>
@@ -52,7 +77,7 @@
     <ion-row>
       <ion-col></ion-col>
       <ion-col text-center>
-        <button ion-button large (click)="validateRegistration()">{{'REGISTRATION.SUBMIT' | translate}}</button>
+        <button ion-button large (click)="validateRegistration()">{{'REGISTRATION_ONLINE.SUBMIT' | translate}}</button>
       </ion-col>
       <ion-col></ion-col>
     </ion-row>

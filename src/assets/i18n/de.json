@@ -23,7 +23,10 @@
     "SUBMIT": "Begin experiment",
     "GENDER_LABEL": "Your gender",
     "MALE": "Male",
-    "FEMALE": "Female"
+    "FEMALE": "Female",
+    "PLAYED_BEFORE": "Have you played this game before?",
+    "YES": "Yes",
+    "NO": "No"
   },
   
   "TRAINING_INSTRUCTIONS": {

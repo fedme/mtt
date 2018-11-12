@@ -25,58 +25,43 @@ export class RegistrationOnlinePage {
     private modalCtrl: ModalController,
     private alertCtrl: AlertController
   ) {
-
-      // Parse available langs
-      this.availableLangs = this.translate.langs;
-
-      // Get language from localStorage
-      if (localStorage.getItem('lang') != null && localStorage.getItem('lang') != '') {
-        this.lang = localStorage.getItem('lang');
-      }   
+    
 
   }
 
   handleRegistration() {
 
-    // set Language
-    this.stimuli.setLang(this.lang);
-    localStorage.setItem('lang', this.lang);
-  
-    // initialize stimuli conditions
-    this.stimuli.initializeConditions();
-    this.navCtrl.push('ConsentFormPage');
+      // Save data and go to reward page
+      this.data.save();
+      this.navCtrl.push("RewardPage");
   }
 
   validateRegistration() {
-    const ageNull = this.stimuli.participant.age == null;
-    const genderNull = this.stimuli.participant.gender == null;
-    if (ageNull || genderNull) {
 
-      if (ageNull) {
-        this.stimuli.participant.age = 0;
-      }
+    const checks = 
+      this.stimuli.participant.age != null
+      && this.stimuli.participant.age > 0
+      && this.stimuli.participant.gender != null
+      && this.stimuli.participant.playedBefore != null
+      && this.stimuli.participant.languageProficiency != null
 
+    if (checks) {
+      this.handleRegistration();
+    }
+
+    else {
       let alert = this.alertCtrl.create({
-        title: 'Proceed without age/gender?',
-        message: 'Are you sure you want to proceed without entering age/gender?',
+        title: 'Missing Information',
+        message: 'Please fill all the fields',
         buttons: [
           {
-            text: 'Yes',
-            handler: () => {
-              this.handleRegistration();
-            }
-          },
-          {
-            text: 'No',
+            text: 'Ok',
             role: 'cancel',
             handler: () => {}
           }
         ]
       });
       alert.present();
-    }
-    else {
-      this.handleRegistration();
     }
   }
 

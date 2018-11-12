@@ -178,7 +178,9 @@ export class Data {
       "age": this.stimuli.participant.age,
       "ageGroup": this.stimuli.participant.ageGroup,
       "grade": this.stimuli.participant.grade,
-      "gender": this.stimuli.participant.gender
+      "gender": this.stimuli.participant.gender,
+      "playedBefore": this.stimuli.participant.playedBefore,
+      "languageProficiency": this.stimuli.participant.languageProficiency
     }
   }
 

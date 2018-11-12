@@ -76,7 +76,7 @@ export class MyApp {
     // Check if online version...
     if (params.get("uid")) {
 
-      console.log("[DEBUG] Online Version", this.stimuli);
+      console.log("[DEBUG] Online Version");
 
       // Parse participant info
       this.stimuli.onlineVersion = true;
@@ -109,7 +109,7 @@ export class MyApp {
         this.stimuli.getConditionFromServer();
       }
 
-      // Go to online registration page
+      // Go to the consent form
       this.rootPage = OnlineFirstRunPage;
     }
   }

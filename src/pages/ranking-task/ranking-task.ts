@@ -33,8 +33,17 @@ export class RankingTaskPage {
   }
 
   next() {
-    this.data.save();
-    this.navCtrl.push("RewardPage");
+
+    // If online version, go to final registration page
+    if (this.stimuli.onlineVersion) {
+      this.navCtrl.push("RegistrationOnlinePage");
+    }
+
+    // Otherwise, save data and go to reward
+    else {
+      this.data.save();
+      this.navCtrl.push("RewardPage");
+    }
   }
 
 }

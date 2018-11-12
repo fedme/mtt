@@ -7,6 +7,8 @@ export class Participant {
   ageGroup: string;
   dob: Date;
   grade: number;
+  playedBefore: boolean = false;
+  languageProficiency: number;
 
   constructor(code: string) {
     this.code = code;

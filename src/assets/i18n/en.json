@@ -21,10 +21,19 @@
     "CODE_LABEL": "Your code",
     "AGE_LABEL": "Your age in years",
     "GRADE_LABEL": "The school grade you are in",
-    "SUBMIT": "Begin experiment",
+    "SUBMIT": "Submit",
     "GENDER_LABEL": "Your gender",
     "MALE": "Male",
-    "FEMALE": "Female"
+    "FEMALE": "Female",
+    "PLAYED_BEFORE": "Have you played this game before?",
+    "YES": "Yes",
+    "NO": "No",
+    "LANG_PROFICIENCY_QUESTION": "What is your English proficiency level?",
+    "LANG_PROFICIENCY_1": "Native Speaker or bilingual proficiency",
+    "LANG_PROFICIENCY_2": "Full professional proficiency",
+    "LANG_PROFICIENCY_3": "Professional working proficiency",
+    "LANG_PROFICIENCY_4": "Limited working proficiency",
+    "LANG_PROFICIENCY_5": "Elementary proficiency"
   },
 
   "TRAINING_INSTRUCTIONS": {
