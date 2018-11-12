@@ -12,8 +12,8 @@
             
             <p [innerHTML]="'TRAINING_INSTRUCTIONS.SECOND.BODY' | translate"></p>
             <br>
-            <p *ngIf="stimuli.isActive()" [innerHTML]="'TRAINING_INSTRUCTIONS.THIRD.BODY_ACTIVE' | translate"></p>
-            <p *ngIf="stimuli.isPassive()" [innerHTML]="'TRAINING_INSTRUCTIONS.THIRD.BODY_PASSIVE' | translate"></p>
+            <p *ngIf="stimuli.isActive()" [innerHTML]="'TRAINING_INSTRUCTIONS.THIRD.BODY_ACTIVE' | translate:{ncards: stimuli.condition.trainingTasks}"></p>
+            <p *ngIf="stimuli.isPassive()" [innerHTML]="'TRAINING_INSTRUCTIONS.THIRD.BODY_PASSIVE' | translate:{ncards: stimuli.condition.trainingTasks}"></p>
           </div>
       </ion-col>
       <ion-col></ion-col>

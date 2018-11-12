@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Stimuli } from '../../providers/providers';
 
 /**
  * Generated class for the TrainingInstructionsPage page.
@@ -17,7 +18,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TrainingInstructionsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public stimuli: Stimuli
+  ) {
+    //
   }
 
   ionViewDidLoad() {

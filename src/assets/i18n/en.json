@@ -41,9 +41,9 @@
     },
     "THIRD": {
       "TITLE_ACTIVE": "",
-      "BODY_ACTIVE": "Now it's time to find out what the relationship between each monster's feature scores and the number of fruits it picked is. You can click on <strong>some</strong> of the cards on the screen to find out how many fruits the monsters picked, but <strong>not all of them</strong>. Since you cannot click on all the cards, make sure you <strong>start with the most informative ones</strong> so you can learn as much as possible, as quickly as possible. <strong>Remember that you have to learn how the monster's features influence their fruit-picking ability</strong>. This will help you to win the game!",
+      "BODY_ACTIVE": "Now it's time to find out what the relationship between each monster's feature scores and the number of fruits it picked is. You can click on <strong>{{ncards}}</strong> of the cards on the screen to find out how many fruits the monsters picked, but <strong>not all of them</strong>. Since you cannot click on all the cards, make sure you <strong>start with the most informative ones</strong> so you can learn as much as possible, as quickly as possible. <strong>Remember that you have to learn how the monster's features influence their fruit-picking ability</strong>. This will help you to win the game!",
       "TITLE_PASSIVE": "",
-      "BODY_PASSIVE": "Now it's time to find out what the relationship between each monster's feature scores and the number of fruits it picked is. You can click on <strong>the cards that turn red</strong> to find out how many fruits the monsters picked. Since you cannot click on all of the cards, try to learn as much as possible, as quickly as possible about <strong>how the monster's features influence their fruit-picking ability</strong>. This will help you to win the game!",
+      "BODY_PASSIVE": "Now it's time to find out what the relationship between each monster's feature scores and the number of fruits it picked is. You can click on <strong>the {{ncards}} cards that turn red</strong> to find out how many fruits the monsters picked. Since you cannot click on all of the cards, try to learn as much as possible, as quickly as possible about <strong>how the monster's features influence their fruit-picking ability</strong>. This will help you to win the game!",
       "NEXT": "Next"
     }
   },

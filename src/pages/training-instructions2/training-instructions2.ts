@@ -9,8 +9,11 @@ import { Stimuli } from '../../providers/providers';
 })
 export class TrainingInstructions2Page {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private stimuli: Stimuli) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private stimuli: Stimuli
+  ) {
       //console.log("[DEBUG] trainig type:", this.stimuli.trainingType);
   }
 
