@@ -5,6 +5,7 @@ import { Participant } from '../../models/participant';
 import { TESTS_ORDER, CONDITIONS, CONDITIONS_ACTIVE_ONLY, ONLINE_DEFAULT_CONDITION, CONDITIONS_EXTENDED } from './constants';
 import { AppInfo } from './app-info';
 import { Api } from '../api/api';
+import { Pro } from '@ionic/pro';
 
 @Injectable()
 export class Stimuli {
@@ -75,6 +76,7 @@ export class Stimuli {
     }
     catch(e) {
       console.log('ERROR in getting condition from server:', e);
+      Pro.monitoring.log('ERROR getting condition from server: ' + e, { level: 'error' });
       this.condition = CONDITIONS_EXTENDED[0];
     }
   }

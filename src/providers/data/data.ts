@@ -11,6 +11,7 @@ import { OutputEstimationProvider } from '../output-estimation/output-estimation
 import { RankingTaskProvider } from '../ranking-task/ranking-task';
 import { AppInfo } from '../stimuli/app-info';
 import shortid from 'shortid';
+import { Pro } from '@ionic/pro';
 
 
 @Injectable()
@@ -235,6 +236,15 @@ export class Data {
     try {
       const res = await this.api.post('records', body).toPromise();
       if (res['status'] != 'success') {
+
+        // Send error to Ionic Monitoring
+        Pro.monitoring.log(
+          `ERROR saving data to the server. 
+          Uid: ${this.stimuli.participant.code}. WorkerId: ${this.stimuli.participant.workerId}. 
+          Respose: ${res}
+          `, { level: 'error' }
+        );
+
         throw "Error saving data to the server";
       }
       else {
@@ -242,6 +252,15 @@ export class Data {
       }
     }
     catch(e) {
+
+      // Send error to Ionic Monitoring
+      Pro.monitoring.log(
+        `ERROR saving data to the server. 
+        Uid: ${this.stimuli.participant.code}. WorkerId: ${this.stimuli.participant.workerId}.
+        Error: ${e}
+        `, { level: 'error' }
+      );
+
       console.log('Error saving data to the server:', e);
     }
 
