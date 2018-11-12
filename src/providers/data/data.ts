@@ -161,7 +161,7 @@ export class Data {
     console.log("[DEBUG] Serialized data: ", dataObject);
 
     // Save data...
-    if (this.stimuli.runInBrowser) {
+    if (this.stimuli.onlineVersion) {
       // online
       this.postDataToServer(dataObject);
     }
@@ -220,24 +220,30 @@ export class Data {
     }
   }
 
-  postDataToServer(dataObject: any) {
-    const jsonData = JSON.stringify(dataObject);
-    console.log("[saving data][browser][participant_code]", this.stimuli.participant.code);
-    console.log("[saving data][browser][data]", dataObject);
+  async postDataToServer(dataObject: any) {
 
-    const requestBody = {
-      participant_code: this.stimuli.participant.code,
-      data: jsonData
+    const body = {
+      uid: this.stimuli.participant.code,
+      worker_id: this.stimuli.participant.code,
+      data: dataObject
     };
 
-    this.api.post(this.serverURI, requestBody).subscribe(
-      (resp) => {
-        console.log("[saving data][browser][POST] resp", resp);
-      },
-      (err) => {
-        console.log("[saving data][browser][POST] ERROR!!!", err);
+    console.log('Saving data to the server...', body);
+
+    try {
+      const res = await this.api.post('records', body).toPromise();
+      if (res['status'] != 'success') {
+        throw "Error saving data to the server";
       }
-    );
+      else {
+        console.log('Data saved to the server:', res);
+      }
+    }
+    catch(e) {
+      console.log('Error saving data to the server:', e);
+    }
+
+   
   }
 
   loadAllRecords() {

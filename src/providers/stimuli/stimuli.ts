@@ -2,8 +2,9 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Utils } from '../utils/utils';
 import { Participant } from '../../models/participant';
-import { TESTS_ORDER, CONDITIONS, CONDITIONS_ACTIVE_ONLY, ONLINE_DEFAULT_CONDITION } from './constants';
+import { TESTS_ORDER, CONDITIONS, CONDITIONS_ACTIVE_ONLY, ONLINE_DEFAULT_CONDITION, CONDITIONS_EXTENDED } from './constants';
 import { AppInfo } from './app-info';
+import { Api } from '../api/api';
 
 @Injectable()
 export class Stimuli {
@@ -34,7 +35,12 @@ export class Stimuli {
   questionsCheck: any[] = [];
   questionsCheckCounter: number = 0;
 
-  constructor(private utils: Utils, private platform: Platform) {
+  constructor(
+    private utils: Utils, 
+    private platform: Platform,
+    private api: Api
+    ) {
+
     //console.log('Hello Stimuli Provider');
     this.participant = new Participant("");
     this.runInBrowser = this.platform.is('core') || this.platform.is('mobileweb');
@@ -58,6 +64,23 @@ export class Stimuli {
       "testingOrder": testingOrder ? testingOrder : ONLINE_DEFAULT_CONDITION.testingOrder 
     }
     this.condition = condition;
+  }
+
+  async getConditionFromServer() {
+    try {
+      const res = await this.api.get('conditions/first').toPromise();
+      const id: number = res ? res['data']['condition_id'] : 0;
+      console.log('Got condition id from server:', id);
+      this.condition = CONDITIONS_EXTENDED[id % CONDITIONS_EXTENDED.length];
+    }
+    catch(e) {
+      console.log('ERROR in getting condition from server:', e);
+      this.condition = CONDITIONS_EXTENDED[0];
+    }
+  }
+
+  public setConditionById(id: number) {
+    this.condition = CONDITIONS_EXTENDED[id % CONDITIONS_EXTENDED.length];
   }
 
   initializeConditions(isActiveOnly: boolean = false) {
@@ -158,7 +181,6 @@ export class Stimuli {
     return (6 * x) + (3 * y) + z - 10;
   }
 
-  // TODO: function 2
   criterionFunction2(feature_a: number, feature_b: number, feature_c: number): number {
     const features = {
       "feature_a": feature_a,
@@ -168,7 +190,7 @@ export class Stimuli {
     const x = features[this.featuresOrder[0]];
     const y = features[this.featuresOrder[1]];
     const z = features[this.featuresOrder[2]];
-    return x + y + z;
+    return -x*x + 3*y + z + 21;
   }
 
   // TODO: age groups

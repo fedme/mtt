@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string = 'https://isrc.mpib-berlin.mpg.de';
+  url: string = 'https://mtt-api.isearchlab.org/api/v1';
 
   constructor(public http: HttpClient) {
   }

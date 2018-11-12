@@ -68,7 +68,7 @@ export class MyApp {
   /**
 	 * ParseUrlParams()
 	 */
-  parseUrlParams() {
+  async parseUrlParams() {
 
     // Parse URL params
     const params = new URLSearchParams(window.location.search);
@@ -76,23 +76,38 @@ export class MyApp {
     // Check if online version...
     if (params.get("uid")) {
 
-      console.log("[DEBUG] Online Version");
+      console.log("[DEBUG] Online Version", this.stimuli);
 
       // Parse participant info
       this.stimuli.onlineVersion = true;
       this.stimuli.participant.code = params.get("uid");
+      this.stimuli.participant.workerId = params.get("workerId");
       this.stimuli.participant.age = Number(params.get("age"));
       this.stimuli.participant.grade = Number(params.get("grade"));
       this.stimuli.participant.dob = new Date(params.get("dob"));
       this.stimuli.participant.gender = params.get("gender");
 
-      // Parse conditions
-      this.stimuli.setCondition(
-        Number(params.get("nTraining")),
-        Number(params.get("func")),
-        params.get("trainingType"),
-        Number(params.get("testingOrder")),
-      );
+      // Parse condition by id
+      if (params.get("cid")) {
+        this.stimuli.setConditionById(
+          parseInt(params.get("cid"))
+        );
+      }
+
+      // Or parse condition from individual properties
+      else if (params.get("func")) {
+        this.stimuli.setCondition(
+          Number(params.get("nTraining")),
+          Number(params.get("func")),
+          params.get("trainingType"),
+          Number(params.get("testingOrder")),
+        );
+      }
+
+      // Or ask the server  for a condition id
+      else {
+        this.stimuli.getConditionFromServer();
+      }
 
       // Go to online registration page
       this.rootPage = OnlineFirstRunPage;
