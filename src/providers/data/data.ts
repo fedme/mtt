@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { File } from '@ionic-native/file';
-import { Platform } from 'ionic-angular';
+import { Platform, ToastController } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 import { Stimuli } from '../stimuli/stimuli';
 import { Api } from '../api/api';
@@ -22,18 +22,19 @@ export class Data {
   allRecords: any;
 
   constructor(
-    private storage: Storage, 
-    private filesystem: File, 
+    private storage: Storage,
+    private filesystem: File,
+    private toastCtrl: ToastController,
     private api: Api,
     private platform: Platform,
     private device: Device,
-    private stimuli: Stimuli, 
+    private stimuli: Stimuli,
     private training: TrainingProvider,
-    private pairComparison: PairComparisonProvider, 
+    private pairComparison: PairComparisonProvider,
     private outputEstimation: OutputEstimationProvider,
     private rankingTask: RankingTaskProvider
   ) {
-      //console.log('Hello Data Provider');
+    //console.log('Hello Data Provider');
   }
 
   initialize() {
@@ -61,7 +62,7 @@ export class Data {
     // save training data (revealed cards)
     i = 1;
     for (let card of this.training.revealedCards) {
-      data.set("training_revealed_"+i+"_card", card.monster != null ? card.monster.toString() : null);
+      data.set("training_revealed_" + i + "_card", card.monster != null ? card.monster.toString() : null);
       i++;
     }
 
@@ -69,18 +70,18 @@ export class Data {
     i = 1;
     for (let card of this.training.cards) {
       if (!card.hasBeenRevealed()) {
-        data.set("training_unrevealed_"+i+"_card", card.monster != null ? card.monster.toString() : null);
-      i++;
+        data.set("training_unrevealed_" + i + "_card", card.monster != null ? card.monster.toString() : null);
+        i++;
       }
     }
 
     // save test "pair comparison" data
     i = 1;
     for (let question of this.pairComparison.questions) {
-      data.set("test_comparison_"+i+"_card_a",  question.pair.left != null ? question.pair.left.toString() : null);
-      data.set("test_comparison_"+i+"_card_b",  question.pair.right != null ? question.pair.right.toString() : null);
-      data.set("test_comparison_"+i+"_chosen_card", question.chosenMonster != null ? question.chosenMonster.toString() : null);
-      data.set("test_comparison_"+i+"_correct", question.isAnswerCorrect() ? 1 : 0);
+      data.set("test_comparison_" + i + "_card_a", question.pair.left != null ? question.pair.left.toString() : null);
+      data.set("test_comparison_" + i + "_card_b", question.pair.right != null ? question.pair.right.toString() : null);
+      data.set("test_comparison_" + i + "_chosen_card", question.chosenMonster != null ? question.chosenMonster.toString() : null);
+      data.set("test_comparison_" + i + "_correct", question.isAnswerCorrect() ? 1 : 0);
       i++;
     }
 
@@ -88,9 +89,9 @@ export class Data {
     i = 1;
     for (let question of this.outputEstimation.questions) {
       if (question.type === "extrapolation") {
-        data.set("test_estimation_extrapolation_"+i+"_card", question.monster != null ? question.monster.toString() : null);
-        data.set("test_estimation_extrapolation_"+i+"_estimated_criterion", question.guessedCriterion);
-        data.set("test_estimation_extrapolation_"+i+"_estimation_distance", question.getAnswerDistance());
+        data.set("test_estimation_extrapolation_" + i + "_card", question.monster != null ? question.monster.toString() : null);
+        data.set("test_estimation_extrapolation_" + i + "_estimated_criterion", question.guessedCriterion);
+        data.set("test_estimation_extrapolation_" + i + "_estimation_distance", question.getAnswerDistance());
         i++;
       }
     }
@@ -99,9 +100,9 @@ export class Data {
     i = 1;
     for (let question of this.outputEstimation.questions) {
       if (question.type === "interpolation") {
-        data.set("test_estimation_interpolation_"+i+"_card", question.monster != null ? question.monster.toString() : null);
-        data.set("test_estimation_interpolation_"+i+"_estimated_criterion", question.guessedCriterion);
-        data.set("test_estimation_interpolation_"+i+"_estimation_distance", question.getAnswerDistance());
+        data.set("test_estimation_interpolation_" + i + "_card", question.monster != null ? question.monster.toString() : null);
+        data.set("test_estimation_interpolation_" + i + "_estimated_criterion", question.guessedCriterion);
+        data.set("test_estimation_interpolation_" + i + "_estimation_distance", question.getAnswerDistance());
         i++;
       }
     }
@@ -110,9 +111,9 @@ export class Data {
     i = 1;
     for (let question of this.outputEstimation.questions) {
       if (question.type === "recall") {
-        data.set("test_estimation_recall_"+i+"_card", question.monster != null ? question.monster.toString() : null);
-        data.set("test_estimation_recall_"+i+"_estimated_criterion", question.guessedCriterion);
-        data.set("test_estimation_recall_"+i+"_estimation_distance", question.getAnswerDistance());
+        data.set("test_estimation_recall_" + i + "_card", question.monster != null ? question.monster.toString() : null);
+        data.set("test_estimation_recall_" + i + "_estimated_criterion", question.guessedCriterion);
+        data.set("test_estimation_recall_" + i + "_estimation_distance", question.getAnswerDistance());
         i++;
       }
     }
@@ -120,14 +121,14 @@ export class Data {
     // save ranking task data
     i = 1;
     for (let feature of this.rankingTask.features) {
-      data.set("ranking_task_feature_"+i, feature.id);
+      data.set("ranking_task_feature_" + i, feature.id);
       i++;
     }
 
     // save ranking task free text question (some hopefully working sanitization here...)
-    let freeText = this.rankingTask.freeText != null ? this.rankingTask.freeText.replace(/[^\w\s!?\-*+\/\.\(\)]/g,' ') : "";
+    let freeText = this.rankingTask.freeText != null ? this.rankingTask.freeText.replace(/[^\w\s!?\-*+\/\.\(\)]/g, ' ') : "";
     freeText.replace(/\r?\n|\r/g, ' ');
-    freeText = "'"+freeText+"'";
+    freeText = "'" + freeText + "'";
     data.set("ranking_task_question_adults", freeText);
 
     // save rewards data
@@ -142,7 +143,7 @@ export class Data {
   }
 
   save() {
-    
+
     console.log("[DEBUG] DB driver: " + this.storage.driver);
 
     // Generate unique short id
@@ -251,7 +252,7 @@ export class Data {
         console.log('Data saved to the server:', res);
       }
     }
-    catch(e) {
+    catch (e) {
 
       // Send error to Ionic Monitoring
       Pro.monitoring.log(
@@ -264,45 +265,56 @@ export class Data {
       console.log('Error saving data to the server:', e);
     }
 
-   
+
   }
 
-  loadAllRecords() {
-    this.storageGetAll()
-      .then(records => {
-        console.log("[debug] storage.loadAllRecords()");
-        this.allRecords = records;
-        console.log(this.allRecords);
-      });
+  async loadAllRecords() {
+    console.log("[debug] Loading all records...");
+
+    // get records
+    let records = await this.storageGetAll();
+
+    // order records by date
+    records.sort((a, b) => new Date(b["session"]["datetime"]).getTime()
+      - new Date(a["session"]["datetime"]).getTime());
+
+    this.allRecords = records;
+    console.log("All records", this.allRecords);
   }
 
-  exportRecordsAsJSON() {
-    this.storageGetAll()
-      .then(records => {
-        console.log("records:");
-        console.log(records);
-        let fileContent = JSON.stringify(records);
-        this.saveOutputFile(fileContent, "json");
-      });
+
+  async exportRecordsAsJSON() {
+    console.log("[debug] Exporting all records as JSON...");
+
+    // get records
+    let records = await this.storageGetAll();
+
+    // order records by date
+    records.sort((a, b) => new Date(b["session"]["datetime"]).getTime()
+      - new Date(a["session"]["datetime"]).getTime());
+
+    // debug records
+    console.log("All records", records);
+
+    // save records to JSON file
+    let fileContent = JSON.stringify(records);
+    this.saveOutputFile(fileContent);
+
+    // show toast
+    this.toastCtrl.create({
+      message: 'Saving JSON file to internal memory...',
+      duration: 2000,
+      position: 'top'
+    }).present();
   }
 
-  exportRecordsAsCsv() {
-    this.storageGetAll()
-      .then(records => {
-        console.log("records:");
-        console.log(records);
-        let csvContent = this.fromRecordsToCsv(records);
-        this.saveOutputFile(csvContent, "csv");
-      });
+
+  async updateRecordsNumber() {
+    let records = await this.storageGetAll();
+    if (records == null) return 0;
+    this.recordsNumber = records.length;
   }
 
-  updateRecordsNumber() {
-    this.storageGetAll()
-      .then(records => {
-        if (records == null) return 0;
-        this.recordsNumber = records.length;
-      });
-  }
 
   /**
    * Returns a Promise with the raw records from Storage
@@ -313,25 +325,7 @@ export class Data {
   }
 
 
-  fromRecordsToCsv(records) {
-    console.log("[DEBUG] fromRecordsToCsv: ", records);
-    let csvKeys = [];
-    let csvRows = [];
-    let first = true;
-    for (let record of records) {
-      if (first) {
-        csvKeys = Object.keys(record).map(x => JSON.stringify(x));
-        first = false;
-      }
-      let csvRow = Object.keys(record).map(key=>record[key]).map(x => JSON.stringify(x));
-      csvRows.push(csvRow.join(","));
-    }
-    let csvContent = csvKeys.join(",") + "\n";
-    csvContent += csvRows.join("\n");
-    return csvContent;
-  }
-
-  saveOutputFile(csvContent, fileExt = "csv") {
+  saveOutputFile(csvContent, fileExt = "json") {
     // build file name
     let currentdate = new Date();
     let day = ("0" + currentdate.getDate()).slice(-2);

@@ -52,7 +52,17 @@ export class InstructionsCheckPage {
     }
     else {
       this.stimuli.questionsCheckCounter++;
-      this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 2)); //go back to the training instructions 2
+
+      // If answer is wrong but still have attempts, go to through instructions again
+      if (this.stimuli.questionsCheckCounter <= 3) {
+        this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 2)); //go back to the training instructions 2
+      }
+
+      // Otherwise, fail experiment
+      else {
+        this.navCtrl.setRoot('FailurePage');
+      }
+      
     }
 
 

@@ -36,6 +36,11 @@
     "LANG_PROFICIENCY_5": "Elementary proficiency"
   },
 
+  "FAILURE": {
+    "TITLE": "Experiment Failed",
+    "BODY": "We are sorry to inform you that you cannot proceed to the study as you have already tried the instructions check three times."
+  },
+
   "TRAINING_INSTRUCTIONS": {
     "FIRST": {
       "TITLE": "",
