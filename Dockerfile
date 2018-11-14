@@ -27,11 +27,12 @@ COPY . .
 RUN ionic build --prod
 
 # Delete everything apart from the compiled web app
-RUN mv www ../ && \
+RUN mv www player/ && \
+    mv player ../ && \
     rm -rf ./* && \
-    mv ../www .
+    mv ../player .
 
 # Serve app
 EXPOSE 80
-CMD ["hs", "./www", "-p", "80", "--silent"]
+CMD ["hs", "./player", "-p", "80", "--silent"]
 
