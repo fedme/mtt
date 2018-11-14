@@ -1,0 +1,22 @@
+version: "3"
+services:
+
+  app:
+    build:
+      context: ./
+    restart: always
+    environment:
+      - NODE_ENV=production
+    expose:
+      - "80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=80"
+      - "traefik.frontend.rule=Host:mtt.isearchlab.org"
+      - "traefik.docker.network=web-proxy"
+    networks:
+      - web-proxy
+
+networks:
+  web-proxy:
+    external: true
