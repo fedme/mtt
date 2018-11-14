@@ -37,14 +37,18 @@
     <iframe id="player" src="/www" height="100%" width="100%" frameborder="0"></iframe>
 
     <script>
-        window.history.pushState(null, "", window.location.href);        
-        window.onpopstate = function() {
-            window.history.pushState(null, "", window.location.href);
-        };
         var loc = window.location.toString();
         var params = loc.split('?')[1];
         var player = document.getElementById('player');
         player.src = player.src + '?' + params;
+
+        window.history.pushState(null, "", window.location.href);        
+        window.onpopstate = function() {
+            window.history.pushState(null, "", window.location.href);
+        };
+        player.onclick = function() {
+            window.history.pushState(null, "", window.location.href);
+        };
     </script>
 </body>
 
