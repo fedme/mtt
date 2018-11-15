@@ -7,7 +7,7 @@ services:
     restart: always
     depends_on:
       - db
-    exposes:
+    expose:
       - 22362
     volumes:
       - ./psiturk-example:/psiturk
