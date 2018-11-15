@@ -3,17 +3,17 @@ version: '3'
 services:
 
   experiment:
-      build: .
-      restart: always
-      depends_on:
+    build: .
+    restart: always
+    depends_on:
       - db
-      exposes:
+    exposes:
       - 22362
-      volumes:
+    volumes:
       - ./psiturk-example:/psiturk
-      tty: true
-      stdin_open: true
-      labels:
+    tty: true
+    stdin_open: true
+    labels:
       - "traefik.enable=true"
       - "traefik.port=22362"
       - "traefik.frontend.rule=Host:mtt-psiturk.isearchlab.org"
@@ -30,10 +30,10 @@ services:
     volumes:
       - /var/server-data/mtt-psiturk/data/mysql:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: psiturk
-      MYSQL_DATABASE: participants
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      - MYSQL_ROOT_PASSWORD=psiturk
+      - MYSQL_DATABASE=participants
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
     networks:
       - default
       - pg-admin
