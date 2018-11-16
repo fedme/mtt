@@ -2,7 +2,7 @@ version: '3'
 
 services:
 
-  experiment:
+  app:
     build: .
     restart: always
     depends_on:
@@ -11,6 +11,8 @@ services:
       - 22362
     volumes:
       - ./psiturk-example:/psiturk
+    tty: true
+    stdin_open: true
     #command: ["psiturk", "-e", "server", "on", "||", "exit", "0"]
     labels:
       - "traefik.enable=true"
