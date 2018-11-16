@@ -43,7 +43,7 @@ var ExperimentPlayer = function() {
 	// Load the stage.html snippet into the body of the page
 	psiTurk.showPage('stage.html');
 	
-	var player = document.getElementById('player');
+	var player = document.getElementById('frame-player');
 	var expUrl = 'https://mtt.isearchlab.org'
 	player.src = expUrl + '?uid=' + uniqueId;
 	player.style.visibility = "visible";
