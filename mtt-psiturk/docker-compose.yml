@@ -11,7 +11,7 @@ services:
       - 22362
     volumes:
       - ./psiturk-example:/psiturk
-    command: "psiturk -e 'server on' || exit 0"
+    #command: ["psiturk", "-e", "server", "on", "||", "exit", "0"]
     labels:
       - "traefik.enable=true"
       - "traefik.port=22362"
