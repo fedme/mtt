@@ -11,8 +11,7 @@ services:
       - 22362
     volumes:
       - ./psiturk-example:/psiturk
-    tty: true
-    stdin_open: true
+    command: psiturk -e "server on"
     labels:
       - "traefik.enable=true"
       - "traefik.port=22362"
