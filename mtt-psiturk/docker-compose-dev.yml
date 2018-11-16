@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  experiment:
+    build: .
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 22362:22362
+    volumes:
+      - ./psiturk-example:/psiturk
+    tty: true
+    stdin_open: true
+
+  db:
+    image: mysql:5.7
+    restart: always
+    expose:
+      - 3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=psiturk
+      - MYSQL_DATABASE=participants
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
