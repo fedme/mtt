@@ -39,6 +39,9 @@ var instructionPages = [ // add as a list as many pages as you like
 * EXPERIMENT PLAYER *
 ********************/
 var ExperimentPlayer = function() {
+
+	// Load the stage.html snippet into the body of the page
+	psiTurk.showPage('stage.html');
 	
 	var player = document.getElementById('player');
 	var expUrl = 'https://mtt.isearchlab.org'
@@ -48,10 +51,7 @@ var ExperimentPlayer = function() {
 	var finish = function() {
 	    currentview = new Questionnaire();
 	};
-	
-	// Load the stage.html snippet into the body of the page
-	psiTurk.showPage('stage.html');
-	
+
 };
 
 
