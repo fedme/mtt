@@ -106,7 +106,7 @@ export class MyApp {
 
       // Or ask the server  for a condition id
       else {
-        this.stimuli.getConditionFromServer();
+        await this.stimuli.getConditionFromServer();
       }
 
       // Initialize conditions

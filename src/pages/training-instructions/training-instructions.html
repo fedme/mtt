@@ -4,7 +4,7 @@
     <ion-row>
       <ion-col></ion-col>
       <ion-col col-8 text-center>
-          <div class="instructions-wrapper">
+          <div class="instructions-wrapper" data-app-version="{{stimuli.appInfo.version}}">
             <h1 translate [translateParams]="">TRAINING_INSTRUCTIONS.FIRST.TITLE</h1>
 
             <p *ngIf="!stimuli.onlineVersion" [innerHTML]="'TRAINING_INSTRUCTIONS.FIRST.BODY' | translate"></p>
