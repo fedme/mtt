@@ -25,7 +25,7 @@ export class ConsentFormPage {
     //this.navCtrl.pop();
 
     // initialize stimuli conditions
-    this.stimuli.initializeConditions();
+    //this.stimuli.initializeConditions();
 
     // proceed to training
     this.navCtrl.push("TrainingInstructionsPage");

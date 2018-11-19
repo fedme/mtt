@@ -109,6 +109,9 @@ export class MyApp {
         this.stimuli.getConditionFromServer();
       }
 
+      // Initialize conditions
+      this.stimuli.initializeConditions();
+
       // Go to the consent form
       this.rootPage = OnlineFirstRunPage;
     }
