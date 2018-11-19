@@ -6,8 +6,7 @@ RUN apk add --no-cache \
     openssh
 
 # Install Ionic and HTTP server
-# TODO: Remove @rc when Ionic CLI 4 is out!
-RUN npm i -g --unsafe-perm ionic@rc http-server && \
+RUN npm i -g --unsafe-perm ionic http-server && \
     ionic --no-interactive config set -g daemon.updates false
 
 # Create app directory
@@ -27,10 +26,9 @@ COPY . .
 RUN ionic build --prod
 
 # Delete everything apart from the compiled web app
-RUN mv www player/ && \
-    mv player ../ && \
+RUN mv www ../ && \
     rm -rf ./* && \
-    mv ../player .
+    mv ../www .
 
 # Serve app
 EXPOSE 80
