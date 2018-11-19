@@ -33,6 +33,7 @@ export class RegistrationOnlinePage {
 
       // Save data and go to reward page
       this.data.save();
+
       this.navCtrl.push("RewardPage");
   }
 

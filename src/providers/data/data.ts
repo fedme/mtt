@@ -164,13 +164,25 @@ export class Data {
 
     // Save data...
     if (this.stimuli.onlineVersion) {
+
       // online
       this.postDataToServer(dataObject);
+
+      // If run inside an iframe, send data as Post Message to parent window
+      if (window.parent) {
+        window.parent.postMessage({
+          'state': 'end',
+          'data': dataObject
+        }, '*');
+      }
+
     }
     else {
       // locally
       this.storage.set(recordId, dataObject);
     }
+
+    return dataObject;
 
   }
 
