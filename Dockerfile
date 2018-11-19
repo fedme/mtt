@@ -32,5 +32,5 @@ RUN mv www ../ && \
 
 # Serve app
 EXPOSE 80
-CMD ["hs", "./player", "-p", "80", "--silent"]
+CMD ["hs", "./www", "-p", "80", "--silent"]
 
