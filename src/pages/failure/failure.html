@@ -4,15 +4,22 @@
     <ion-row>
       <ion-col></ion-col>
       <ion-col col-8 text-center>
-          <div class="instructions-wrapper">
-            <h1 translate [translateParams]="">FAILURE.TITLE</h1>
+        <div class="instructions-wrapper">
+          <h1 translate [translateParams]="">FAILURE.TITLE</h1>
 
-            <p [innerHTML]="'FAILURE.BODY' | translate"></p>
-          </div>
+          <p [innerHTML]="'FAILURE.BODY' | translate"></p>
+        </div>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col text-center>
+        <button ion-button large (click)="next()">OK</button>
       </ion-col>
       <ion-col></ion-col>
     </ion-row>
   </ion-grid>
 
-  
+
 </ion-content>

@@ -4,25 +4,25 @@
     <ion-row>
       <ion-col></ion-col>
       <ion-col col-8 text-center>
-          <div class="instructions-wrapper {{stimuli.appInfo.version}}">
-            <h1 translate [translateParams]="">TRAINING_INSTRUCTIONS.FIRST.TITLE</h1>
+        <div class="instructions-wrapper {{stimuli.appInfo.version}}">
+          <h1 translate [translateParams]="">TRAINING_INSTRUCTIONS.FIRST.TITLE</h1>
 
-            <p *ngIf="!stimuli.onlineVersion" [innerHTML]="'TRAINING_INSTRUCTIONS.FIRST.BODY' | translate"></p>
-            <p *ngIf="stimuli.onlineVersion" [innerHTML]="'TRAINING_INSTRUCTIONS.FIRST.BODY_ONLINE' | translate"></p>
+          <p *ngIf="!stimuli.onlineVersion" [innerHTML]="'TRAINING_INSTRUCTIONS.FIRST.BODY' | translate"></p>
+          <p *ngIf="stimuli.onlineVersion" [innerHTML]="'TRAINING_INSTRUCTIONS.FIRST.BODY_ONLINE' | translate"></p>
 
-          </div>
+        </div>
       </ion-col>
       <ion-col></ion-col>
     </ion-row>
 
     <ion-row>
-        <ion-col></ion-col>
-        <ion-col text-center>
-            <button ion-button large (click)="next()">{{'TRAINING_INSTRUCTIONS.FIRST.NEXT' | translate}}</button>
-        </ion-col>
-        <ion-col></ion-col>
-      </ion-row>
+      <ion-col></ion-col>
+      <ion-col text-center>
+        <button ion-button large (click)="next()">{{'TRAINING_INSTRUCTIONS.FIRST.NEXT' | translate}}</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
   </ion-grid>
 
-  
+
 </ion-content>

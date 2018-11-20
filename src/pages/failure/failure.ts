@@ -21,7 +21,25 @@ export class FailurePage {
   }
 
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad TrainingInstructionsPage');
+    // If run inside an iframe, send data as Post Message to parent window
+    if (window.parent) {
+      window.parent.postMessage({
+        'state': 'failure',
+        'data': {
+          'fail': true
+        }
+      }, '*');
+    }
+  }
+
+  next() {
+     // If run inside an iframe, send data as Post Message to parent window
+     if (window.parent) {
+      window.parent.postMessage({
+        'state': 'failure-ack',
+        'data': {}
+      }, '*');
+    }
   }
 
 

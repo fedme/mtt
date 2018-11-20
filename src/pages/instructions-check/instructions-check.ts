@@ -60,15 +60,6 @@ export class InstructionsCheckPage {
 
       // Otherwise, fail experiment
       else {
-
-        // If run inside an iframe, send data as Post Message to parent window
-        if (window.parent) {
-          window.parent.postMessage({
-            'state': 'failure',
-            'data': {}
-          }, '*');
-        }
-
         this.navCtrl.setRoot('FailurePage');
       }
       
