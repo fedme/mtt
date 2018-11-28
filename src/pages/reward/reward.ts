@@ -37,4 +37,14 @@ export class RewardPage {
     this.navCtrl.popToRoot();
   }
 
+  nextOnlineVersion() {
+    // If run inside an iframe, send data as Post Message to parent window
+    if (window.parent) {
+      window.parent.postMessage({
+        'state': 'end-ack',
+        'data': {}
+      }, '*');
+    }
+  }
+
 }

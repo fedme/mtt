@@ -17,11 +17,11 @@
   },
 
   "REGISTRATION_ONLINE": {
-    "TITLE": "Please fill in this form",
+    "TITLE": "One last thing: please fill in this form",
     "CODE_LABEL": "Your code",
     "AGE_LABEL": "Your age in years",
     "GRADE_LABEL": "The school grade you are in",
-    "SUBMIT": "Submit",
+    "SUBMIT": "Submit and proceed",
     "GENDER_LABEL": "Your gender",
     "MALE": "Male",
     "FEMALE": "Female",
@@ -108,6 +108,8 @@
     "BODY": "Well done! here is your reward:"
   },
 
-  "RESTART_GAME": "Restart game"
+  "RESTART_GAME": "Restart game",
+
+  "END_EXPERIMENT": "End Experiment"
 
 }

@@ -12,26 +12,16 @@
 
           <p class="reward" *ngIf="!stimuli.activeOnlyVersion">{{ getTotalReward() }} €</p>
 
-          <br>
-          <br>
-
-          <strong *ngIf="stimuli.onlineVersion">
-            Now please go back to the Mturk page and enter the following completion code: <br><br>
-            <span class="reward">MTT-ONLINE-2018</span>
-          </strong>
-
-          <br>
-          <br>
-
         </div>
       </ion-col>
       <ion-col></ion-col>
     </ion-row>
 
-    <ion-row *ngIf="!stimuli.onlineVersion">
+    <ion-row>
       <ion-col></ion-col>
       <ion-col text-center>
-        <button ion-button large (click)="next()">{{'RESTART_GAME' | translate}}</button>
+        <button *ngIf="!stimuli.onlineVersion" ion-button large (click)="next()">{{'RESTART_GAME' | translate}}</button>
+        <button *ngIf="stimuli.onlineVersion" ion-button large (click)="nextOnlineVersion()">{{'END_EXPERIMENT' | translate}}</button>
       </ion-col>
       <ion-col></ion-col>
     </ion-row>
