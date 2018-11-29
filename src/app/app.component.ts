@@ -74,18 +74,21 @@ export class MyApp {
     const params = new URLSearchParams(window.location.search);
     
     // Check if online version...
-    if (params.get("uid")) {
-
-      console.log("[DEBUG] Online Version");
+    if (params.get("assignment_id")) {
 
       // Parse participant info
       this.stimuli.onlineVersion = true;
-      this.stimuli.participant.code = params.get("uid");
-      this.stimuli.participant.workerId = params.get("workerId");
+      this.stimuli.participant.code = params.get("worker_id");
+      this.stimuli.participant.workerId = params.get("worker_id");
+      this.stimuli.participant.assignmentId = params.get("assignment_id");
+      this.stimuli.participant.hitId = params.get("hit_id");
       this.stimuli.participant.age = Number(params.get("age"));
       this.stimuli.participant.grade = Number(params.get("grade"));
       this.stimuli.participant.dob = new Date(params.get("dob"));
       this.stimuli.participant.gender = params.get("gender");
+
+      console.log("[DEBUG] Online Version", this.stimuli.participant);
+
 
       // Parse condition by id
       if (params.get("cid")) {

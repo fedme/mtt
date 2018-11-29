@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Stimuli } from '../../providers/providers';
+import { Stimuli, Data } from '../../providers/providers';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @IonicPage()
@@ -15,7 +15,8 @@ export class InstructionsCheckPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private stimuli: Stimuli
+    private stimuli: Stimuli,
+    private data: Data
   ) {
 
     this.questionsForm = new FormGroup({
@@ -60,6 +61,7 @@ export class InstructionsCheckPage {
 
       // Otherwise, fail experiment
       else {
+        this.data.sendFailureToServer();
         this.navCtrl.setRoot('FailurePage');
       }
       
@@ -67,5 +69,7 @@ export class InstructionsCheckPage {
 
 
   }
+
+  
 
 }

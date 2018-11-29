@@ -30,9 +30,9 @@ export class RegistrationPage {
       // Parse available langs
       this.availableLangs = this.translate.langs;
 
-      // Initialize providers
-      this.stimuli.initialize();
-      this.data.initialize();
+      // // Initialize providers, now done in app.component
+      // this.stimuli.initialize();
+      // this.data.initialize();
 
       // Get if active-only-version from localStorage
       if (localStorage.getItem('active-only-version') != null && localStorage.getItem('active-only-version') != '') {

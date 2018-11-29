@@ -238,9 +238,14 @@ export class Data {
 
   async postDataToServer(dataObject: any) {
 
+    console.log('Participant', this.stimuli.participant);
+
     const body = {
-      uid: this.stimuli.participant.code,
-      worker_id: this.stimuli.participant.code,
+      worker_id: this.stimuli.participant.workerId,
+      assignment_id: this.stimuli.participant.assignmentId,
+      hit_id: this.stimuli.participant.hitId,
+      completed: true,
+      bonus: parseFloat(dataObject['data']['reward_mturk_total_euros']),
       data: dataObject
     };
 
@@ -278,6 +283,49 @@ export class Data {
     }
 
 
+  }
+
+  async sendFailureToServer() {
+    const body = {
+      worker_id: this.stimuli.participant.workerId,
+      assignment_id: this.stimuli.participant.assignmentId,
+      hit_id: this.stimuli.participant.hitId,
+      completed: false,
+      data: {}
+    };
+
+    console.log('Saving data to the server...', body);
+
+    try {
+      const res = await this.api.post('records', body).toPromise();
+      if (res['status'] != 'success') {
+
+        // Send error to Ionic Monitoring
+        Pro.monitoring.log(
+          `ERROR saving data to the server. 
+          Uid: ${this.stimuli.participant.code}. WorkerId: ${this.stimuli.participant.workerId}. 
+          Respose: ${res}
+          `, { level: 'error' }
+        );
+
+        throw "Error saving data to the server";
+      }
+      else {
+        console.log('Data saved to the server:', res);
+      }
+    }
+    catch (e) {
+
+      // Send error to Ionic Monitoring
+      Pro.monitoring.log(
+        `ERROR saving data to the server. 
+        Uid: ${this.stimuli.participant.code}. WorkerId: ${this.stimuli.participant.workerId}.
+        Error: ${e}
+        `, { level: 'error' }
+      );
+
+      console.log('Error saving data to the server:', e);
+    }
   }
 
   async loadAllRecords() {
