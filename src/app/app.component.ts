@@ -87,6 +87,14 @@ export class MyApp {
       this.stimuli.participant.dob = new Date(params.get("dob"));
       this.stimuli.participant.gender = params.get("gender");
 
+      if ( params.get("is_mturk")) {
+        this.stimuli.participant.isMturk = Number(params.get("is_mturk")) == 1;
+      }
+
+      if ( params.get("is_sandbox")) {
+        this.stimuli.participant.isSandbox = Number(params.get("is_sandbox")) == 1;
+      }
+
       console.log("[DEBUG] Online Version", this.stimuli.participant);
 
 

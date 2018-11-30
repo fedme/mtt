@@ -244,6 +244,8 @@ export class Data {
       worker_id: this.stimuli.participant.workerId,
       assignment_id: this.stimuli.participant.assignmentId,
       hit_id: this.stimuli.participant.hitId,
+      is_mturk: this.stimuli.participant.isMturk,
+      is_sandbox: this.stimuli.participant.isSandbox,
       completed: true,
       bonus: parseFloat(dataObject['data']['reward_mturk_total_euros']),
       data: dataObject
@@ -290,6 +292,8 @@ export class Data {
       worker_id: this.stimuli.participant.workerId,
       assignment_id: this.stimuli.participant.assignmentId,
       hit_id: this.stimuli.participant.hitId,
+      is_mturk: this.stimuli.participant.isMturk,
+      is_sandbox: this.stimuli.participant.isSandbox,
       completed: false,
       data: {}
     };

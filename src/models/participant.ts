@@ -11,6 +11,8 @@ export class Participant {
   grade: number;
   playedBefore: boolean = false;
   languageProficiency: number;
+  isMturk: boolean = false;
+  isSandbox: boolean = false;
 
   constructor(code: string) {
     this.code = code;
