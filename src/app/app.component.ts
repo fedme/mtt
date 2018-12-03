@@ -123,6 +123,8 @@ export class MyApp {
       // Initialize conditions
       this.stimuli.initializeConditions();
 
+      this.data.sendStartedToServer();
+
       // Go to the consent form
       this.rootPage = OnlineFirstRunPage;
     }

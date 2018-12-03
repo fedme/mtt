@@ -69,8 +69,8 @@ export class Stimuli {
 
   async getConditionFromServer() {
     try {
-      const res = await this.api.get('conditions/first').toPromise();
-      const id: number = res ? res['data']['condition_id'] : 0;
+      const res = await this.api.get('conditions/random').toPromise();
+      const id: number = res ? res['conditionId'] : 0;
       console.log('Got condition id from server:', id);
       this.condition = CONDITIONS_EXTENDED[id % CONDITIONS_EXTENDED.length];
     }

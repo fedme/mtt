@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string = 'https://mtt-api.isearchlab.org/api/v1';
+
+  url: string = 'https://localhost:5001/api'; // TODO: change in production!!!
 
   constructor(public http: HttpClient) {
   }

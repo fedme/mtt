@@ -241,35 +241,22 @@ export class Data {
     console.log('Participant', this.stimuli.participant);
 
     const body = {
-      worker_id: this.stimuli.participant.workerId,
-      assignment_id: this.stimuli.participant.assignmentId,
-      hit_id: this.stimuli.participant.hitId,
-      is_mturk: this.stimuli.participant.isMturk,
-      is_sandbox: this.stimuli.participant.isSandbox,
-      completed: true,
+      workerId: this.stimuli.participant.workerId,
+      assignmentId: this.stimuli.participant.assignmentId,
+      hitId: this.stimuli.participant.hitId,
+      status: RecordStatus.Completed,
+      isMturk: this.stimuli.participant.isMturk,
+      isSandbox: this.stimuli.participant.isSandbox,
       bonus: parseFloat(dataObject['data']['reward_mturk_total_euros']),
-      data: dataObject
+      dataString: JSON.stringify(dataObject)
     };
 
     console.log('Saving data to the server...', body);
+    //console.log('Saving data to the server...', JSON.stringify(dataObject));
 
     try {
       const res = await this.api.post('records', body).toPromise();
-      if (res['status'] != 'success') {
-
-        // Send error to Ionic Monitoring
-        Pro.monitoring.log(
-          `ERROR saving data to the server. 
-          Uid: ${this.stimuli.participant.code}. WorkerId: ${this.stimuli.participant.workerId}. 
-          Respose: ${res}
-          `, { level: 'error' }
-        );
-
-        throw "Error saving data to the server";
-      }
-      else {
-        console.log('Data saved to the server:', res);
-      }
+      console.log('Data saved to the server:', res);
     }
     catch (e) {
 
@@ -287,48 +274,61 @@ export class Data {
 
   }
 
-  async sendFailureToServer() {
+  async sendStartedToServer() {
     const body = {
-      worker_id: this.stimuli.participant.workerId,
-      assignment_id: this.stimuli.participant.assignmentId,
-      hit_id: this.stimuli.participant.hitId,
-      is_mturk: this.stimuli.participant.isMturk,
-      is_sandbox: this.stimuli.participant.isSandbox,
-      completed: false,
-      data: {}
+      workerId: this.stimuli.participant.workerId,
+      assignmentId: this.stimuli.participant.assignmentId,
+      hitId: this.stimuli.participant.hitId,
+      status: RecordStatus.Started,
+      isMturk: this.stimuli.participant.isMturk,
+      isSandbox: this.stimuli.participant.isSandbox,
     };
 
     console.log('Saving data to the server...', body);
 
     try {
       const res = await this.api.post('records', body).toPromise();
-      if (res['status'] != 'success') {
-
-        // Send error to Ionic Monitoring
-        Pro.monitoring.log(
-          `ERROR saving data to the server. 
-          Uid: ${this.stimuli.participant.code}. WorkerId: ${this.stimuli.participant.workerId}. 
-          Respose: ${res}
-          `, { level: 'error' }
-        );
-
-        throw "Error saving data to the server";
-      }
-      else {
-        console.log('Data saved to the server:', res);
-      }
+      console.log('Data saved to the server:', res);
     }
     catch (e) {
 
       // Send error to Ionic Monitoring
       Pro.monitoring.log(
-        `ERROR saving data to the server. 
+        `ERROR sending Start to the server. 
+        Uid: ${this.stimuli.participant.code}. WorkerId: ${this.stimuli.participant.workerId}.
+        Error: ${e}
+        `, { level: 'error' }
+      );
+      
+      console.log('ERROR sending Start to the server:', e);
+    }
+  }
+
+  async sendFailureToServer() {
+    const body = {
+      workerId: this.stimuli.participant.workerId,
+      assignmentId: this.stimuli.participant.assignmentId,
+      hitId: this.stimuli.participant.hitId,
+      status: RecordStatus.Failed
+    };
+
+    console.log('Saving data to the server...', body);
+
+    try {
+      const res = await this.api.post('records', body).toPromise();
+      console.log('Data saved to the server:', res);
+    }
+    catch (e) {
+
+      // Send error to Ionic Monitoring
+      Pro.monitoring.log(
+        `ERROR sending Failure to the server. 
         Uid: ${this.stimuli.participant.code}. WorkerId: ${this.stimuli.participant.workerId}.
         Error: ${e}
         `, { level: 'error' }
       );
 
-      console.log('Error saving data to the server:', e);
+      console.log('ERROR sending Failure to the server:', e);
     }
   }
 
@@ -439,3 +439,5 @@ export class Data {
   }
 
 }
+
+enum RecordStatus { Assigned, Started, Failed, Completed, Submitted, Approved, Rejected }
