@@ -55,7 +55,7 @@ export class InstructionsCheckPage {
       this.stimuli.questionsCheckCounter++;
 
       // If answer is wrong but still have attempts, go to through instructions again
-      if (this.stimuli.questionsCheckCounter <= 3) {
+      if (this.stimuli.questionsCheckCounter < 3) {
         this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 2)); //go back to the training instructions 2
       }
 

@@ -8,6 +8,13 @@
           <h1 translate [translateParams]="">FAILURE.TITLE</h1>
 
           <p [innerHTML]="'FAILURE.BODY' | translate"></p>
+
+          <br>
+
+          <strong *ngIf="stimuli.onlineVersion">
+            Please go back to the Mturk page and enter the following completion code: <br><br>
+            <span class="reward">MTT-ONLINE-2018</span>
+          </strong>
         </div>
       </ion-col>
       <ion-col></ion-col>
