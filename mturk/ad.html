@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
 <section class="container" id="SurveyLink" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:0.9em;">
 	<div class="row col-xs-12 col-md-12">
@@ -74,7 +75,7 @@
 			if (pair[0] == "hitId") { hitId = pair[1]; }
 		}
 
-		var expUrl = 'https://mtt.isearchlab.org?worker_id=' + workerId + '&assignment_id=' + assignmentId + '&hit_id=' + hitId + '&is_mturk=' + isMturk + '&is_sandbox=' + isSandbox;
+		var expUrl = 'https://mtt.isearchlab.org?workerId=' + workerId + '&assignmentId=' + assignmentId + '&hitId=' + hitId + '&isMturk=' + isMturk + '&isSandbox=' + isSandbox;
 
 		function openExperimentPopup() {
 			popup = window.open(expUrl, 'Popup', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=' + 1024 + ',height=' + 768 + '');
@@ -87,10 +88,37 @@
 			assignment_id_field.innerHTML = '<a onclick="openExperimentPopup()"><h1><span style="color: rgb(255, 0, 0);"><span><b>Click here to start the game (in a popup)</b></span></span></h1></a>';
 		}
 
+		$.get("https://mtt-api.isearchlab.org/api/forbiddenWorkers/" + workerId, function(res) {
+			console.log('res2', res);
+			if (res['forbidden'] == true) {
+				assignment_id_field.innerHTML = '<h3 style="color:red;">Unfortunately it seems that you have already played a version of this game before. You can not play it again.</h3>';
+			}
+		});
+
 		document.getElementById('mturk_form').addEventListener('submit', function(e) {
 			if (document.getElementById('surveycode').value != 'MTT-ONLINE-2018') {
 				e.preventDefault();
 				alert('Wrong completion code!');
+			}
+			else {
+				$.ajax({
+					type: "POST", 
+					url: 'https://mtt-api.isearchlab.org/api/records',
+					contentType: "application/json; charset=utf-8",
+    				dataType: "json",
+					data: JSON.stringify({
+						"workerId": workerId,
+						"assignmentId": assignmentId,
+						"hitId": hitId,
+						"status": 4 // submitted
+					}),
+					success: function (res) {
+						console.log('res2', res);
+					},
+					failure: function (err) {
+						console.log('res2', err);
+					}
+				});
 			}
 		});
 
