@@ -189,6 +189,9 @@ export class Data {
   getParticipantInfo() {
     return {
       "code": this.stimuli.participant.code,
+      "workerId": this.stimuli.participant.workerId,
+      "assignmentId": this.stimuli.participant.assignmentId,
+      "hitId": this.stimuli.participant.hitId,
       "age": this.stimuli.participant.age,
       "ageGroup": this.stimuli.participant.ageGroup,
       "grade": this.stimuli.participant.grade,

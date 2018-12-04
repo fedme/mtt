@@ -74,25 +74,25 @@ export class MyApp {
     const params = new URLSearchParams(window.location.search);
     
     // Check if online version...
-    if (params.get("assignment_id")) {
+    if (params.get("assignmentId")) {
 
       // Parse participant info
       this.stimuli.onlineVersion = true;
-      this.stimuli.participant.code = params.get("worker_id");
-      this.stimuli.participant.workerId = params.get("worker_id");
-      this.stimuli.participant.assignmentId = params.get("assignment_id");
-      this.stimuli.participant.hitId = params.get("hit_id");
+      this.stimuli.participant.code = params.get("workerId");
+      this.stimuli.participant.workerId = params.get("workerId");
+      this.stimuli.participant.assignmentId = params.get("assignmentId");
+      this.stimuli.participant.hitId = params.get("hitId");
       this.stimuli.participant.age = Number(params.get("age"));
       this.stimuli.participant.grade = Number(params.get("grade"));
       this.stimuli.participant.dob = new Date(params.get("dob"));
       this.stimuli.participant.gender = params.get("gender");
 
-      if ( params.get("is_mturk")) {
-        this.stimuli.participant.isMturk = Number(params.get("is_mturk")) == 1;
+      if ( params.get("isMturk")) {
+        this.stimuli.participant.isMturk = Number(params.get("isMturk")) == 1;
       }
 
-      if ( params.get("is_sandbox")) {
-        this.stimuli.participant.isSandbox = Number(params.get("is_sandbox")) == 1;
+      if ( params.get("isSandbox")) {
+        this.stimuli.participant.isSandbox = Number(params.get("isSandbox")) == 1;
       }
 
       console.log("[DEBUG] Online Version", this.stimuli.participant);
