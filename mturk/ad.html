@@ -100,26 +100,26 @@
 				e.preventDefault();
 				alert('Wrong completion code!');
 			}
-			else {
-				$.ajax({
-					type: "POST", 
-					url: 'https://mtt-api.isearchlab.org/api/records',
-					contentType: "application/json; charset=utf-8",
-    				dataType: "json",
-					data: JSON.stringify({
-						"workerId": workerId,
-						"assignmentId": assignmentId,
-						"hitId": hitId,
-						"status": 4 // submitted
-					}),
-					success: function (res) {
-						console.log('res2', res);
-					},
-					failure: function (err) {
-						console.log('res2', err);
-					}
-				});
-			}
+			// else {
+			// 	$.ajax({
+			// 		type: "POST", 
+			// 		url: 'https://mtt-api.isearchlab.org/api/records',
+			// 		contentType: "application/json; charset=utf-8",
+    		// 		dataType: "json",
+			// 		data: JSON.stringify({
+			// 			"workerId": workerId,
+			// 			"assignmentId": assignmentId,
+			// 			"hitId": hitId,
+			// 			"status": 4 // submitted
+			// 		}),
+			// 		success: function (res) {
+			// 			console.log('res2', res);
+			// 		},
+			// 		failure: function (err) {
+			// 			console.log('res2', err);
+			// 		}
+			// 	});
+			// }
 		});
 
 </script>
