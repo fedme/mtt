@@ -1,0 +1,115 @@
+{
+    "MONSTER": {
+      "FEATURE_A_LABEL": "SIMPÁTICO",
+      "FEATURE_B_LABEL": "FRESCO",
+      "FEATURE_C_LABEL": "GRACIOSO"
+    },
+  
+    "REGISTRATION": {
+      "TITLE": "Enter participant data",
+      "CODE_LABEL": "Participant code",
+      "AGE_LABEL": "Participant age",
+      "GRADE_LABEL": "Participant grade",
+      "SUBMIT": "Begin experiment",
+      "GENDER_LABEL": "Participant gender",
+      "MALE": "Male",
+      "FEMALE": "Female"
+    },
+  
+    "REGISTRATION_ONLINE": {
+      "TITLE": "One last thing: please fill in this form",
+      "CODE_LABEL": "Your code",
+      "AGE_LABEL": "Your age in years",
+      "GRADE_LABEL": "The school grade you are in",
+      "SUBMIT": "Submit and proceed",
+      "GENDER_LABEL": "Your gender",
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "PLAYED_BEFORE": "Have you played this game before?",
+      "YES": "Yes",
+      "NO": "No",
+      "LANG_PROFICIENCY_QUESTION": "What is your English proficiency level?",
+      "LANG_PROFICIENCY_1": "Native Speaker or bilingual proficiency",
+      "LANG_PROFICIENCY_2": "Full professional proficiency",
+      "LANG_PROFICIENCY_3": "Professional working proficiency",
+      "LANG_PROFICIENCY_4": "Limited working proficiency",
+      "LANG_PROFICIENCY_5": "Elementary proficiency"
+    },
+  
+    "FAILURE": {
+      "TITLE": "Experiment Failed",
+      "BODY": "We are sorry to inform you that you cannot proceed to the study as you have already tried the instructions check three times."
+    },
+  
+    "TRAINING_INSTRUCTIONS": {
+      "FIRST": {
+        "TITLE": "",
+        "BODY": "Vamos a jugar un juego de cartas con monstruos. Estos monstrus viven en un planeta llamado planeta Apres. Todos los días, recolectan algunas frutas mágicas para aumentar su nivel de poder. Cuanta más fruta recolectan, más poder tienen, y tienen competencias para ver quién puede recolectar la mayor cantidad de frutas. Tenemos que descubrir cómo predecir cuántas frutas ha recolectado un monstruo usando los valores en el frente de las cartas. Veamos cómo funciona. <br></br>Cada monstruo tiene un puntaje de lo amigable, desfachatado y divertido que es. Una puntuación más alta significa que un monstruo es más amigable, desfachatado o divertido. La puntuación más baja es 1, y la puntuación más alta es 5. La cantidad de frutas que recoge cada monstruo <strong>depende de las tres puntuaciones</strong> en el frente de cada carta, y está escrita en el circulo sobre su imagen. El número <strong>máximo</strong> de frutas es 40 y el <strong>mínimo</strong> es 0. <br></br>El objetivo del juego es predecir cuántas frutas ha recolectado cada monstruo, usando <strong>solo</strong> las puntuaciones en el frente de las cartas. <strong>Eso significa que tienes que aprender la relación entre los puntajes y la cantidad de frutas escogidas por cada monstruo, para descubrir cómo influye cada característica en la capacidad de recolección de frutas del monstruo. </strong> Ahora, elige <strong>una</strong> de estas tarjetas para averiguar cuántas frutas ha recolectado el monstruo hoy. Luego verás el resto de las instrucciones antes de continuar el juego.",
+        "BODY_ONLINE":"You are going to play a card game with some monsters. These monsters live on the planet Apres. Every day, they pick some magic fruit to become stronger. The more fruit they gather, the stronger they get. You already have some information about these monsters on the cards, and you need to find out how to use this knowledge to <strong>predict how many fruits the monsters have collected</strong>. Let's find out how it works! <br></br>Each monster has a score for how funny, cheeky and friendly it is, displayed under its picture. This is called the feature score. The lowest score is 1, and the highest score is 5. The number of fruits collected by each monster <strong> depends on these three feature scores</strong>, and appears in the circle just above its picture. The <strong>maximum</strong> number of fruit is 40, and the <strong>minimum</strong> is 0.<br></br>The aim of the game is to predict how many fruits each monster has picked, using <strong>only</strong> the three feature scores on each card. <strong>That means you need to learn the relationship between the scores and the number of fruits collected by each monster!</strong> Now you can click on <strong>one</strong> card to find out how many fruits that monster collected. Then you will see the rest of the instructions, before continuing the game.",
+        "NEXT": "Jugámos!"
+      },
+      "SECOND": {
+        "TITLE": "",
+        "BODY": "Ahora has visto como se ven las cartas y cuantas frutas ha recogido el monstruo que has elegido. Ahora continuemos leyendo las instrucciones. Presta atención! Despues comienza el juego. <br></br>Por primero harás un entrenimiento you will do some training, para aprender la relación entre las características / puntuaciones del monstruo y la cantidad de frutas que recoge cada monstruo clicando en algunas targetas para ver cuantas frutas ha recogido el monstruo. Después de tu entrenamiento jugaremos dos juegos de prediccion. ¡Por cada respuesta correcta, obtendrás algunos puntos!",
+        "NEXT": "Start the game!"
+      },
+      "THIRD": {
+        "TITLE_ACTIVE": "",
+        "BODY_ACTIVE": "Ok, ahora es el momento de practicar un poco para descubrir cuál es la relación entre las puntuaciones del monstruo y la cantidad de frutas que recoge cada monstruo. Puedes hacer clic en <strong>{{ncards}}</strong> cartas para descubrir cuantas frutas los monstruos recogieron, pero no <strong>todas las cartas</strong>. Ya que no puedes voltear todas estas cartas, <strong>¡asegúrate de comenzar con las que dan más información</strong>, para que puedas aprender lo más posible, lo más rápido posible y ganar el juego! <strong>Acuerdate que tienes que aprender la relación entre las puntuaciones de los monstruos y la cantidad de frutas que recoge cada monstruo.</strong>.",
+        "TITLE_PASSIVE": "",
+        "BODY_PASSIVE": "Ok, ahora es el momento de practicar un poco para descubrir cuál es la relación entre las puntuaciones del monstruo y la cantidad de frutas que recoge cada monstruo. Puedes hacer clic en <strong>{{ncards}}</strong> cartas para descubrir cuantas frutas los monstruos recogieron, pero no <strong>todas las cartas</strong>. Ya que no puedes voltear todas estas cartas, <strong>¡asegúrate de comenzar con las que dan más información</strong>, para que puedas aprender lo más posible, lo más rápido posible y ganar el juego! <strong>Acuerdate que tienes que aprender la relación entre las puntuaciones de los monstruos y la cantidad de frutas que recoge cada monstruo.</strong>.",
+        "NEXT": "Siguiente"
+      }
+    },
+  
+    "TRAINING": {
+      "NEXT_PICK_BUTTON_ACTIVE": "Dejame elegir una carta",
+      "NEXT_PICK_BUTTON_PASSIVE": "Elije una carta para mi",
+      "PICK_CARD_INSTRUCTION_ACTIVE": "Clica en una carta para ver cuantas frutas ha recogido el monstruo.",
+      "PICK_CARD_INSTRUCTION_PASSIVE": "Clica en la carta roja para ver cuantas frutas ha recogido el monstruo.",
+      "END_BUTTON": "Fin del entrenamiento"
+    },
+  
+    "TEST_INSTRUCTIONS": {
+      "NEXT": "Let's go!",
+      "PAIR_COMPARISON": {
+        "TITLE": "",
+        "BODY": "Ahora jugarás un otro juego, en el cuál usarás lo que has aprendido en el entrenamiento. ¡Recuerda que ganarás algunos puntos por cada respuesta correcta!"
+      },
+      "OUTPUT_ESTIMATION": {
+        "TITLE": "",
+        "BODY": "Ahora jugarás un otro juego, en el cuál usarás lo que has aprendido en el entrenamiento. ¡Recuerda que ganarás algunos puntos por cada respuesta correcta!"
+      }
+    },
+  
+    "TEST": {
+      "PAIR_COMPARISON": {
+        "TITLE": "",
+        "BODY": "mira estos dos monstruos; Toca el que creas que ha recogido más frutas.",
+        "NEXT_QUESTION": "Siguiente"
+      },
+      "OUTPUT_ESTIMATION": {
+        "TITLE": "",
+        "BODY": "Mira esta tarjeta. ¿Cuántas frutas crees que ha recogido este monstruo? Mueva el control deslizante para seleccionar el número que piensas.",
+        "NEXT_QUESTION": "Siguiente"
+      },
+      "NEXT": "Juego siguiente"
+    },
+  
+    "RANKING_TASK": {
+      "TITLE": "",
+      "BODY": "Aquí puedes ver las características de los monstruos de nuevo. ¿Podrías por favor mostrarme cuál fue la característica más importante para recolectar más frutas? Muevas las más importantes en la parte superior y las menos importantes en la parte inferior.",
+      "QUESTION_ADULTS": "What was the relationship between the monster features and the number of fruits picked by each monster? Write your answer in the text box below.",
+      "NEXT": "Siguiente"
+    },
+  
+    "REWARD": {
+      "TITLE": "¡Jugaste muy bien!",
+      "BODY": "¡Jugaste muy bien! Los puntos que has vinto están escritos aquí:"
+    },
+  
+    "RESTART_GAME": "Reinicia el juego",
+  
+    "END_EXPERIMENT": "Fin del experimento"
+  
+  }
