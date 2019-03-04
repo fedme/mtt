@@ -129,6 +129,7 @@ export class Stimuli {
     this.condition = condition;
     this.trainingType = condition.training;
     this.testTypes = TESTS_ORDER[condition.testingOrder];
+    this.currentTestIndex = -1;
 
     this.criterionFunctionIndex = condition.func;
     this.trainingTasksNuber = condition.trainingTasks;
