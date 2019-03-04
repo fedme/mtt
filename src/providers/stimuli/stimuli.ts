@@ -133,8 +133,8 @@ export class Stimuli {
     this.criterionFunctionIndex = condition.func;
     this.trainingTasksNuber = condition.trainingTasks;
 
-    //console.log("[trainingType]", this.trainingType);
-    //console.log("[testTypes]", this.testTypes);
+    console.log("[trainingType]", this.trainingType);
+    console.log("[testTypes]", this.testTypes);
   }
 
   pickFeaturesOrder() {
