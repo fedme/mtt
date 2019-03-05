@@ -16,6 +16,7 @@ export class Stimuli {
   lang: string = "en";
 
   activeOnlyVersion: boolean;
+  hideReward: boolean;
 
   // onlineVersion
   onlineVersion: boolean = false;
@@ -85,7 +86,8 @@ export class Stimuli {
     this.condition = CONDITIONS_EXTENDED[id % CONDITIONS_EXTENDED.length];
   }
 
-  initializeConditions(isActiveOnly: boolean = false) {
+  initializeConditions(isActiveOnly: boolean = false, hideReward: boolean = false) {
+    this.hideReward = hideReward;
     this.activeOnlyVersion = isActiveOnly;
     this.pickCondition();
     this.pickFeaturesOrder();

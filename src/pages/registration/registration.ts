@@ -14,6 +14,7 @@ import { OnlineFirstRunPage } from "../pages";
 export class RegistrationPage {
 
   isActiveOnlyVersion: boolean = false;
+  hideReward:boolean = false;
   lang: string = "en";
   availableLangs: string[];
 
@@ -30,13 +31,18 @@ export class RegistrationPage {
       // Parse available langs
       this.availableLangs = this.translate.langs;
 
-      // // Initialize providers, now done in app.component
-      // this.stimuli.initialize();
-      // this.data.initialize();
+      // Initialize providers, now done in app.component
+      this.stimuli.initialize();
+      this.data.initialize();
 
       // Get if active-only-version from localStorage
       if (localStorage.getItem('active-only-version') != null && localStorage.getItem('active-only-version') != '') {
         this.isActiveOnlyVersion = localStorage.getItem('active-only-version') == 'true';
+      }
+
+      // Get hideReward from localStorage
+      if (localStorage.getItem('isrc-mtt-hide-reward') != null && localStorage.getItem('isrc-mtt-hide-reward') != '') {
+        this.hideReward= localStorage.getItem('isrc-mtt-hide-reward') == 'true';
       }
 
       // Get language from localStorage
@@ -55,6 +61,9 @@ export class RegistrationPage {
     // Remember if active-only version
     localStorage.setItem('active-only-version', this.isActiveOnlyVersion ? 'true' : 'false');
 
+    // Remember hideReward
+    localStorage.setItem('isrc-mtt-hide-reward', this.hideReward ? 'true' : 'false');
+
     // set Language
     this.stimuli.setLang(this.lang);
     localStorage.setItem('lang', this.lang);
@@ -63,7 +72,7 @@ export class RegistrationPage {
     this.stimuli.participant.ageGroup = this.stimuli.getParticipantAgeGroup(this.stimuli.participant.age);
   
     // initialize stimuli
-    this.stimuli.initializeConditions(this.isActiveOnlyVersion);
+    this.stimuli.initializeConditions(this.isActiveOnlyVersion, this.hideReward);
     this.navCtrl.push('TrainingInstructionsPage');
   }
 

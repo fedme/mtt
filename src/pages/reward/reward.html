@@ -6,11 +6,11 @@
       <ion-col col-8 text-center>
         <div class="content-wrapper">
           <h1 translate [translateParams]="">REWARD.TITLE</h1>
-          <p *ngIf="!stimuli.activeOnlyVersion" [innerHTML]="'REWARD.BODY' | translate"></p>
+          <p *ngIf="!stimuli.hideReward" [innerHTML]="'REWARD.BODY' | translate"></p>
 
    
 
-          <p class="reward" *ngIf="!stimuli.activeOnlyVersion">{{ getTotalReward() }} €</p>
+          <p class="reward" *ngIf="!stimuli.hideReward">{{ getTotalReward() }} €</p>
 
 
           <br>

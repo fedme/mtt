@@ -64,7 +64,12 @@
               </ion-item>
 
               <ion-item>
-                <ion-label>Play active-only version</ion-label>
+                <ion-label>Hide reward at the end</ion-label>
+                <ion-checkbox [(ngModel)]="hideReward" name="hideReward"></ion-checkbox>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Active-only version</ion-label>
                 <ion-checkbox [(ngModel)]="isActiveOnlyVersion" name="isActiveOnlyVersion"></ion-checkbox>
               </ion-item>
 
