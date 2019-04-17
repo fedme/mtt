@@ -15,7 +15,7 @@ export class InstructionsCheckPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private stimuli: Stimuli,
+    public stimuli: Stimuli,
     private data: Data
   ) {
 
@@ -43,10 +43,15 @@ export class InstructionsCheckPage {
 
     this.stimuli.questionsCheck.push(this.questionsForm.value);
 
+    const numberCheckCorrect =
+      parseInt(this.questionsForm.value["question-cards"]) == this.stimuli.condition.trainingTasks
+      || (this.questionsForm.value["question-cards"] == "all" && this.stimuli.condition.trainingTasks == 27)
+      || (this.questionsForm.value["question-cards"] == "none" && this.stimuli.condition.trainingTasks == 0);
+
     const answerCorrect = 
       this.questionsForm.value["question-goal"] == "correct" 
       && this.questionsForm.value["question-fruits"] == "correct" 
-      && parseInt(this.questionsForm.value["question-cards"]) == this.stimuli.condition.trainingTasks;
+      && numberCheckCorrect;
 
     if (answerCorrect) {
       this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 3)); //go back to the training

@@ -2,7 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Utils } from '../utils/utils';
 import { Participant } from '../../models/participant';
-import { TESTS_ORDER, CONDITIONS, CONDITIONS_ACTIVE_ONLY, ONLINE_DEFAULT_CONDITION, CONDITIONS_EXTENDED } from './constants';
+import { TESTS_ORDER, CONDITIONS, CONDITIONS_ACTIVE_ONLY,
+  ONLINE_DEFAULT_CONDITION, CONDITIONS_EXTENDED, CONDITIONS_EXTENDED_2 } from './constants';
 import { AppInfo } from './app-info';
 import { Api } from '../api/api';
 //import { Pro } from '@ionic/pro';
@@ -73,12 +74,12 @@ export class Stimuli {
       const res = await this.api.get('conditions/random').toPromise();
       const id: number = res ? res['conditionId'] : 0;
       console.log('Got condition id from server:', id);
-      this.condition = CONDITIONS_EXTENDED[id % CONDITIONS_EXTENDED.length];
+      this.condition = CONDITIONS_EXTENDED_2[id % CONDITIONS_EXTENDED_2.length];
     }
     catch(e) {
       console.log('ERROR in getting condition from server:', e);
       //Pro.monitoring.log('ERROR getting condition from server: ' + e, { level: 'error' });
-      this.condition = CONDITIONS_EXTENDED[0];
+      this.condition = CONDITIONS_EXTENDED_2[0];
     }
   }
 

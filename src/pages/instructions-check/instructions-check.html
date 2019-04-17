@@ -29,7 +29,7 @@
 
             <br>
 
-            <ion-list radio-group formControlName="question-cards">
+            <ion-list *ngIf="stimuli.condition.trainingTasks == 5 || stimuli.condition.trainingTasks == 22" radio-group formControlName="question-cards">
               <ion-list-header>
                 How many cards can you click?
               </ion-list-header>
@@ -40,6 +40,30 @@
               <ion-item>
                 <ion-label>5</ion-label>
                 <ion-radio value="5"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>22</ion-label>
+                <ion-radio value="22"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>None</ion-label>
+                <ion-radio value="none"></ion-radio>
+              </ion-item>
+            </ion-list>
+
+            <br>
+
+            <ion-list *ngIf="stimuli.condition.trainingTasks == 0 || stimuli.condition.trainingTasks == 1  || stimuli.condition.trainingTasks == 27" radio-group formControlName="question-cards">
+              <ion-list-header>
+                How many cards can you click?
+              </ion-list-header>
+              <ion-item>
+                <ion-label>All</ion-label>
+                <ion-radio value="all"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>1</ion-label>
+                <ion-radio value="1"></ion-radio>
               </ion-item>
               <ion-item>
                 <ion-label>22</ion-label>

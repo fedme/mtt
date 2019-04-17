@@ -86,6 +86,7 @@ export class MyApp {
       this.stimuli.participant.grade = Number(params.get("grade"));
       this.stimuli.participant.dob = new Date(params.get("dob"));
       this.stimuli.participant.gender = params.get("gender");
+      const lang = params.get("lang");
 
       if ( params.get("isMturk")) {
         this.stimuli.participant.isMturk = Number(params.get("isMturk")) == 1;
@@ -118,6 +119,11 @@ export class MyApp {
       // Or ask the server  for a condition id
       else {
         await this.stimuli.getConditionFromServer();
+      }
+
+      // Set language
+      if (lang != null && lang != "") {
+        this.stimuli.setLang(lang);
       }
 
       // Initialize conditions

@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 
 /**
  * Api is a generic REST Api handler. Set your API url first.
@@ -7,10 +7,15 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Api {
 
-  //url: string = 'https://localhost:5001/api'; // TODO: change in production!!!
-  url: string = 'https://mtt-api.isearchlab.org/api';
+  url: string = 'https://localhost:44349/api';
 
   constructor(public http: HttpClient) {
+    if(isDevMode()) {
+      this.url = 'https://localhost:44349/api';
+    }
+    else {
+      this.url = 'https://mtt-api.isearchlab.org/api';
+    }
   }
 
   get(endpoint: string, params?: any, reqOpts?: any) {

@@ -39,6 +39,33 @@ export const CONDITIONS_EXTENDED: {trainingTasks: number, func: number, training
   {"trainingTasks": 5, "func": 2, "training": "passive", "testingOrder": 1}
 ];
 
+export const CONDITIONS_EXTENDED_2: {trainingTasks: number, func: number, training: string, testingOrder: number}[] = [
+  
+  // 1 card linear
+  {"trainingTasks": 1, "func": 1, "training": "active", "testingOrder": 0},
+  {"trainingTasks": 1, "func": 1, "training": "active", "testingOrder": 1},
+  {"trainingTasks": 1, "func": 1, "training": "passive", "testingOrder": 0},
+  {"trainingTasks": 1, "func": 1, "training": "passive", "testingOrder": 1},
+
+  // 1 card non linear
+  {"trainingTasks": 1, "func": 2, "training": "active", "testingOrder": 0},
+  {"trainingTasks": 1, "func": 2, "training": "active", "testingOrder": 1},
+  {"trainingTasks": 1, "func": 2, "training": "passive", "testingOrder": 0},
+  {"trainingTasks": 1, "func": 2, "training": "passive", "testingOrder": 1},
+
+  // 0 cards
+  {"trainingTasks": 0, "func": 1, "training": "passive", "testingOrder": 0},
+  {"trainingTasks": 0, "func": 1, "training": "passive", "testingOrder": 1},
+  {"trainingTasks": 0, "func": 2, "training": "passive", "testingOrder": 0},
+  {"trainingTasks": 0, "func": 2, "training": "passive", "testingOrder": 1},
+
+  // all cards
+  {"trainingTasks": 27, "func": 1, "training": "passive", "testingOrder": 0},
+  {"trainingTasks": 27, "func": 1, "training": "passive", "testingOrder": 1},
+  {"trainingTasks": 27, "func": 2, "training": "passive", "testingOrder": 0},
+  {"trainingTasks": 27, "func": 2, "training": "passive", "testingOrder": 1}
+];
+
 export const NUMBERS = {
   TRAINING_CARDS: 27,
   PAIR_COMPARISONS: 8,

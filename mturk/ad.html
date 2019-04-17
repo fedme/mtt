@@ -75,7 +75,7 @@
 			if (pair[0] == "hitId") { hitId = pair[1]; }
 		}
 
-		var expUrl = 'https://mtt.isearchlab.org?workerId=' + workerId + '&assignmentId=' + assignmentId + '&hitId=' + hitId + '&isMturk=' + isMturk + '&isSandbox=' + isSandbox;
+		var expUrl = 'https://mtt.isearchlab.org?workerId=' + workerId + '&assignmentId=' + assignmentId + '&hitId=' + hitId + '&isMturk=' + isMturk + '&isSandbox=' + isSandbox + '&lang=en';
 
 		function openExperimentPopup() {
 			popup = window.open(expUrl, 'Popup', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=' + 1024 + ',height=' + 768 + '');
