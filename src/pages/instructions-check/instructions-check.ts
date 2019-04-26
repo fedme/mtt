@@ -54,7 +54,12 @@ export class InstructionsCheckPage {
       && numberCheckCorrect;
 
     if (answerCorrect) {
-      this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 3)); //go back to the training
+      if (this.stimuli.isExtendedCondition2()) {
+        this.navCtrl.setRoot("TrainingPage");
+      }
+      else {
+        this.navCtrl.popTo(this.navCtrl.getByIndex(this.navCtrl.length() - 3)); //go back to the training
+      }
     }
     else {
       this.stimuli.questionsCheckCounter++;

@@ -34,22 +34,78 @@ export class OutputEstimationProvider {
     this.utils.shuffleArray(ids);
     //console.log(ids);
 
-    // generate interpolation questions
-    let unrevealedMonsters = this.training.getUnrevealedMonsters();
     let baseIdIndex = 0;
-    for (let i = 0; i < NUMBERS.OUTPUT_ESTIMATION_INTERPOLATION; i++) {
-      unrevealedMonsters[i].updateId("monster" + ids[baseIdIndex + i]);
-      let question = new OutputEstimationQuestion("interpolation", unrevealedMonsters[i]);
-      this.questions.push(question);
+
+    // Generate interpolation and recall questions
+
+
+    if (this.stimuli.isExtendedCondition2) {
+
+      // If seen 27 cards, 10 recall and 0 interpolation
+      if (this.stimuli.condition.trainingTasks == 27) {
+        let revealedMonsters = this.training.getRevealedMonsters();
+        baseIdIndex = 0;
+        for (let i = 0; i < 10; i++) {  
+          revealedMonsters[i].updateId("monster" + ids[baseIdIndex + i]);
+          let question = new OutputEstimationQuestion("recall", revealedMonsters[i]);
+          this.questions.push(question);
+        }
+      }
+
+      // If seen 0 cards, 0 recall and 10 interpolation
+      if (this.stimuli.condition.trainingTasks == 0) {
+        // interpolation
+        let unrevealedMonsters = this.training.getUnrevealedMonsters();
+        baseIdIndex = 0;
+        for (let i = 0; i < 10; i++) {
+          unrevealedMonsters[i].updateId("monster" + ids[baseIdIndex + i]);
+          let question = new OutputEstimationQuestion("interpolation", unrevealedMonsters[i]);
+          this.questions.push(question);
+        }
+      }
+
+      // If seen 1 card, 1 recall and 9 interpolation
+      if (this.stimuli.condition.trainingTasks == 1) {
+        // recall
+        let revealedMonsters = this.training.getRevealedMonsters();
+        baseIdIndex = 0;
+        for (let i = 0; i < 1; i++) {  
+          revealedMonsters[i].updateId("monster" + ids[baseIdIndex + i]);
+          let question = new OutputEstimationQuestion("recall", revealedMonsters[i]);
+          this.questions.push(question);
+        }
+        // interpolation
+        let unrevealedMonsters = this.training.getUnrevealedMonsters();
+        baseIdIndex = this.questions.length;
+        for (let i = 0; i < 9; i++) {
+          unrevealedMonsters[i].updateId("monster" + ids[baseIdIndex + i]);
+          let question = new OutputEstimationQuestion("interpolation", unrevealedMonsters[i]);
+          this.questions.push(question);
+        }
+      }
+
     }
 
-    // generate recall questions
-    let revealedMonsters = this.training.getRevealedMonsters();
-    baseIdIndex = this.questions.length;
-    for (let i = 0; i < NUMBERS.OUTPUT_ESTIMATION_RECALL; i++) {  
-      revealedMonsters[i].updateId("monster" + ids[baseIdIndex + i]);
-      let question = new OutputEstimationQuestion("recall", revealedMonsters[i]);
-      this.questions.push(question);
+    // Normal experiment:
+    else {
+
+      // generate interpolation questions
+      let unrevealedMonsters = this.training.getUnrevealedMonsters();
+      baseIdIndex = 0;
+      for (let i = 0; i < NUMBERS.OUTPUT_ESTIMATION_INTERPOLATION; i++) {
+        unrevealedMonsters[i].updateId("monster" + ids[baseIdIndex + i]);
+        let question = new OutputEstimationQuestion("interpolation", unrevealedMonsters[i]);
+        this.questions.push(question);
+      }
+
+      // generate recall questions
+      let revealedMonsters = this.training.getRevealedMonsters();
+      baseIdIndex = this.questions.length;
+      for (let i = 0; i < NUMBERS.OUTPUT_ESTIMATION_RECALL; i++) {  
+        revealedMonsters[i].updateId("monster" + ids[baseIdIndex + i]);
+        let question = new OutputEstimationQuestion("recall", revealedMonsters[i]);
+        this.questions.push(question);
+      }
     }
 
     // generate extrapolation questions

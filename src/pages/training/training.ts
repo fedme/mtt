@@ -36,6 +36,11 @@ export class TrainingPage {
     if (this.stimuli.isPassive()) {
       this.pickRandomCards();
     }
+    if (this.stimuli.isExtendedCondition2()) {
+      if (this.stimuli.condition.trainingTasks == 27 || this.stimuli.condition.trainingTasks == 0) {
+        this.ended = true;
+      }
+    }
   }
 
   handleTrainingCardRevealed(card: TrainingCard) {
@@ -61,7 +66,8 @@ export class TrainingPage {
 
     // if button clicked after the 1st revealed card, go to instructions 2
     if (this.training.getRevealedCardsCount() == 1
-      && !this.secondInstructionsShown ) {
+      && !this.secondInstructionsShown
+      && !this.stimuli.isExtendedCondition2() ) {
       this.secondInstructionsShown = true;
       return this.navCtrl.push("TrainingInstructions2Page");
     }

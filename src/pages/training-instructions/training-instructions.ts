@@ -31,7 +31,13 @@ export class TrainingInstructionsPage {
   }
 
   next() {
-    this.navCtrl.push("TrainingPage");
+    console.log('extcond', this.stimuli.isExtendedCondition2());
+    if (this.stimuli.isExtendedCondition2()) {
+      this.navCtrl.push("TrainingInstructions2Page");
+    }
+    else {
+      this.navCtrl.push("TrainingPage");
+    }
   }
 
 }

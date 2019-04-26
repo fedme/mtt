@@ -53,7 +53,7 @@
 
             <br>
 
-            <ion-list *ngIf="stimuli.condition.trainingTasks == 0 || stimuli.condition.trainingTasks == 1  || stimuli.condition.trainingTasks == 27" radio-group formControlName="question-cards">
+            <ion-list *ngIf="stimuli.isExtendedCondition2()" radio-group formControlName="question-cards">
               <ion-list-header>
                 How many cards can you click?
               </ion-list-header>

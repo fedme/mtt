@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Monster } from '../../models/monster';
 import { TrainingCard } from '../../models/training-card';
 
@@ -12,7 +12,7 @@ import { TrainingCard } from '../../models/training-card';
   selector: 'card',
   templateUrl: 'card.html'
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
 
   @Input() monster: Monster;
   @Input() active: boolean;
@@ -25,6 +25,12 @@ export class CardComponent {
 
   constructor() {
     //console.log('Hello CardComponent Component');
+  }
+
+  ngOnInit() {
+    if (this.trainingCard && this.trainingCard.revealed) {
+      this.revealCard();
+    }
   }
 
   handleCardTapped(event) {

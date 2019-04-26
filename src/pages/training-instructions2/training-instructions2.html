@@ -10,7 +10,15 @@
               One or more of your answers were wrong. Plese read the instructions again.<br>
             </p>
             
-            <p [innerHTML]="'TRAINING_INSTRUCTIONS.SECOND.BODY' | translate"></p>
+            <p *ngIf="stimuli.condition.trainingTasks != 0 && stimuli.condition.trainingTasks != 27" 
+              [innerHTML]="'TRAINING_INSTRUCTIONS.SECOND.BODY' | translate"></p>
+
+            <p *ngIf="stimuli.onlineVersion && stimuli.condition.trainingTasks == 0" 
+              [innerHTML]="'TRAINING_INSTRUCTIONS.SECOND.BODY_ONLINE_ZERO' | translate"></p>
+
+            <p *ngIf="stimuli.onlineVersion && stimuli.condition.trainingTasks == 27" 
+              [innerHTML]="'TRAINING_INSTRUCTIONS.SECOND.BODY_ONLINE_ALL' | translate"></p>
+
             <br>
             <p *ngIf="stimuli.isActive()" [innerHTML]="'TRAINING_INSTRUCTIONS.THIRD.BODY_ACTIVE' | translate:{ncards: stimuli.condition.trainingTasks}"></p>
             <p *ngIf="stimuli.isPassive()" [innerHTML]="'TRAINING_INSTRUCTIONS.THIRD.BODY_PASSIVE' | translate:{ncards: stimuli.condition.trainingTasks}"></p>

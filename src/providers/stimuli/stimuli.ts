@@ -147,6 +147,12 @@ export class Stimuli {
     //console.log("[DEBUG] Features Order]", this.featuresOrder);
   }
 
+  isExtendedCondition2(): boolean {
+    return this.condition.trainingTasks == 0
+          || this.condition.trainingTasks == 1
+          || this.condition.trainingTasks == 27
+  }
+
   isPassive() {
     return this.trainingType == "passive";
   }

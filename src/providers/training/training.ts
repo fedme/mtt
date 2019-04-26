@@ -54,6 +54,14 @@ export class TrainingProvider {
       this.cards.push(new TrainingCard(monster));
       i++;
     }
+
+    // Extended condition 2
+    if (this.stimuli.isExtendedCondition2) {
+      if (this.stimuli.condition.trainingTasks == 27) {
+        this.cards.map(card => card.reveal());
+      }
+    }
+
   }
 
   getAllCards() {
