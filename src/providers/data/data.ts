@@ -187,17 +187,18 @@ export class Data {
   }
 
   getParticipantInfo() {
+    const participant = this.stimuli.onlineVersion? this.stimuli.onlineParticipant : this.stimuli.participant;
     return {
-      "code": this.stimuli.participant.code,
-      "workerId": this.stimuli.participant.workerId,
-      "assignmentId": this.stimuli.participant.assignmentId,
-      "hitId": this.stimuli.participant.hitId,
-      "age": this.stimuli.participant.age,
-      "ageGroup": this.stimuli.participant.ageGroup,
-      "grade": this.stimuli.participant.grade,
-      "gender": this.stimuli.participant.gender,
-      "playedBefore": this.stimuli.participant.playedBefore,
-      "languageProficiency": this.stimuli.participant.languageProficiency
+      "code": participant.code,
+      "workerId": participant.workerId,
+      "assignmentId": participant.assignmentId,
+      "hitId": participant.hitId,
+      "age": participant.age,
+      "ageGroup": participant.ageGroup,
+      "grade": participant.grade,
+      "gender": participant.gender,
+      "playedBefore": participant.playedBefore,
+      "languageProficiency": participant.languageProficiency
     }
   }
 
@@ -241,15 +242,15 @@ export class Data {
 
   async postDataToServer(dataObject: any) {
 
-    console.log('Participant', this.stimuli.participant);
+    console.log('Participant', this.stimuli.onlineParticipant);
 
     const body = {
-      workerId: this.stimuli.participant.workerId,
-      assignmentId: this.stimuli.participant.assignmentId,
-      hitId: this.stimuli.participant.hitId,
+      workerId: this.stimuli.onlineParticipant.workerId,
+      assignmentId: this.stimuli.onlineParticipant.assignmentId,
+      hitId: this.stimuli.onlineParticipant.hitId,
       status: RecordStatus.Completed,
-      isMturk: this.stimuli.participant.isMturk,
-      isSandbox: this.stimuli.participant.isSandbox,
+      isMturk: this.stimuli.onlineParticipant.isMturk,
+      isSandbox: this.stimuli.onlineParticipant.isSandbox,
       bonus: parseFloat(dataObject['data']['reward_mturk_total_euros']),
       dataString: JSON.stringify(dataObject)
     };
@@ -279,12 +280,12 @@ export class Data {
 
   async sendStartedToServer() {
     const body = {
-      workerId: this.stimuli.participant.workerId,
-      assignmentId: this.stimuli.participant.assignmentId,
-      hitId: this.stimuli.participant.hitId,
+      workerId: this.stimuli.onlineParticipant.workerId,
+      assignmentId: this.stimuli.onlineParticipant.assignmentId,
+      hitId: this.stimuli.onlineParticipant.hitId,
       status: RecordStatus.Started,
-      isMturk: this.stimuli.participant.isMturk,
-      isSandbox: this.stimuli.participant.isSandbox,
+      isMturk: this.stimuli.onlineParticipant.isMturk,
+      isSandbox: this.stimuli.onlineParticipant.isSandbox,
     };
 
     console.log('Saving data to the server...', body);
@@ -309,9 +310,9 @@ export class Data {
 
   async sendFailureToServer() {
     const body = {
-      workerId: this.stimuli.participant.workerId,
-      assignmentId: this.stimuli.participant.assignmentId,
-      hitId: this.stimuli.participant.hitId,
+      workerId: this.stimuli.onlineParticipant.workerId,
+      assignmentId: this.stimuli.onlineParticipant.assignmentId,
+      hitId: this.stimuli.onlineParticipant.hitId,
       status: RecordStatus.Failed
     };
 

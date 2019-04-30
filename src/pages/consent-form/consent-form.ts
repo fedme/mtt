@@ -28,6 +28,7 @@ export class ConsentFormPage {
     //this.stimuli.initializeConditions();
 
     // proceed to training
+    this.stimuli.setLang('en');
     this.navCtrl.push("TrainingInstructionsPage");
   }
 

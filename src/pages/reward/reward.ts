@@ -1,23 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Stimuli, PairComparisonProvider, OutputEstimationProvider } from '../../providers/providers';
-
+import * as crypto from 'crypto-js';
 
 @IonicPage()
 @Component({
   selector: 'page-reward',
   templateUrl: 'reward.html',
 })
-export class RewardPage {
+export class RewardPage implements OnInit {
+
+  completionCode = '';
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private stimuli: Stimuli, 
+    public stimuli: Stimuli, 
     private pairComparison: PairComparisonProvider,
     private outputEstimation: OutputEstimationProvider
   ) {
 
+  }
+
+  ngOnInit(): void {
+    this.completionCode = this.getCompletionCode();
   }
 
   ionViewDidLoad() {
@@ -30,6 +36,15 @@ export class RewardPage {
       totalReward = totalReward / 5;
     }
     return (totalReward / 100).toFixed(2);
+  }
+
+  getCompletionCode() {
+    console.log('Generating completion code');
+    console.log('participant', this.stimuli.onlineParticipant);
+    const a = crypto.MD5(this.stimuli.onlineParticipant.hitId).toString();
+    const b = crypto.MD5(this.stimuli.onlineParticipant.assignmentId + a).toString();
+    const c = crypto.MD5(this.stimuli.onlineParticipant.workerId + b).toString()
+    return c.slice(0, 6).toUpperCase();
   }
 
   next() {

@@ -7,6 +7,7 @@ import { AndroidFullScreen } from '@ionic-native/android-full-screen';
 
 import { FirstRunPage, OnlineFirstRunPage } from '../pages/pages';
 import { Stimuli, Data } from '../providers/providers';
+import { Participant } from '../models/participant';
 
 declare var cordova: any;
 
@@ -55,6 +56,7 @@ export class MyApp {
 
 
       // Initialize providers
+      console.log('component constructor calling stimuli.initialize()');
       this.stimuli.initialize();
       this.data.initialize();
 
@@ -78,25 +80,26 @@ export class MyApp {
 
       // Parse participant info
       this.stimuli.onlineVersion = true;
-      this.stimuli.participant.code = params.get("workerId");
-      this.stimuli.participant.workerId = params.get("workerId");
-      this.stimuli.participant.assignmentId = params.get("assignmentId");
-      this.stimuli.participant.hitId = params.get("hitId");
-      this.stimuli.participant.age = Number(params.get("age"));
-      this.stimuli.participant.grade = Number(params.get("grade"));
-      this.stimuli.participant.dob = new Date(params.get("dob"));
-      this.stimuli.participant.gender = params.get("gender");
+      this.stimuli.onlineParticipant = new Participant(params.get("workerId"));
+      this.stimuli.onlineParticipant.code = params.get("workerId");
+      this.stimuli.onlineParticipant.workerId = params.get("workerId");
+      this.stimuli.onlineParticipant.assignmentId = params.get("assignmentId");
+      this.stimuli.onlineParticipant.hitId = params.get("hitId");
+      this.stimuli.onlineParticipant.age = Number(params.get("age"));
+      this.stimuli.onlineParticipant.grade = Number(params.get("grade"));
+      this.stimuli.onlineParticipant.dob = new Date(params.get("dob"));
+      this.stimuli.onlineParticipant.gender = params.get("gender");
       const lang = params.get("lang");
 
       if ( params.get("isMturk")) {
-        this.stimuli.participant.isMturk = Number(params.get("isMturk")) == 1;
+        this.stimuli.onlineParticipant.isMturk = Number(params.get("isMturk")) == 1;
       }
 
       if ( params.get("isSandbox")) {
-        this.stimuli.participant.isSandbox = Number(params.get("isSandbox")) == 1;
+        this.stimuli.onlineParticipant.isSandbox = Number(params.get("isSandbox")) == 1;
       }
 
-      console.log("[DEBUG] Online Version", this.stimuli.participant);
+      console.log("[DEBUG] Online Version", this.stimuli.onlineParticipant);
 
 
       // Parse condition by id
@@ -130,6 +133,8 @@ export class MyApp {
       this.stimuli.initializeConditions();
 
       this.data.sendStartedToServer();
+
+      console.log('participant', this.stimuli.onlineParticipant);
 
       // Go to the consent form
       this.rootPage = OnlineFirstRunPage;

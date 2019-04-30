@@ -40,11 +40,11 @@ export class RegistrationOnlinePage {
   validateRegistration() {
 
     const checks = 
-      this.stimuli.participant.age != null
-      && this.stimuli.participant.age > 0
-      && this.stimuli.participant.gender != null
-      && this.stimuli.participant.playedBefore != null
-      && this.stimuli.participant.languageProficiency != null
+      this.stimuli.onlineParticipant.age != null
+      && this.stimuli.onlineParticipant.age > 0
+      && this.stimuli.onlineParticipant.gender != null
+      && this.stimuli.onlineParticipant.playedBefore != null
+      && this.stimuli.onlineParticipant.languageProficiency != null
 
     if (checks) {
       this.handleRegistration();

@@ -29,6 +29,7 @@ export class Stimuli {
 
   initialTimestamp: number;
   participant: Participant;
+  onlineParticipant: Participant;
   featuresOrder: string[];
   trainingType: string;
   testTypes: string[];
@@ -44,7 +45,7 @@ export class Stimuli {
     private api: Api
     ) {
 
-    //console.log('Hello Stimuli Provider');
+    console.log('Hello Stimuli Provider');
     this.participant = new Participant("");
     this.runInBrowser = this.platform.is('core') || this.platform.is('mobileweb');
 

@@ -1,4 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
 <link href="https://s3.amazonaws.com/mturk-public/bs30/css/bootstrap.min.css" rel="stylesheet" />
 <section class="container" id="SurveyLink" style="margin-bottom:15px; padding: 10px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333; font-size:0.9em;">
 	<div class="row col-xs-12 col-md-12">
@@ -59,68 +60,71 @@
 
 <script type="text/javascript" language="JavaScript">
 
-		var assignment_id_field = document.getElementById('myelementLink');	
-		var paramstr = window.location.search.substring(1);
-		var parampairs = paramstr.split("&");
-		var workerId = "";
-		var assignmentId = "";
-		var hitId = "";
-		var isMturk = window.location.origin.includes('mturk') ? 1 : 0;
-		var isSandbox = window.location.origin.includes('sandbox') ? 1 : 0;
+	var hash = CryptoJS.MD5("Message").toString();
+	console.log('Hash of message', hash);
 
-		for (i in parampairs) {
-			var pair = parampairs[i].split("=");
-			if (pair[0] == "workerId") { workerId = pair[1]; }
-			if (pair[0] == "assignmentId") { assignmentId = pair[1]; }
-			if (pair[0] == "hitId") { hitId = pair[1]; }
+	var assignment_id_field = document.getElementById('myelementLink');	
+	var paramstr = window.location.search.substring(1);
+	var parampairs = paramstr.split("&");
+	var workerId = "";
+	var assignmentId = "";
+	var hitId = "";
+	var isMturk = window.location.origin.includes('mturk') ? 1 : 0;
+	var isSandbox = window.location.origin.includes('sandbox') ? 1 : 0;
+
+	for (i in parampairs) {
+		var pair = parampairs[i].split("=");
+		if (pair[0] == "workerId") { workerId = pair[1]; }
+		if (pair[0] == "assignmentId") { assignmentId = pair[1]; }
+		if (pair[0] == "hitId") { hitId = pair[1]; }
+	}
+
+	var expUrl = 'https://mtt.isearchlab.org?workerId=' + workerId + '&assignmentId=' + assignmentId + '&hitId=' + hitId + '&isMturk=' + isMturk + '&isSandbox=' + isSandbox + '&lang=en';
+
+	function openExperimentPopup() {
+		popup = window.open(expUrl, 'Popup', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=' + 1024 + ',height=' + 768 + '');
+	}
+
+	if (workerId == "") {
+		assignment_id_field.innerHTML = '<tt>The link will appear here only if you accept this HIT.</tt>';
+	}
+	else {
+		assignment_id_field.innerHTML = '<a onclick="openExperimentPopup()"><h1><span style="color: rgb(255, 0, 0);"><span><b>Click here to start the game (in a popup)</b></span></span></h1></a>';
+	}
+
+	$.get("https://mtt-api.isearchlab.org/api/forbiddenWorkers/" + workerId, function(res) {
+		console.log('res2', res);
+		if (res['forbidden'] == true) {
+			assignment_id_field.innerHTML = '<h3 style="color:red;">Unfortunately it seems that you have already played a version of this game before. You can not play it again.</h3>';
 		}
+	});
 
-		var expUrl = 'https://mtt.isearchlab.org?workerId=' + workerId + '&assignmentId=' + assignmentId + '&hitId=' + hitId + '&isMturk=' + isMturk + '&isSandbox=' + isSandbox + '&lang=en';
-
-		function openExperimentPopup() {
-			popup = window.open(expUrl, 'Popup', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=' + 1024 + ',height=' + 768 + '');
+	document.getElementById('mturk_form').addEventListener('submit', function(e) {
+		if (document.getElementById('surveycode').value != 'MTT-ONLINE-2018') {
+			e.preventDefault();
+			alert('Wrong completion code!');
 		}
-
-		if (workerId == "") {
-			assignment_id_field.innerHTML = '<tt>The link will appear here only if you accept this HIT.</tt>';
-		}
-		else {
-			assignment_id_field.innerHTML = '<a onclick="openExperimentPopup()"><h1><span style="color: rgb(255, 0, 0);"><span><b>Click here to start the game (in a popup)</b></span></span></h1></a>';
-		}
-
-		$.get("https://mtt-api.isearchlab.org/api/forbiddenWorkers/" + workerId, function(res) {
-			console.log('res2', res);
-			if (res['forbidden'] == true) {
-				assignment_id_field.innerHTML = '<h3 style="color:red;">Unfortunately it seems that you have already played a version of this game before. You can not play it again.</h3>';
-			}
-		});
-
-		document.getElementById('mturk_form').addEventListener('submit', function(e) {
-			if (document.getElementById('surveycode').value != 'MTT-ONLINE-2018') {
-				e.preventDefault();
-				alert('Wrong completion code!');
-			}
-			// else {
-			// 	$.ajax({
-			// 		type: "POST", 
-			// 		url: 'https://mtt-api.isearchlab.org/api/records',
-			// 		contentType: "application/json; charset=utf-8",
-    		// 		dataType: "json",
-			// 		data: JSON.stringify({
-			// 			"workerId": workerId,
-			// 			"assignmentId": assignmentId,
-			// 			"hitId": hitId,
-			// 			"status": 4 // submitted
-			// 		}),
-			// 		success: function (res) {
-			// 			console.log('res2', res);
-			// 		},
-			// 		failure: function (err) {
-			// 			console.log('res2', err);
-			// 		}
-			// 	});
-			// }
-		});
+		// else {
+		// 	$.ajax({
+		// 		type: "POST", 
+		// 		url: 'https://mtt-api.isearchlab.org/api/records',
+		// 		contentType: "application/json; charset=utf-8",
+		// 		dataType: "json",
+		// 		data: JSON.stringify({
+		// 			"workerId": workerId,
+		// 			"assignmentId": assignmentId,
+		// 			"hitId": hitId,
+		// 			"status": 4 // submitted
+		// 		}),
+		// 		success: function (res) {
+		// 			console.log('res2', res);
+		// 		},
+		// 		failure: function (err) {
+		// 			console.log('res2', err);
+		// 		}
+		// 	});
+		// }
+	});
 
 </script>
 

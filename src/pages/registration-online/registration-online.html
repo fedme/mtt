@@ -24,7 +24,7 @@
 
               <ion-item>
                 <ion-label>{{'REGISTRATION_ONLINE.GENDER_LABEL' | translate}}</ion-label>
-                <ion-select [(ngModel)]="stimuli.participant.gender" name="gender">
+                <ion-select [(ngModel)]="stimuli.onlineParticipant.gender" name="gender">
                   <ion-option value="male">{{'REGISTRATION_ONLINE.MALE' | translate}}</ion-option>
                   <ion-option value="female">{{'REGISTRATION_ONLINE.FEMALE' | translate}}</ion-option>
                 </ion-select>
@@ -32,19 +32,19 @@
 
               <ion-item>
                 <ion-label>{{'REGISTRATION_ONLINE.AGE_LABEL' | translate}}</ion-label>
-                <ion-input #focusInput type="number" [(ngModel)]="stimuli.participant.age" name="age" autocomplete="off"
+                <ion-input #focusInput type="number" [(ngModel)]="stimuli.onlineParticipant.age" name="age" autocomplete="off"
                   autocorrect="off"></ion-input>
               </ion-item>
 
-              <ion-item *ngIf="stimuli.participant.age != null && stimuli.participant.age < 18">
+              <ion-item *ngIf="stimuli.onlineParticipant.age != null && stimuli.onlineParticipant.age < 18">
                 <ion-label>{{'REGISTRATION_ONLINE.GRADE_LABEL' | translate}}</ion-label>
-                <ion-input #focusInput type="number" [(ngModel)]="stimuli.participant.grade" name="grade" autocomplete="off"
+                <ion-input #focusInput type="number" [(ngModel)]="stimuli.onlineParticipant.grade" name="grade" autocomplete="off"
                   autocorrect="off"></ion-input>
               </ion-item>
 
               <ion-item>
                 <ion-label>{{'REGISTRATION_ONLINE.PLAYED_BEFORE' | translate}}</ion-label>
-                <ion-select [(ngModel)]="stimuli.participant.playedBefore" name="playedBefore">
+                <ion-select [(ngModel)]="stimuli.onlineParticipant.playedBefore" name="playedBefore">
                   <ion-option [value]="true">{{'REGISTRATION_ONLINE.YES' | translate}}</ion-option>
                   <ion-option [value]="false">{{'REGISTRATION_ONLINE.NO' | translate}}</ion-option>
                 </ion-select>
@@ -52,7 +52,7 @@
 
               <ion-item>
                 <ion-label>{{'REGISTRATION_ONLINE.LANG_PROFICIENCY_QUESTION' | translate}}</ion-label>
-                <ion-select [(ngModel)]="stimuli.participant.languageProficiency" name="langProficiency">
+                <ion-select [(ngModel)]="stimuli.onlineParticipant.languageProficiency" name="langProficiency">
                   <ion-option [value]="1">{{'REGISTRATION_ONLINE.LANG_PROFICIENCY_1' | translate}}</ion-option>
                   <ion-option [value]="2">{{'REGISTRATION_ONLINE.LANG_PROFICIENCY_2' | translate}}</ion-option>
                   <ion-option [value]="3">{{'REGISTRATION_ONLINE.LANG_PROFICIENCY_3' | translate}}</ion-option>
