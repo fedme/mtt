@@ -30,10 +30,14 @@ export class TrainingInstructionsPage {
     //console.log('ionViewDidLoad TrainingInstructionsPage');
   }
 
+  showErrorMessage() {
+    return this.stimuli.questionsCheckCounter > 0;
+  }
+
   next() {
     console.log('extcond', this.stimuli.isExtendedCondition2());
     if (this.stimuli.isExtendedCondition2()) {
-      this.navCtrl.push("TrainingInstructions2Page");
+      this.navCtrl.push("InstructionsCheckPage");
     }
     else {
       this.navCtrl.push("TrainingPage");

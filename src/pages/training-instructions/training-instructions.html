@@ -7,16 +7,41 @@
         <div class="instructions-wrapper {{stimuli.appInfo.version}}">
           <h1 translate [translateParams]="">TRAINING_INSTRUCTIONS.FIRST.TITLE</h1>
 
+          <div *ngIf="stimuli.isExtendedCondition2()">
+            <p *ngIf="showErrorMessage()" style="color:red;">
+              One or more of your answers were wrong. Plese read the instructions again.<br>
+            </p>
+          </div>
+
           <p *ngIf="!stimuli.onlineVersion" [innerHTML]="'TRAINING_INSTRUCTIONS.FIRST.BODY' | translate"></p>
 
-          <p *ngIf="stimuli.onlineVersion && stimuli.condition.trainingTasks != 0 && stimuli.condition.trainingTasks != 27" 
+          <p *ngIf="stimuli.onlineVersion && !stimuli.isExtendedCondition2()"
             [innerHTML]="'TRAINING_INSTRUCTIONS.FIRST.BODY_ONLINE' | translate"></p>
 
-          <p *ngIf="stimuli.onlineVersion && stimuli.condition.trainingTasks == 0" 
-          [innerHTML]="'TRAINING_INSTRUCTIONS.FIRST.BODY_ONLINE_ZERO' | translate"></p>
+          <p *ngIf="stimuli.onlineVersion && stimuli.condition.trainingTasks == 1"
+            [innerHTML]="'TRAINING_INSTRUCTIONS.FIRST.BODY_ONLINE_ONE' | translate"></p>
 
-          <p *ngIf="stimuli.onlineVersion && stimuli.condition.trainingTasks == 27" 
-          [innerHTML]="'TRAINING_INSTRUCTIONS.FIRST.BODY_ONLINE_ALL' | translate"></p>
+          <p *ngIf="stimuli.onlineVersion && stimuli.condition.trainingTasks == 0"
+            [innerHTML]="'TRAINING_INSTRUCTIONS.FIRST.BODY_ONLINE_ZERO' | translate"></p>
+
+          <p *ngIf="stimuli.onlineVersion && stimuli.condition.trainingTasks == 27"
+            [innerHTML]="'TRAINING_INSTRUCTIONS.FIRST.BODY_ONLINE_ALL' | translate"></p>
+
+          <div *ngIf="stimuli.isExtendedCondition2()">
+
+            <div *ngIf="stimuli.condition.trainingTasks == 1">
+              <p *ngIf="stimuli.isActive()"
+                [innerHTML]="'TRAINING_INSTRUCTIONS.THIRD.BODY_ACTIVE_ONLINE_ONE' | translate:{ncards: stimuli.condition.trainingTasks}">
+              </p>
+              <p *ngIf="stimuli.isPassive()"
+                [innerHTML]="'TRAINING_INSTRUCTIONS.THIRD.BODY_PASSIVE_ONLINE_ONE' | translate:{ncards: stimuli.condition.trainingTasks}">
+              </p>
+            </div>
+
+            <p [innerHTML]="'TRAINING_INSTRUCTIONS.SECOND.BODY_ONLINE' | translate"></p>
+
+          </div>
+
 
         </div>
       </ion-col>
