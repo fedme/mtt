@@ -25,11 +25,11 @@
 				<p><strong>Make sure to leave this window open as you complete the game. </strong> When you are
 					finished, you will return to this page to paste the code into the box.</p>
 
-				<p style="font-size: 0.9em; font-style:italic; background-color:#eeeeee; padding:10px;"><strong>Template
+				<!-- <p style="font-size: 0.9em; font-style:italic; background-color:#eeeeee; padding:10px;"><strong>Template
 						note for Requesters </strong>- To verify that Workers actually complete your survey, require
 					each Worker to enter a <span style="text-decoration:underline;">unique</span> survey completion
 					code to your HIT. Consult with your survey service provider on how to generate this code at the end
-					of your survey.</p>
+					of your survey.</p> -->
 			</div>
 		</div>
 		<!-- End Instruction -->
@@ -99,32 +99,20 @@
 		}
 	});
 
-	document.getElementById('mturk_form').addEventListener('submit', function(e) {
-		if (document.getElementById('surveycode').value != 'MTT-ONLINE-2018') {
-			e.preventDefault();
-			alert('Wrong completion code!');
-		}
-		// else {
-		// 	$.ajax({
-		// 		type: "POST", 
-		// 		url: 'https://mtt-api.isearchlab.org/api/records',
-		// 		contentType: "application/json; charset=utf-8",
-		// 		dataType: "json",
-		// 		data: JSON.stringify({
-		// 			"workerId": workerId,
-		// 			"assignmentId": assignmentId,
-		// 			"hitId": hitId,
-		// 			"status": 4 // submitted
-		// 		}),
-		// 		success: function (res) {
-		// 			console.log('res2', res);
-		// 		},
-		// 		failure: function (err) {
-		// 			console.log('res2', err);
-		// 		}
-		// 	});
-		// }
-	});
+	// function zpa() {
+	// 	var a = CryptoJS.MD5(hitId).toString();
+    // 	var b = CryptoJS.MD5(assignmentId + a).toString();
+    // 	var c = CryptoJS.MD5(workerId + b).toString()
+    // 	return c.slice(0, 6).toUpperCase();
+	// }
+
+	// document.getElementById('mturk_form').addEventListener('submit', function(e) {
+	// 	if (document.getElementById('surveycode').value != zpa()) {
+	// 		e.preventDefault();
+	// 		alert('Wrong completion code!');
+	// 	}
+	// });
+	var _0x2080=['toUpperCase','getElementById','mturk_form','addEventListener','surveycode','value','preventDefault','Wrong\x20completion\x20code!','MD5','toString'];(function(_0x2f4cfe,_0x2bd686){var _0x406496=function(_0xa4b640){while(--_0xa4b640){_0x2f4cfe['push'](_0x2f4cfe['shift']());}};_0x406496(++_0x2bd686);}(_0x2080,0x1ac));var _0x48bc=function(_0x2699a9,_0x501e82){_0x2699a9=_0x2699a9-0x0;var _0x5b6c40=_0x2080[_0x2699a9];return _0x5b6c40;};function zpa(){var _0x355801=CryptoJS[_0x48bc('0x0')](hitId)[_0x48bc('0x1')]();var _0x6ff2bd=CryptoJS[_0x48bc('0x0')](assignmentId+_0x355801)['toString']();var _0x17e25f=CryptoJS[_0x48bc('0x0')](workerId+_0x6ff2bd)['toString']();return _0x17e25f['slice'](0x0,0x6)[_0x48bc('0x2')]();}document[_0x48bc('0x3')](_0x48bc('0x4'))[_0x48bc('0x5')]('submit',function(_0x4bd0f2){if(document[_0x48bc('0x3')](_0x48bc('0x6'))[_0x48bc('0x7')]!=zpa()){_0x4bd0f2[_0x48bc('0x8')]();alert(_0x48bc('0x9'));}});
 
 </script>
 
