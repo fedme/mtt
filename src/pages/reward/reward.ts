@@ -23,7 +23,9 @@ export class RewardPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.completionCode = this.getCompletionCode();
+    if (this.stimuli.onlineVersion) {
+      this.completionCode = this.getCompletionCode();
+    }
   }
 
   ionViewDidLoad() {
