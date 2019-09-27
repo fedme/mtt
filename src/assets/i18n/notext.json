@@ -1,0 +1,93 @@
+{
+  "MONSTER": {
+    "FEATURE_A_LABEL": "لذيذ",
+    "FEATURE_B_LABEL": "شقي",
+    "FEATURE_C_LABEL": "مضحك"
+  },
+  "REGISTRATION": {
+    "TITLE": "Index 0",
+    "CODE_LABEL": "Participant code",
+    "AGE_LABEL": "Participant age",
+    "GRADE_LABEL": "Participant grade",
+    "SUBMIT": "Begin experiment",
+    "GENDER_LABEL": "Participant gender",
+      "MALE": "Male",
+      "FEMALE": "Female"
+  },
+
+  "REGISTRATION_ONLINE": {
+    "TITLE": "Please fill in this form",
+    "CODE_LABEL": "Your code",
+    "AGE_LABEL": "Your age in years",
+    "GRADE_LABEL": "The school grade you are in",
+    "SUBMIT": "Submit and proceed",
+    "GENDER_LABEL": "Your gender",
+    "MALE": "Male",
+    "FEMALE": "Female",
+    "PLAYED_BEFORE": "Have you played this game before?",
+    "YES": "Yes",
+    "NO": "No"
+  },
+  
+  "TRAINING_INSTRUCTIONS": {
+    "FIRST": {
+      "TITLE": "Index 1",
+      "BODY": "",
+      "NEXT": "Let's go!"
+    },
+    "SECOND": {
+      "TITLE": "Index 3 - 4",
+      "BODY": "",
+      "NEXT": "Next"
+    },
+    "THIRD": {
+      "TITLE_ACTIVE": "Index 4",
+      "BODY_ACTIVE": "",
+      "TITLE_PASSIVE": "",
+      "BODY_PASSIVE": "Jetzt wollen wir herausfinden, wie die Eigenschaften der Monster mit der Anzahl der gesammelten Früchte zusammenhängen. Benutze dafür die Karten auf dem Bildschirm! Du kannst auf <strong>{{ncards}} klicken</strong>, um herauszufinden, wie viele Früchte die Monster gesammelt haben, <strong>aber nicht alle!</strong> Klicke auf die Karten, die <strong>rot</strong> werden, um die Anzahl der gesammelten Früchte zu sehen. Da du diese Anzahl nicht für alle Karten sehen kannst, solltest du versuchen so viel wie möglich und so schnell wie möglich zu lernen, wie die Eigenschaften der Monster mit der Anzahl der gesammelten Früchte zusammenhängen. Denk daran, dass du herausfinden musst, welche Eigenschaften den Monstern helfen, die meisten Früchte zu sammeln. <strong>Das wird dir helfen zu gewinnen!</strong>",
+      "NEXT": "Next"
+    }
+  },
+  "TRAINING": {
+    "NEXT_PICK_BUTTON_ACTIVE": "Let me pick a card",
+    "NEXT_PICK_BUTTON_PASSIVE": "Wähle eine Karte für mich aus",
+    "PICK_CARD_INSTRUCTION_ACTIVE": "Tip on one card to see the amount of fruits collected",
+    "PICK_CARD_INSTRUCTION_PASSIVE": "Tippe auf die rote Karte, um die Anzahl der gesammelten Früchte zu sehen.",
+    "END_BUTTON": "End of training"
+  },
+  "TEST_INSTRUCTIONS": {
+    "NEXT": "Let's go!",
+    "PAIR_COMPARISON": {
+      "TITLE": "Index 5 or 7",
+      "BODY": "If <strong>first</strong> game go to Index <strong>5</strong> <br> If <strong>second</strong> game go to Index <strong>7</strong> "
+    },
+    "OUTPUT_ESTIMATION": {
+      "TITLE": "Index 5 or 7",
+      "BODY": "If <strong>first</strong> game, go to Index <strong>5</strong> <br> If <strong>second</strong> game go to Index <strong>7</strong> "
+    }
+  },
+  "TEST": {
+    "PAIR_COMPARISON": {
+      "TITLE": "Index 8",
+      "BODY": "Look at these two monsters: Which one do you think collected more fruits?",
+      "NEXT_QUESTION": "Next"
+    },
+    "OUTPUT_ESTIMATION": {
+      "TITLE": "Index 6",
+      "BODY": "How many fruits do you think this monster has collected?",
+      "NEXT_QUESTION": "Next"
+    },
+    "NEXT": "Next Game"
+  },
+  "RANKING_TASK": {
+    "TITLE": "Index 9",
+    "BODY": "",
+    "QUESTION_ADULTS": "",
+    "NEXT": "Next"
+  },
+  "REWARD": {
+    "TITLE": "",
+    "BODY": "Well done!"
+  },
+  "RESTART_GAME": "Play again"
+}

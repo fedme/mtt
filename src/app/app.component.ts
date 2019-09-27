@@ -165,7 +165,7 @@ export class MyApp {
 
   initTranslate() {
     // Set the default language
-    this.translate.addLangs(['en', 'de', 'es']);
+    this.translate.addLangs(['en', 'de', 'es', 'notext']);
     this.translate.setDefaultLang('en');
 
     // Get language from local storage
