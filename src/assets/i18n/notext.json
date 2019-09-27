@@ -49,6 +49,7 @@
     }
   },
   "TRAINING": {
+    "TITLE": "TRAINING TITLE",
     "NEXT_PICK_BUTTON_ACTIVE": "Let me pick a card",
     "NEXT_PICK_BUTTON_PASSIVE": "Wähle eine Karte für mich aus",
     "PICK_CARD_INSTRUCTION_ACTIVE": "Tip on one card to see the amount of fruits collected",

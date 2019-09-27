@@ -49,6 +49,7 @@
     }
   },
   "TRAINING": {
+    "TITLE": "",
     "NEXT_PICK_BUTTON_ACTIVE": "Lass mich eine Karte auswählen",
     "NEXT_PICK_BUTTON_PASSIVE": "Wähle eine Karte für mich aus",
     "PICK_CARD_INSTRUCTION_ACTIVE": "Tippe auf eine Karte, um die Anzahl der gesammelten Früchte zu sehen.",

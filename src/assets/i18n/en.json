@@ -69,6 +69,7 @@
   },
 
   "TRAINING": {
+    "TITLE": "",
     "NEXT_PICK_BUTTON_ACTIVE": "Let me pick a card",
     "NEXT_PICK_BUTTON_PASSIVE": "Pick a card for me",
     "PICK_CARD_INSTRUCTION_ACTIVE": "Click on a card to see how many fruits that monster picked.",

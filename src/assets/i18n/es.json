@@ -63,6 +63,7 @@
   },
 
   "TRAINING": {
+    "TITLE": "",
     "NEXT_PICK_BUTTON_ACTIVE": "Dejame elegir una carta",
     "NEXT_PICK_BUTTON_PASSIVE": "Elige una carta para mi",
     "PICK_CARD_INSTRUCTION_ACTIVE": "Clica en una carta para ver cuántas frutas ha recogido el monstruo.",
