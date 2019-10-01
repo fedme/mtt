@@ -36,7 +36,7 @@
       "NEXT": "Let's go!"
     },
     "SECOND": {
-      "TITLE": "Index 3 - 4",
+      "TITLE": "Index 3",
       "BODY": "",
       "NEXT": "Next"
     },
@@ -49,7 +49,7 @@
     }
   },
   "TRAINING": {
-    "TITLE": "<strong>Index 1</strong>",
+    "TITLE": "Index 2 - (if after 3) Index 4",
     "NEXT_PICK_BUTTON_ACTIVE": "Let me pick a card",
     "NEXT_PICK_BUTTON_PASSIVE": "Wähle eine Karte für mich aus",
     "PICK_CARD_INSTRUCTION_ACTIVE": "Tip on one card to see the amount of fruits collected",
